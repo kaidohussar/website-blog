@@ -4,16 +4,13 @@
   "site_description": "Next.js blog template for Netlify",
   "site_keywords": [
     {
-      "keyword": "Next.js"
-    },
-    {
-      "keyword": "Netlify"
+      "keyword": "Design"
     },
     {
       "keyword": "React"
     }
   ],
   "posts_per_page": 5,
-  "twitter_account": "@my-account",
-  "github_account": "wutali"
+  "linkedin_account": "kaido-hussar",
+  "github_account": "kaidohussar"
 }
