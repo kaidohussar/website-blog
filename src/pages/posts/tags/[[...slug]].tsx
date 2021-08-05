@@ -4,8 +4,8 @@ import BasicMeta from "../../../components/meta/BasicMeta";
 import OpenGraphMeta from "../../../components/meta/OpenGraphMeta";
 import TagPostList from "../../../components/TagPostList";
 import config from "../../../lib/config";
-import { countPosts, listPostContent, PostContent } from "../../../lib/posts";
-import { getTag, listTags, TagContent } from "../../../lib/tags";
+import { countPosts, listPostContent, PostContent } from "@src/lib/posts";
+import { getTag, listTags, TagContent } from "@src/lib/tags";
 
 type Props = {
   posts: PostContent[];

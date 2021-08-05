@@ -1,14 +1,12 @@
 import { GetStaticProps, GetStaticPaths } from "next";
-import { MDXProvider } from "@mdx-js/react";
 import matter from "gray-matter";
 import { fetchPostContent } from "@src/lib/posts";
 import fs from "fs";
 import yaml from "js-yaml";
 import { parseISO } from "date-fns";
 import PostLayout from "@components/PostLayout";
-
-import InstagramEmbed from "react-instagram-embed";
-import YouTube from "react-youtube";
+import { serialize } from "next-mdx-remote/serialize";
+import { MDXRemote } from "next-mdx-remote";
 
 export type Props = {
   title: string;
@@ -20,7 +18,12 @@ export type Props = {
   source: any;
 };
 
-const components = { InstagramEmbed, YouTube };
+const components = {
+  h1: ({ children }) => (
+    <h1 className="text-2xl font-bold mt-6 mb-4">{children}</h1>
+  ),
+};
+
 const slugToPostContent = ((postContents) => {
   let hash = {};
   postContents.forEach((it) => (hash[it.slug] = it));
@@ -36,7 +39,8 @@ export default function Post({
   description = "",
   source,
 }: Props) {
-  console.log({ source, components });
+  console.log("source", source);
+
   return (
     <PostLayout
       title={title}
@@ -46,7 +50,7 @@ export default function Post({
       author={author}
       description={description}
     >
-      <MDXProvider components={components}>{source}</MDXProvider>
+      <MDXRemote {...source} components={components} />
     </PostLayout>
   );
 }
@@ -62,7 +66,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.post as string;
   const source = fs.readFileSync(slugToPostContent[slug].fullPath, "utf8");
-  const { content, data } = matter(source, {
+  const mdxSource = await serialize(source);
+  const { data } = matter(source, {
     engines: {
       yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object,
     },
@@ -76,7 +81,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       description: "",
       tags: data.tags,
       author: data.author,
-      source: content,
+      source: mdxSource,
     },
   };
 };
