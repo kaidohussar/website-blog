@@ -2,14 +2,11 @@ import Layout from "../components/Layout";
 import BasicMeta from "../components/meta/BasicMeta";
 import OpenGraphMeta from "../components/meta/OpenGraphMeta";
 import { SocialList } from "../components/SocialList";
-import dynamic from "next/dynamic";
-
-const Button = dynamic(
-  () => import("kaidohussar-ui").then((mod) => mod.Button),
-  { ssr: false }
-);
+import { Button, useTheme } from "kaidohussar-ui";
 
 export default function Index() {
+  const { setTheme, theme } = useTheme();
+  console.log("active theme", theme);
   return (
     <Layout>
       <BasicMeta url={"/"} />
@@ -22,8 +19,11 @@ export default function Index() {
           </h1>
           <span className="handle">@kaidohussar</span>
           <h2>Front-end developer and UX designer</h2>
-          <Button appearance="primary" onClick={() => console.log("click")}>
-            Test
+          <Button appearance="primary" onClick={() => setTheme("light")}>
+            Light
+          </Button>
+          <Button appearance="primary" onClick={() => setTheme("dark")}>
+            DArk
           </Button>
           <SocialList />
         </div>

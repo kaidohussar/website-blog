@@ -4,6 +4,12 @@ import { AppProps } from "next/app";
 // They are used by the Netlify CMS preview feature.
 import "../../public/styles/global.css";
 import { createGlobalStyle } from "styled-components";
+import dynamic from "next/dynamic";
+
+const StylesProvider = dynamic(
+  () => import("kaidohussar-ui").then((mod) => mod.StylesProvider),
+  { ssr: false }
+);
 
 export const GlobalStyle = createGlobalStyle`
   html {
@@ -19,9 +25,9 @@ export const GlobalStyle = createGlobalStyle`
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <StylesProvider>
       <GlobalStyle />
       <Component {...pageProps} />
-    </>
+    </StylesProvider>
   );
 }
