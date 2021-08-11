@@ -3989,10 +3989,10 @@
   dependencies:
     "minimist" "^1.2.5"
 
-"kaidohussar-ui@1.0.14":
-  "integrity" "sha512-kHe6PW3tIvnwzTHz4TrybnYByV9IX+ps23pyKupxcxhFpng9F4ro18XwhdDq8dWyUAXhxyt2Q1usnqlraK7noQ=="
-  "resolved" "https://registry.npmjs.org/kaidohussar-ui/-/kaidohussar-ui-1.0.14.tgz"
-  "version" "1.0.14"
+"kaidohussar-ui@1.0.16":
+  "integrity" "sha512-fDISEjO5jVJY8rY1gUtzesDLyPGdVvHovqyAcENFCkK0ouyPwyW3n+4mkKdTLYya82w1T1EmzxtHvB8w0UZuHA=="
+  "resolved" "https://registry.npmjs.org/kaidohussar-ui/-/kaidohussar-ui-1.0.16.tgz"
+  "version" "1.0.16"
 
 "kind-of@^6.0.0", "kind-of@^6.0.2":
   "integrity" "sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw=="

@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Navigation from "./Navigation";
+import { Frame } from "kaidohussar-ui";
 
 type Props = {
   children: React.ReactNode;
@@ -17,7 +18,7 @@ export default function Layout({ children }: Props) {
       <nav>
         <Navigation />
       </nav>
-      <main>{children}</main>
+      <Frame maxWidth="medium">{children}</Frame>
     </div>
   );
 }
