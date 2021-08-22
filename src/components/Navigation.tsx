@@ -4,7 +4,7 @@ import { NavHeader, Switch, useTheme } from "kaidohussar-ui";
 export default function Navigation() {
   const router = useRouter();
   const { setTheme, theme } = useTheme();
-
+  console.log("theme", theme);
   return (
     <NavHeader
       alignment="right"
@@ -31,6 +31,7 @@ export default function Navigation() {
       addOn={
         <Switch
           labels={{ left: "Lights ON", right: "Lights OFF" }}
+          isToggled={theme === "dark"}
           handleToggle={() => {
             setTheme(theme === "light" ? "dark" : "light");
           }}
