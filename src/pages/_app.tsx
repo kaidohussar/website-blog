@@ -1,6 +1,7 @@
 import "normalize.css";
 import { AppProps } from "next/app";
 import dynamic from "next/dynamic";
+import { Frame } from "kaidohussar-ui";
 
 const StylesProvider = dynamic(
   () => import("kaidohussar-ui").then((mod) => mod.StylesProvider),
@@ -10,7 +11,9 @@ const StylesProvider = dynamic(
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <StylesProvider>
-      <Component {...pageProps} />
+      <Frame backgroundColor="backgroundColor" maxWidth="large">
+        <Component {...pageProps} />
+      </Frame>
     </StylesProvider>
   );
 }

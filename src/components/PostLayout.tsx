@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "../../public/styles/content.module.css";
 import Author from "./Author";
 import Copyright from "./Copyright";
 import Date from "./Date";
@@ -30,7 +29,7 @@ export default function PostLayout({
   description = "",
   children,
 }: Props) {
-  const keywords = tags.map(it => getTag(it).name);
+  const keywords = tags.map((it) => getTag(it).name);
   const authorName = getAuthor(author).name;
   return (
     <Layout>
@@ -66,7 +65,7 @@ export default function PostLayout({
               </div>
             </div>
           </header>
-          <div className={styles.content}>{children}</div>
+          <div>{children}</div>
           <ul className={"tag-list"}>
             {tags.map((it, i) => (
               <li key={i}>

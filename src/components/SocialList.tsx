@@ -4,7 +4,7 @@ import { Icon } from "kaidohussar-ui";
 
 export function SocialList({}) {
   return (
-    <div>
+    <div style={{ marginTop: 16 }}>
       <Icon
         type="github"
         size="xxl"
