@@ -11,19 +11,19 @@ export default function Navigation() {
       navItems={[
         {
           title: "About",
-          onClick: async (e) => {
+          onClick: (e) => {
             console.log("router push");
             e.preventDefault();
-            await router.push("/");
+            router.push("/");
           },
           active: router.pathname === "/",
         },
         {
           title: "Blog",
-          onClick: async (e) => {
+          onClick: (e) => {
             console.log("router push");
             e.preventDefault();
-            await router.push("/posts");
+            router.push("/posts");
           },
           active: router.pathname.startsWith("/posts"),
         },
