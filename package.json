@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint": "next lint",
     "export": "next build && next export -o ./dist",
     "typecheck": "tsc --noEmit",
     "test": "jest"
@@ -21,15 +22,16 @@
     "next": "11.0.1",
     "next-mdx-remote": "^3.0.4",
     "normalize.css": "^8.0.1",
-    "react-schemaorg": "^2.0.0",
-    "schema-dts": "^0.10.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-schemaorg": "^2.0.0",
+    "schema-dts": "^0.10.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.24",
     "@types/node": "^16.4.12",
     "@types/react": "^17.0.15",
+    "eslint-config-next": "^11.1.0",
     "jest": "^27.0.6",
     "ts-jest": "^27.0.4",
     "typescript": "^4.3.5",

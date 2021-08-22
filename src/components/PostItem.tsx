@@ -6,7 +6,10 @@ import { parseISO } from "date-fns";
 type Props = {
   post: PostContent;
 };
-export default function PostItem({ post }: Props) {
+
+const PostItem = ({ post }: Props) => {
+  console.log("post", post);
+
   return (
     <Link href={"/posts/" + post.slug}>
       <a>
@@ -15,4 +18,6 @@ export default function PostItem({ post }: Props) {
       </a>
     </Link>
   );
-}
+};
+
+export default PostItem;

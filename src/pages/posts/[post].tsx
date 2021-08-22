@@ -7,6 +7,7 @@ import { parseISO } from "date-fns";
 import PostLayout from "@components/PostLayout";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
+import { Heading } from "kaidohussar-ui";
 
 export type Props = {
   title: string;
@@ -19,8 +20,11 @@ export type Props = {
 };
 
 const components = {
+  // eslint-disable-next-line react/display-name
   h1: ({ children }) => (
-    <h1 className="text-2xl font-bold mt-6 mb-4">{children}</h1>
+    <Heading type="h1" size="xxl">
+      {children}
+    </Heading>
   ),
 };
 

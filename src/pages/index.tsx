@@ -9,14 +9,10 @@ const Index = () => (
     <BasicMeta url={"/"} />
     <OpenGraphMeta url={"/"} />
 
-    <div
-      style={{
-        height: "70%",
-        // @ts-ignore
-        "align-items": "center",
-        "justify-content": "center",
-        display: "flex",
-      }}
+    <Box
+      alignItems="center"
+      justifyContent="center"
+      cssProps={{ height: "70%" }}
     >
       <Box flexDirection="column" justifyContent="center">
         <Heading type="h1" size="xxxl">
@@ -28,7 +24,7 @@ const Index = () => (
 
         <SocialList />
       </Box>
-    </div>
+    </Box>
   </Layout>
 );
 
