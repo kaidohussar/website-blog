@@ -12,8 +12,10 @@ const PostItem = ({ post }: Props) => {
 
   return (
     <Link href={"/posts/" + post.slug}>
-      <Date date={parseISO(post.date)} />
-      <h2>{post.title}</h2>
+      <a>
+        <Date date={parseISO(post.date)} />
+        <h2>{post.title}</h2>
+      </a>
     </Link>
   );
 };
