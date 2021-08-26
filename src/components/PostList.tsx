@@ -19,7 +19,7 @@ const PostList = ({ posts, tags, pagination }: Props) => {
   return (
     <Box justifyContent="center">
       <Box top="xxl" flexDirection="column" maxWidth="medium">
-        <div className={"posts"}>
+        <Box>
           <ul className={"post-list"}>
             {posts.map((it, i) => (
               <li key={i}>
@@ -38,8 +38,8 @@ const PostList = ({ posts, tags, pagination }: Props) => {
               }}
             />
           )}
-        </div>
-        <ul className={"categories"}>
+        </Box>
+        <ul>
           {tags.map((it, i) => (
             <li key={i}>
               <TagLink tag={it} />

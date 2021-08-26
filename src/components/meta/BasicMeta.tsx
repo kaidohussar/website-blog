@@ -34,7 +34,6 @@ export default function BasicMeta({
       />
       {author ? <meta name="author" content={author} /> : null}
       <link rel="canonical" href={config.base_url + url} />
-      <link rel="stylesheet" href="https://use.typekit.net/dxi1kwr.css" />
     </Head>
   );
 }

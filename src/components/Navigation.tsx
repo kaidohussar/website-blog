@@ -4,7 +4,7 @@ import { NavHeader, Switch, useTheme } from "kaidohussar-ui";
 export default function Navigation() {
   const router = useRouter();
   const { setTheme, theme } = useTheme();
-  console.log("theme", theme);
+  console.log("router", router);
   return (
     <NavHeader
       alignment="right"
@@ -14,7 +14,7 @@ export default function Navigation() {
           onClick: (e) => {
             console.log("router push");
             e.preventDefault();
-            router.push("/");
+            router.push("/", undefined, { shallow: true });
           },
           active: router.pathname === "/",
         },
@@ -23,7 +23,7 @@ export default function Navigation() {
           onClick: (e) => {
             console.log("router push");
             e.preventDefault();
-            router.push("/posts");
+            router.push("/posts", undefined, { shallow: true });
           },
           active: router.pathname.startsWith("/posts"),
         },

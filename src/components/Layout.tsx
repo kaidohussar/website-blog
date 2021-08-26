@@ -1,10 +1,24 @@
 import Head from "next/head";
 import Navigation from "./Navigation";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 type Props = {
   children: React.ReactNode;
 };
-export default function Layout({ children }: Props) {
+
+const Layout = ({ children }: Props) => {
+  const [loading, setIsLoading] = useState(false);
+
+  const { events } = useRouter();
+
+  if (!events) {
+    return null;
+  }
+
+  events.on("routeChangeStart", () => setIsLoading(true));
+  events.on("routeChangeComplete", () => setIsLoading(false));
+
   return (
     <>
       <Head>
@@ -13,9 +27,29 @@ export default function Layout({ children }: Props) {
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="apple-touch-icon" href="/icon.png" />
         <meta name="theme-color" content="#fff" />
+        <link
+          rel="preload"
+          href="/fonts/Poppins-Medium.ttf"
+          as="font"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/Poppins-Light.ttf"
+          as="font"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/Poppins-Bold.ttf"
+          as="font"
+          crossOrigin="anonymous"
+        />
       </Head>
       <Navigation />
-      {children}
+      {loading ? <p>loading</p> : children}
     </>
   );
-}
+};
+
+export default Layout;
