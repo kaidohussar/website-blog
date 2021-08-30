@@ -1,5 +1,12 @@
 const path = require("path");
 
+const securityHeaders = [
+  {
+    key: "Content-Security-Policy",
+    value: "connect-src 'self'",
+  },
+];
+
 module.exports = {
   pageExtensions: ["tsx"],
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
@@ -22,5 +29,14 @@ module.exports = {
       ]
     );
     return config;
+  },
+  async headers() {
+    return [
+      {
+        // Apply these headers to all routes in your application.
+        source: "/(.*)",
+        headers: securityHeaders,
+      },
+    ];
   },
 };

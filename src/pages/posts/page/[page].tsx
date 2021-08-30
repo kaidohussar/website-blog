@@ -1,11 +1,10 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Layout from "@components/Layout";
-import BasicMeta from "@components/meta/BasicMeta";
-import OpenGraphMeta from "@components/meta/OpenGraphMeta";
 import PostList from "@components/PostList";
 import config from "@src/lib/config";
 import { countPosts, listPostContent, PostContent } from "@src/lib/posts";
 import { listTags, TagContent } from "@src/lib/tags";
+import MetaData from "@components/meta/MetaData";
 
 type Props = {
   posts: PostContent[];
@@ -16,17 +15,16 @@ type Props = {
     pages: number;
   };
 };
-export default function Page({ posts, tags, pagination, page }: Props) {
+const Page = ({ posts, tags, pagination, page }: Props) => {
   const url = `/posts/page/${page}`;
   const title = "All posts";
   return (
     <Layout>
-      <BasicMeta url={url} title={title} />
-      <OpenGraphMeta url={url} title={title} />
+      <MetaData url={url} title={title} />
       <PostList posts={posts} tags={tags} pagination={pagination} />
     </Layout>
   );
-}
+};
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const page = parseInt(params.page as string);
@@ -56,3 +54,5 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: false,
   };
 };
+
+export default Page;

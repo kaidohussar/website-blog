@@ -4,6 +4,8 @@ import PostItem from "./PostItem";
 import TagLink from "./TagLink";
 import Pagination from "./Pagination";
 import { TagContent } from "../lib/tags";
+import styles from "../styles/modules/postList.module.scss";
+import ContentWrapper from "@components/ContentWrapper";
 import { Box } from "kaidohussar-ui";
 
 type Props = {
@@ -17,12 +19,12 @@ type Props = {
 
 const PostList = ({ posts, tags, pagination }: Props) => {
   return (
-    <Box justifyContent="center">
-      <Box top="xxl" flexDirection="column" maxWidth="medium">
-        <Box>
-          <ul className={"post-list"}>
+    <ContentWrapper>
+      <Box>
+        <div className={styles.list}>
+          <ul>
             {posts.map((it, i) => (
-              <li key={i}>
+              <li className={styles.listItem} key={i}>
                 <PostItem post={it} />
               </li>
             ))}
@@ -38,8 +40,9 @@ const PostList = ({ posts, tags, pagination }: Props) => {
               }}
             />
           )}
-        </Box>
-        <ul>
+        </div>
+
+        <ul className={styles.tags}>
           {tags.map((it, i) => (
             <li key={i}>
               <TagLink tag={it} />
@@ -47,7 +50,7 @@ const PostList = ({ posts, tags, pagination }: Props) => {
           ))}
         </ul>
       </Box>
-    </Box>
+    </ContentWrapper>
   );
 };
 

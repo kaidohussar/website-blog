@@ -1,0 +1,24 @@
+@use './src/styles/helpers' as h;
+
+.list {
+  flex: 3;
+  padding-right: h.$gridunit * 10;
+
+  .listItem {
+  }
+}
+
+.tags {
+  flex: 1;
+  margin-left: h.$gridunit * 6;
+
+  li {
+    &:not(:first-child) {
+      margin-top: h.$gridunit * 2;
+    }
+
+    a {
+      color: h.$color-text;
+    }
+  }
+}

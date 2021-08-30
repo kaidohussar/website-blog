@@ -34,7 +34,7 @@ const slugToPostContent = ((postContents) => {
   return hash;
 })(fetchPostContent());
 
-export default function Post({
+const Post = ({
   title,
   dateString,
   slug,
@@ -42,7 +42,7 @@ export default function Post({
   author,
   description = "",
   source,
-}: Props) {
+}: Props) => {
   console.log("source", source);
 
   return (
@@ -57,7 +57,7 @@ export default function Post({
       <MDXRemote {...source} components={components} />
     </PostLayout>
   );
-}
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = fetchPostContent().map((it) => "/posts/" + it.slug);
@@ -77,15 +77,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
   });
 
+  const { date, ...dataProps } = data;
+
   return {
     props: {
-      title: data.title,
-      dateString: data.date,
-      slug: data.slug,
+      dateString: date,
       description: "",
-      tags: data.tags,
-      author: data.author,
       source: mdxSource,
+      ...dataProps,
     },
   };
 };
+
+export default Post;

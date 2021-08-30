@@ -1,0 +1,9 @@
+@use './src/styles/helpers' as h;
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 60em;
+  margin: 6em auto 2em;
+  width: 100%;
+}

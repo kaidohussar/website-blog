@@ -1,8 +1,8 @@
 import Layout from "../components/Layout";
-import BasicMeta from "../components/meta/BasicMeta";
-import OpenGraphMeta from "../components/meta/OpenGraphMeta";
+import { Box, Heading, Text } from "kaidohussar-ui";
+import BasicMeta from "@components/meta/BasicMeta";
+import OpenGraphMeta from "@components/meta/OpenGraphMeta";
 import { SocialList } from "@components/SocialList";
-import { Box, Heading } from "kaidohussar-ui";
 
 const Index = () => (
   <Layout>

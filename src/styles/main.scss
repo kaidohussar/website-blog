@@ -1,0 +1,20 @@
+
+html[data-kh-theme='light'] {
+    --kh-color-text: #1A1A1A;
+    --kh-color-grey: #777575;
+}
+
+html[data-kh-theme='dark'] {
+    --kh-color-text: #FFFFFF;
+    --kh-color-grey: #E5E5E5;
+}
+
+body {
+    font-family: 'Poppins', 'sans-serif' !important;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+}

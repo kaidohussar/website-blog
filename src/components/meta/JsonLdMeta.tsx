@@ -13,7 +13,7 @@ type Props = {
   image?: string;
   description?: string;
 };
-export default function JsonLdMeta({
+const JsonLdMeta = ({
   url,
   title,
   keywords,
@@ -21,7 +21,7 @@ export default function JsonLdMeta({
   author,
   image,
   description,
-}: Props) {
+}: Props) => {
   return (
     <Head>
       <script
@@ -30,13 +30,15 @@ export default function JsonLdMeta({
           "@type": "BlogPosting",
           mainEntityOfPage: config.base_url + url,
           headline: title,
-          keywords: keywords ? undefined : keywords.join(","),
-          datePublished: formatISO(date),
-          author: author,
-          image: image,
-          description: description,
+          keywords: keywords && keywords.join(","),
+          datePublished: date && formatISO(date),
+          author: author && author,
+          image: image && image,
+          description: description && description,
         })}
       />
     </Head>
   );
-}
+};
+
+export default JsonLdMeta;

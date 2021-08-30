@@ -1,5 +1,4 @@
 import React from "react";
-import Author from "./Author";
 import Copyright from "./Copyright";
 import Date from "./Date";
 import Layout from "./Layout";
@@ -10,6 +9,10 @@ import { SocialList } from "./SocialList";
 import TagButton from "./TagButton";
 import { getAuthor } from "../lib/authors";
 import { getTag } from "../lib/tags";
+import ContentWrapper from "@components/ContentWrapper";
+import { Heading } from "kaidohussar-ui";
+import PostMeta from "@components/PostMeta";
+import MetaData from "@components/meta/MetaData";
 
 type Props = {
   title: string;
@@ -33,18 +36,7 @@ export default function PostLayout({
   const authorName = getAuthor(author).name;
   return (
     <Layout>
-      <BasicMeta
-        url={`/posts/${slug}`}
-        title={title}
-        keywords={keywords}
-        description={description}
-      />
-      <OpenGraphMeta
-        url={`/posts/${slug}`}
-        title={title}
-        description={description}
-      />
-      <JsonLdMeta
+      <MetaData
         url={`/posts/${slug}`}
         title={title}
         keywords={keywords}
@@ -52,35 +44,24 @@ export default function PostLayout({
         author={authorName}
         description={description}
       />
-      <div className={"container"}>
+      <ContentWrapper>
         <article>
           <header>
-            <h1>{title}</h1>
-            <div className={"metadata"}>
-              <div>
-                <Date date={date} />
-              </div>
-              <div>
-                <Author author={getAuthor(author)} />
-              </div>
-            </div>
+            <Heading type="h1" size="xxl" weight="semibold">
+              {title}
+            </Heading>
           </header>
+
+          <PostMeta tags={tags} date={date} />
+
           <div>{children}</div>
-          <ul className={"tag-list"}>
-            {tags.map((it, i) => (
-              <li key={i}>
-                <TagButton tag={getTag(it)} />
-              </li>
-            ))}
-          </ul>
         </article>
+
         <footer>
-          <div className={"social-list"}>
-            <SocialList />
-          </div>
+          <SocialList />
           <Copyright />
         </footer>
-      </div>
+      </ContentWrapper>
     </Layout>
   );
 }

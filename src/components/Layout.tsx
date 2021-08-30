@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Navigation from "./Navigation";
+import { Loading } from "kaidohussar-ui";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
@@ -47,7 +48,7 @@ const Layout = ({ children }: Props) => {
         />
       </Head>
       <Navigation />
-      {loading ? <p>loading</p> : children}
+      {loading ? <Loading size="fill-content" /> : children}
     </>
   );
 };
