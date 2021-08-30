@@ -43,8 +43,6 @@ const Post = ({
   description = "",
   source,
 }: Props) => {
-  console.log("source", source);
-
   return (
     <PostLayout
       title={title}
