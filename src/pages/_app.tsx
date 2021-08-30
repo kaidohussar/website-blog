@@ -10,7 +10,7 @@ const StylesProvider = dynamic(
   { ssr: false }
 );
 
-export default function App({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
   const commonOverWrites = { fontFamily: "Poppins, 'sans-serif'" };
 
   return (
@@ -21,4 +21,6 @@ export default function App({ Component, pageProps }: AppProps) {
       </Frame>
     </StylesProvider>
   );
-}
+};
+
+export default App;
