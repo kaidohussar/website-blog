@@ -1,24 +1,34 @@
 import Head from "next/head";
 import Navigation from "./Navigation";
 import { Loading } from "kaidohussar-ui";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Script from "next/script";
 
 type Props = {
   children: React.ReactNode;
 };
+
+const googleTrackingId = "G-9DDQJQ0KZ1";
 
 const Layout = ({ children }: Props) => {
   const [loading, setIsLoading] = useState(false);
 
   const { events } = useRouter();
 
-  if (!events) {
-    return null;
-  }
+  const handleLoading = () => {
+    setIsLoading((currentLoadingState) => !currentLoadingState);
+  };
 
-  events.on("routeChangeStart", () => setIsLoading(true));
-  events.on("routeChangeComplete", () => setIsLoading(false));
+  useEffect(() => {
+    events.on("routeChangeStart", handleLoading);
+    events.on("routeChangeComplete", handleLoading);
+
+    return () => {
+      events.off("routeChangeStart", handleLoading);
+      events.off("routeChangeComplete", handleLoading);
+    };
+  }, [events]);
 
   return (
     <>
@@ -45,6 +55,22 @@ const Layout = ({ children }: Props) => {
           href="/fonts/Poppins-Bold.ttf"
           as="font"
           crossOrigin="anonymous"
+        />
+
+        <Script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${googleTrackingId}`}
+        />
+        <Script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+    
+              gtag('config', '${googleTrackingId}');
+            `,
+          }}
         />
       </Head>
       <Navigation />

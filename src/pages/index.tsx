@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import { Box, Heading, Text } from "kaidohussar-ui";
+import { Box, Heading } from "kaidohussar-ui";
 import BasicMeta from "@components/meta/BasicMeta";
 import OpenGraphMeta from "@components/meta/OpenGraphMeta";
 import { SocialList } from "@components/SocialList";
@@ -21,7 +21,6 @@ const Index = () => (
         <Heading type="h2" size="xl">
           Front-end developer and UX designer
         </Heading>
-
         <SocialList />
       </Box>
     </Box>
