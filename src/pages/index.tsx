@@ -21,7 +21,9 @@ const Index = () => (
         <Heading type="h2" size="xl">
           Front-end developer and UX designer
         </Heading>
-        <SocialList />
+        <Box top="lg">
+          <SocialList />
+        </Box>
       </Box>
     </Box>
   </Layout>
