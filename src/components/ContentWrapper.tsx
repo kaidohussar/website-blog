@@ -1,4 +1,4 @@
-import styles from "../styles/modules/components/contentWrapper.module.scss";
+import styles from "@styles/modules/contentWrapper.module.scss";
 
 const ContentWrapper = ({ children }) => (
   <div className={styles.contentWrapper}>{children}</div>

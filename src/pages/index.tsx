@@ -1,4 +1,4 @@
-import Layout from "../components/Layout";
+import Layout from "@components/Layout";
 import { Box, Heading } from "kaidohussar-ui";
 import BasicMeta from "@components/meta/BasicMeta";
 import OpenGraphMeta from "@components/meta/OpenGraphMeta";

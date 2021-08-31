@@ -5,6 +5,9 @@
   padding-right: h.$gridunit * 10;
 
   .listItem {
+    &:not(:first-child) {
+      margin-top: h.$gridunit * 6;
+    }
   }
 }
 

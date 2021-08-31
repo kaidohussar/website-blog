@@ -4,7 +4,7 @@ import { Box, Icon } from "kaidohussar-ui";
 
 export function SocialList({}) {
   return (
-    <Box top="lg">
+    <Box>
       <Box>
         <Icon
           type="github"

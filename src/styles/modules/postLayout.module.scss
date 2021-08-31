@@ -1,0 +1,42 @@
+@use './src/styles/helpers' as h;
+
+button.backLink {
+  display: flex;
+  text-transform: inherit;
+  margin-right: auto;
+  color: h.$color-grey;
+
+  &:first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.header {
+  margin-top: h.$gridunit * 8;
+}
+
+.content {
+  margin-top: h.$gridunit * 8;
+
+  p {
+    margin-top: 16px;
+    line-height: 20px;
+    font-size: 16px;
+    color: h.$color-text;
+  }
+
+  h2, h3 {
+    color: h.$color-text;
+    font-weight: 600;
+    margin-top: h.$gridunit * 3;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: h.$gridunit * 5;
+
+  p { color: h.$color-text; }
+}

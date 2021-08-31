@@ -3,7 +3,7 @@ import { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import { Frame } from "kaidohussar-ui";
 
-import "../styles/main.scss";
+import "@styles/main.scss";
 
 const StylesProvider = dynamic(
   () => import("kaidohussar-ui").then((mod) => mod.StylesProvider),
@@ -14,7 +14,6 @@ const App = ({ Component, pageProps }: AppProps) => {
   const commonOverWrites = { fontFamily: "Poppins, 'sans-serif'" };
 
   return (
-    // @ts-ignore
     <StylesProvider customThemes={[commonOverWrites, commonOverWrites]}>
       <Frame backgroundColor="backgroundColor" maxWidth="large">
         <Component {...pageProps} />

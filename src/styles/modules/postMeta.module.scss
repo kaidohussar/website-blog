@@ -1,0 +1,34 @@
+@use './src/styles/helpers' as h;
+
+.container {
+  display: flex;
+  margin-top: h.$gridunit * 3;
+
+  ul {
+    display: flex;
+
+    li:not(:last-child) {
+      margin-right: h.$gridunit * 3;
+    }
+  }
+
+  a, time {
+    color: h.$color-text;
+  }
+
+  .separator {
+    display: block;
+    margin: 0 h.$gridunit * 3;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: h.$gridunit;
+      width: h.$gridunit-small;
+      height: h.$gridunit-small;
+      border-radius: 50%;
+      background: h.$color-grey;
+    }
+  }
+}

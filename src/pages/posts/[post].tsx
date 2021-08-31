@@ -8,6 +8,7 @@ import PostLayout from "@components/PostLayout";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
 import { Heading } from "kaidohussar-ui";
+import CodeHighlighter from "@components/CodeHighlighter";
 
 export type Props = {
   title: string;
@@ -26,6 +27,22 @@ const components = {
       {children}
     </Heading>
   ),
+  // eslint-disable-next-line react/display-name
+  pre: (props) => {
+    const className = props.children.props.className || "";
+    const matches = className.match(/language-(?<lang>.*)/);
+
+    return (
+      <CodeHighlighter
+        code={props.children.props.children.trim()}
+        language={
+          matches && matches.groups && matches.groups.lang
+            ? matches.groups.lang
+            : ""
+        }
+      />
+    );
+  },
 };
 
 const slugToPostContent = ((postContents) => {
@@ -52,7 +69,7 @@ const Post = ({
       author={author}
       description={description}
     >
-      <MDXRemote {...source} components={components} />
+      <MDXRemote components={components} {...source} />
     </PostLayout>
   );
 };
@@ -68,15 +85,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.post as string;
   const source = fs.readFileSync(slugToPostContent[slug].fullPath, "utf8");
-  const mdxSource = await serialize(source);
-  const { data } = matter(source, {
+
+  const { data, content } = matter(source, {
     engines: {
       yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object,
     },
   });
 
-  const { date, ...dataProps } = data;
+  const mdxSource = await serialize(content);
 
+  const { date, ...dataProps } = data;
   return {
     props: {
       dateString: date,
