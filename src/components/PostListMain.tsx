@@ -1,8 +1,6 @@
 import React from "react";
 import { PostContent } from "../lib/posts";
-import PostItem from "./PostItem";
 import TagLink from "./TagLink";
-import Pagination from "./Pagination";
 import { TagContent } from "../lib/tags";
 import styles from "../styles/modules/postList.module.scss";
 import ContentWrapper from "@components/ContentWrapper";

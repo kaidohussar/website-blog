@@ -15,13 +15,13 @@ type Props = {
     pages: number;
   };
 };
-const Page = ({ posts, tags, pagination, page }: Props) => {
+const Page = ({ posts, pagination, page }: Props) => {
   const url = `/posts/page/${page}`;
   const title = "All posts";
   return (
     <Layout>
       <MetaData url={url} title={title} />
-      <PostList posts={posts} tags={tags} pagination={pagination} />
+      <PostList posts={posts} pagination={pagination} />
     </Layout>
   );
 };
