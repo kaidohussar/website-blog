@@ -7,7 +7,7 @@ import { parseISO } from "date-fns";
 import PostLayout from "@components/PostLayout";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
-import { Heading } from "kaidohussar-ui";
+import { Heading, Text } from "kaidohussar-ui";
 import CodeHighlighter from "@components/CodeHighlighter";
 
 export type Props = {
@@ -21,11 +21,20 @@ export type Props = {
 };
 
 const components = {
-  // eslint-disable-next-line react/display-name
   h1: ({ children }) => (
     <Heading type="h1" size="xxl">
       {children}
     </Heading>
+  ),
+  em: ({ children }) => (
+    <Text type="p" size="lg">
+      {children}
+    </Text>
+  ),
+  p: ({ children }) => (
+    <Text type="p" size="md">
+      {children}
+    </Text>
   ),
   // eslint-disable-next-line react/display-name
   pre: (props) => {
