@@ -1,0 +1,24 @@
+@use './src/styles/helpers' as h;
+
+.breadCrumbs {
+
+  display: flex;
+  align-items: center;
+  color: h.$color-grey;
+  margin-bottom: h.$gridunit * 8;
+
+  button.backLink {
+    display: flex;
+    color: h.$color-grey;
+    text-transform: inherit;
+    margin-right: h.$gridunit * 2;
+
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  span:last-child {
+    margin-left: h.$gridunit * 2;
+  }
+}

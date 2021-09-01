@@ -1,8 +1,11 @@
 import React from "react";
 import { PostContent } from "../lib/posts";
 import { TagContent } from "../lib/tags";
-import PostItem from "./PostItem";
-import Pagination from "./Pagination";
+import ContentWrapper from "@components/ContentWrapper";
+import styles from "@styles/modules/tagPostList.module.scss";
+import { Button } from "kaidohussar-ui";
+import { useRouter } from "next/router";
+import PostList from "@components/PostList";
 
 type Props = {
   posts: PostContent[];
@@ -12,30 +15,25 @@ type Props = {
     pages: number;
   };
 };
-export default function TagPostList({ posts, tag, pagination }: Props) {
+const TagPostList = ({ posts, tag, pagination }: Props) => {
+  const router = useRouter();
+
   return (
-    <div className={"container"}>
-      <h1>
-        All posts / <span>{tag.name}</span>
-      </h1>
-      <ul>
-        {posts.map((it, i) => (
-          <li key={i}>
-            <PostItem post={it} />
-          </li>
-        ))}
-      </ul>
-      <Pagination
-        current={pagination.current}
-        pages={pagination.pages}
-        link={{
-          href: () => "/posts/tags/[[...slug]]",
-          as: (page) =>
-            page === 1
-              ? "/posts/tags/" + tag.slug
-              : `/posts/tags/${tag.slug}/${page}`,
-        }}
-      />
-    </div>
+    <ContentWrapper>
+      <div className={styles.breadCrumbs}>
+        <Button
+          onClick={() => router.push("/posts", undefined, { shallow: true })}
+          className={styles.backLink}
+          appearance="text"
+        >
+          All posts
+        </Button>
+        <span>/</span>
+        <span>{tag.name}</span>
+      </div>
+      <PostList posts={posts} pagination={pagination} />
+    </ContentWrapper>
   );
-}
+};
+
+export default TagPostList;

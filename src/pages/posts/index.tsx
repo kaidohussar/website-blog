@@ -1,6 +1,6 @@
 import { GetStaticProps } from "next";
 import Layout from "@components/Layout";
-import PostList from "@components/PostList";
+import PostListMain from "@components/PostListMain";
 import config from "../../lib/config";
 import { countPosts, listPostContent, PostContent } from "@src/lib/posts";
 import { listTags, TagContent } from "@src/lib/tags";
@@ -20,7 +20,7 @@ export default function Index({ posts, tags, pagination }: Props) {
   return (
     <Layout>
       <MetaData url={url} title={title} />
-      <PostList posts={posts} tags={tags} pagination={pagination} />
+      <PostListMain posts={posts} tags={tags} pagination={pagination} />
     </Layout>
   );
 }
