@@ -18,7 +18,7 @@ type Props = {
 
 const PostListMain = ({ posts, tags, pagination }: Props) => {
   return (
-    <ContentWrapper>
+    <ContentWrapper size="wide">
       <Box>
         <PostList posts={posts} pagination={pagination} />
         <ul className={styles.tags}>

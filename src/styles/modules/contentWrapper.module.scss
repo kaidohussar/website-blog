@@ -3,8 +3,12 @@
 .contentWrapper {
   display: flex;
   flex-direction: column;
-  max-width: 60em;
+  max-width: 48em;
   margin: 6em auto;
   padding-bottom: 4em;
   width: 100%;
+
+  &.wide {
+    max-width: 60em;
+  }
 }

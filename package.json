@@ -16,6 +16,7 @@
     "@sentry/nextjs": "^6.11.0",
     "@svgr/webpack": "^5.5.0",
     "@types/js-yaml": "^4.0.2",
+    "clsx": "^1.1.1",
     "date-fns": "^2.23.0",
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",

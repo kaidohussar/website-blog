@@ -19,7 +19,7 @@ const TagPostList = ({ posts, tag, pagination }: Props) => {
   const router = useRouter();
 
   return (
-    <ContentWrapper>
+    <ContentWrapper size="wide">
       <div className={styles.breadCrumbs}>
         <Button
           onClick={() => router.push("/posts", undefined, { shallow: true })}

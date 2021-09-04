@@ -1,7 +1,19 @@
+import React from "react";
 import styles from "@styles/modules/contentWrapper.module.scss";
+import clsx from "clsx";
 
-const ContentWrapper = ({ children }) => (
-  <div className={styles.contentWrapper}>{children}</div>
+interface ContentWrapperProps {
+  size?: "default" | "wide";
+}
+
+const ContentWrapper: React.FC<ContentWrapperProps> = ({ children, size }) => (
+  <div
+    className={clsx(styles.contentWrapper, {
+      [styles.wide]: size === "wide",
+    })}
+  >
+    {children}
+  </div>
 );
 
 export default ContentWrapper;

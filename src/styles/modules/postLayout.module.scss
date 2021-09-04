@@ -18,9 +18,25 @@ button.backLink {
 .content {
   margin-top: h.$gridunit * 8;
 
+  em {
+    font-style: normal;
+    font-size: 20px;
+    margin-top: h.$gridunit;
+    display: block;
+    line-height: 28px;
+  }
+
   p {
-    margin-top: 16px;
     color: h.$color-text;
+    margin: 0;
+
+    & + p {
+      margin-top: h.$gridunit;
+    }
+  }
+
+  hr {
+    margin-top: h.$gridunit * 3;
   }
 
   h2, h3 {
@@ -28,12 +44,56 @@ button.backLink {
     font-weight: 600;
     margin-top: h.$gridunit * 3;
   }
+
+  h3{
+    margin-bottom: h.$gridunit;
+  }
+
+  h2 {
+    margin-top: h.$gridunit * 5;
+    margin-bottom: h.$gridunit * 2;
+    line-height: h.$gridunit * 4;
+  }
+
+  b, strong {
+    font-weight: 600;
+  }
+
+  ul {
+    list-style: disc;
+    margin-left: h.$gridunit * 3;
+    margin-bottom: h.$gridunit * 2;
+    color: h.$color-text;
+
+    li {
+      margin-top: h.$gridunit;
+      line-height: 24px;
+      font-size: 18px;
+    }
+  }
+
+  code {
+    padding: h.$gridunit / 4 h.$gridunit / 2;
+    background: h.$color-grey-extra-light;
+    color: h.$color-text;
+    border-radius: h.$gridunit / 2;
+    font-size: 14px;
+  }
+
+  a {
+    text-decoration: underline;
+    color: h.$color-link;
+
+    &:visited {
+      color: #056996;
+    }
+  }
 }
 
 .footer {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   margin-top: h.$gridunit * 5;
 
   p { color: h.$color-text; }
