@@ -63,6 +63,7 @@ const Layout = ({ children }: Props) => {
           as="font"
           crossOrigin="anonymous"
         />
+        <link href="/fonts/style.css" rel="stylesheet" />
 
         <Script
           async

@@ -19,36 +19,6 @@ html[data-kh-theme='dark'] {
     --kh-color-link: #0089c7;
 }
 
-@font-face {
-    font-family: "Poppins";
-    src: url("../../public/fonts/Poppins-Thin.ttf");
-    font-style: normal;
-    font-weight: 100;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Poppins";
-    src: url("../../public/fonts/Poppins-Medium.ttf");
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-}
-@font-face {
-    font-family: "Poppins";
-    src: url("../../public/fonts/Poppins-Light.ttf");
-    font-style: normal;
-    font-weight: 300;
-    font-display: swap;
-}
-@font-face {
-    font-family: "Poppins";
-    src: url("../../public/fonts/Poppins-Bold.ttf");
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-}
-
 body {
     font-family: 'Poppins', 'sans-serif' !important;
 
