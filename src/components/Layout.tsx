@@ -57,6 +57,12 @@ const Layout = ({ children }: Props) => {
           as="font"
           crossOrigin="anonymous"
         />
+        <link
+          rel="preload"
+          href="/fonts/Poppins-Medium.ttf"
+          as="font"
+          crossOrigin="anonymous"
+        />
 
         <Script
           async

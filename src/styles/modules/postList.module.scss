@@ -17,7 +17,7 @@
 
   li {
     &:not(:first-child) {
-      margin-top: h.$gridunit * 2;
+      margin-top: h.$gridunit * 4;
     }
 
     a {
