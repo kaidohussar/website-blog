@@ -24,4 +24,8 @@
       color: h.$color-text;
     }
   }
+
+  @media only screen and (max-width: h.$breakpoint-mobile) {
+    display: none;
+  }
 }

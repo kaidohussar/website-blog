@@ -26,6 +26,16 @@ const components = {
       {children}
     </Heading>
   ),
+  h2: ({ children }) => (
+    <Heading type="h2" size="xl">
+      {children}
+    </Heading>
+  ),
+  h3: ({ children }) => (
+    <Heading type="h3" size="lg">
+      {children}
+    </Heading>
+  ),
   em: ({ children }) => (
     <Text type="p" size="lg">
       {children}

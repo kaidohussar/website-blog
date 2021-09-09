@@ -4,7 +4,7 @@ import { NavHeader, Switch, useTheme } from "kaidohussar-ui";
 export default function Navigation() {
   const router = useRouter();
   const { setTheme, theme } = useTheme();
-  console.log("router", router);
+
   return (
     <NavHeader
       alignment="right"
