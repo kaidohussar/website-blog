@@ -13,6 +13,10 @@ button.backLink {
 
 .header {
   margin-top: h.$gridunit * 8;
+
+  @media only screen and (max-width: h.$breakpoint-mobile) {
+    margin-top: h.$gridunit * 4;
+  }
 }
 
 .content {

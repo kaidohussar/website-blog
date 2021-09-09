@@ -8,6 +8,10 @@
   padding-bottom: 4em;
   width: 100%;
 
+  @media only screen and (max-width: h.$breakpoint-mobile) {
+    margin: 2em auto;
+  }
+
   &.wide {
     max-width: 60em;
   }
