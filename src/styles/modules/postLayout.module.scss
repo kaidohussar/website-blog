@@ -75,6 +75,7 @@ button.backLink {
   a {
     text-decoration: underline;
     color: h.$color-link;
+    word-break: break-word;
 
     &:visited {
       color: #056996;
