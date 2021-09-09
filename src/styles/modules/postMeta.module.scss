@@ -31,4 +31,17 @@
       background: h.$color-grey;
     }
   }
+
+  @media only screen and (max-width: h.$breakpoint-mobile) {
+    margin-top: h.$gridunit * 2;
+    flex-direction: column-reverse;
+
+    .separator {
+      display: none;
+    }
+
+    ul {
+      margin-top: h.$gridunit * 2;
+    }
+  }
 }

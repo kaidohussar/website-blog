@@ -22,6 +22,10 @@ button.backLink {
 .content {
   margin-top: h.$gridunit * 8;
 
+  @media only screen and (max-width: h.$breakpoint-mobile) {
+    margin-top: h.$gridunit * 6;
+  }
+
   p {
     color: h.$color-text;
     margin: 0;
