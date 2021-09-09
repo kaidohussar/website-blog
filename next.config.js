@@ -26,6 +26,7 @@ const securityHeaders = [
 
 const moduleExports = {
   pageExtensions: ["tsx"],
+  optimizeFonts: true,
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.module.rules.push(
       ...[
@@ -47,7 +48,7 @@ const moduleExports = {
     );
     return config;
   },
-  async headers() {
+  /*async headers() {
     return [
       {
         // Apply these headers to all routes in your application.
@@ -55,7 +56,7 @@ const moduleExports = {
         headers: securityHeaders,
       },
     ];
-  },
+  },*/
 };
 
 const SentryWebpackPluginOptions = {

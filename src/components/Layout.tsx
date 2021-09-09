@@ -41,29 +41,33 @@ const Layout = ({ children }: Props) => {
         <meta name="theme-color" content="#fff" />
         <link
           rel="preload"
-          href="/fonts/Poppins-Medium.ttf"
+          href="fonts/Poppins-Medium.ttf"
           as="font"
-          crossOrigin="anonymous"
+          type="font/ttf"
+          crossOrigin=""
         />
         <link
           rel="preload"
-          href="/fonts/Poppins-Light.ttf"
+          href="fonts/Poppins-Light.ttf"
           as="font"
-          crossOrigin="anonymous"
+          type="font/ttf"
+          crossOrigin=""
         />
         <link
           rel="preload"
-          href="/fonts/Poppins-Bold.ttf"
+          href="fonts/Poppins-Bold.ttf"
           as="font"
-          crossOrigin="anonymous"
+          type="font/ttf"
+          crossOrigin=""
         />
         <link
           rel="preload"
-          href="/fonts/Poppins-Medium.ttf"
+          href="fonts/Poppins-Medium.ttf"
           as="font"
-          crossOrigin="anonymous"
+          type="font/ttf"
+          crossOrigin=""
         />
-        <link href="/fonts/style.css" rel="stylesheet" />
+        <link href="fonts/style.css" rel="stylesheet" />
 
         <Script
           async
