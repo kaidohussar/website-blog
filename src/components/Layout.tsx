@@ -39,35 +39,6 @@ const Layout = ({ children }: Props) => {
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="apple-touch-icon" href="/icon.png" />
         <meta name="theme-color" content="#fff" />
-        <link
-          rel="preload"
-          href="fonts/Poppins-Medium.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin=""
-        />
-        <link
-          rel="preload"
-          href="fonts/Poppins-Light.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin=""
-        />
-        <link
-          rel="preload"
-          href="fonts/Poppins-Bold.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin=""
-        />
-        <link
-          rel="preload"
-          href="fonts/Poppins-Medium.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin=""
-        />
-        <link href="fonts/style.css" rel="stylesheet" />
 
         <Script
           async
