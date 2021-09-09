@@ -19,7 +19,7 @@ const Index = () => (
           Kaido Hussar
         </Heading>
         <Heading type="h2" size="xl">
-          Front-end developer and UX designer
+          Front-end developer
         </Heading>
         <Box top="lg">
           <SocialList />
