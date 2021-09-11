@@ -45,13 +45,19 @@ button.backLink {
     margin-top: h.$gridunit * 3;
   }
 
-  h3{
-    margin-bottom: h.$gridunit;
-  }
-
   h2 {
     margin-top: h.$gridunit * 5;
     margin-bottom: h.$gridunit * 2;
+  }
+
+  h3 {
+    margin-bottom: h.$gridunit;
+  }
+
+  h4 {
+    margin-top: h.$gridunit * 2;
+    margin-bottom: h.$gridunit;
+    font-weight: 600;
   }
 
   b, strong {
