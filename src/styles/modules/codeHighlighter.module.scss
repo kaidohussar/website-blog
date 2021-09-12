@@ -5,5 +5,6 @@
     padding: h.$gridunit * 2;
     border-radius: h.$gridunit-small;
     margin: h.$gridunit * 3 0;
+    overflow-x: auto;
   }
 }
