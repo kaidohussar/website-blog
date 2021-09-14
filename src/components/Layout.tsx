@@ -40,7 +40,7 @@ const Layout = ({ children }: Props) => {
         <meta name="theme-color" content="#fff" />
 
         {process.env.NODE_ENV === "production" &&
-          window.location.hostname === "kaidohussar.dev" && (
+          window.location.hostname === "www.kaidohussar.dev" && (
             <>
               <script
                 async
