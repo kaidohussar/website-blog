@@ -15,7 +15,7 @@ const Index = () => (
       cssProps={{ height: "70%" }}
     >
       <Box flexDirection="column" justifyContent="center">
-        <Heading type="h1" size="xxxl" weight="bold">
+        <Heading type="h1" size="xxxl" weight="bold" lineHeight="xs">
           Kaido Hussar
         </Heading>
         <Heading type="h2" size="xl">
