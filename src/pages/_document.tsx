@@ -19,7 +19,9 @@ class MyDocument extends Document {
           />
           <link
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=block"
-            rel="stylesheet"
+            rel="preload"
+            as="font"
+            crossOrigin="anonymous"
           />
         </Head>
         <body>
