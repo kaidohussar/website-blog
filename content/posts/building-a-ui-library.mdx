@@ -4,7 +4,7 @@ title: Building a UI library
 date: 2021-09-11
 author: kaidohussar
 tags:
-  - react
+  - web
   - design
 ---
 
@@ -38,14 +38,15 @@ Building a UI library usually comes with building a design system alongside it.
 All the components should follow strictly set patterns - spacings, colors, typography, etc.
 
 ### What technologies to use?
-After trying and investigating multiple technologies I personally think the 2 best options on building a UI library supported by the design system is either using <b>[styled-components](https://styled-components.com/)</b>
+After trying and investigating multiple technologies I personally think the 2 best options on building a UI library supported by a design system is
+either using [styled-components](https://styled-components.com/)
 or good old <b>CSS modules</b> with the addition of CSS custom properties.
 
 #### Styled-components
 
 Pros:
 - **Built-in theming** - styled-components is providing a context based ThemeProvider out of the box.
-- **Easily maintainable theming** - single source of truth theme object, that includes all the color pallets, spacings, etc.
+- **Easily maintainable theming** - single source of truth theme object, that includes all the color pallets, spacings, typography options,etc.
 ```css
 padding: ${({theme}) => `0 ${theme.spacing.lg}`};
 ```
@@ -61,7 +62,7 @@ const FlexContainerExtended = styled(FlexContainer)`
 Cons:
 * **Learning curve** - Often considered a myth, but in my opinion as with any other framework or tool, bringing it into a team and expecting best practices might not be that easy when components are really complex.
 * **Separations of concern** - Even though there are ways to differentiate logic and styles, in many cases these 2 worlds still mix. With CSS it is really easy to understand which code changes logic, which one styles.
-* **No caching of stylesheets** - Class names are generated dynamically, which can cause issues with caching between builds or renders. With Sass, this issue doesn’t exist.
+* **No caching of stylesheets** - Class names are generated dynamically, which can cause issues with caching between builds or renders. With Sass for example, this issue doesn’t exist.
 
 #### CSS modules with CSS variables
 
@@ -75,6 +76,8 @@ Cons:
 - **Not as flexible theming** - Even though you could utilize CSS variables for it, it's not quite on the same level as using styled-components
 
 ### Conclusion
+
+I think both options are valid and can be really good in certain scenarios - so it really depends.
 
 I would choose Styled components when:
 - **Creating a UI library for multiple projects** - Every project could customize it for their needs.
@@ -97,7 +100,7 @@ Storybook is more of a tool to build components in isolation. You can easily doc
 Sites to document and display your design system and UI components. Some popular options are for example [React Styleguidist](https://github.com/styleguidist/react-styleguidist) and [Docz](https://www.docz.site/).
 
 #### What I would use?
-If I were to start a large-scale project and would need a great out-of-the-box solution, I would definitely go with **[bit.dev](https://bit.dev/)**. Going with modular applications and maintaining packages as separate entities is the way to go in my opinion.
+If I were to start a large-scale project and would need a great out-of-the-box solution, I would definitely go with [bit.dev](https://bit.dev/). Going with modular applications and maintaining components as separate entities is the way to go in my opinion.
 
 For constructing a UI library for documentation and display purposes I would choose [Storybook](https://storybook.js.org/), as there is a lot of tools and addons available for different needs.
 For a more customizable option, I would choose any of the static docs generators.

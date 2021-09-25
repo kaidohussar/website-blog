@@ -74,6 +74,10 @@ button.backLink {
       margin-top: h.$gridunit;
       line-height: 24px;
       font-size: 18px;
+
+      > ul > li {
+        list-style: circle;
+      }
     }
   }
 

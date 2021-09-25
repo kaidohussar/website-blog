@@ -6,8 +6,9 @@ let csp = ``;
 csp += `base-uri 'self';`;
 csp += `form-action 'self';`;
 csp += `default-src 'self';`;
+csp += `font-src 'self' https://fonts.gstatic.com;`;
 csp += `script-src 'self' ${prod ? "" : "'unsafe-eval'"};`; // NextJS requires 'unsafe-eval' in dev (faster source maps)
-csp += `style-src 'unsafe-inline' data:;`; // NextJS requires 'unsafe-inline'
+csp += `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;`; // NextJS requires 'unsafe-inline'
 
 const securityHeaders = [
   {
