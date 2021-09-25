@@ -11,6 +11,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <link rel="canonical" href="https://kaidohussar.dev" />
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
