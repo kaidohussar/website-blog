@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Navigation from "./Navigation";
 import { Loading } from "kaidohussar-ui";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 type Props = {
@@ -15,18 +15,9 @@ const Layout = ({ children }: Props) => {
 
   const { events } = useRouter();
 
-  const handleLoading = () => {
-    setIsLoading((currentLoadingState) => !currentLoadingState);
-  };
-
   useEffect(() => {
-    events.on("routeChangeStart", handleLoading);
-    events.on("routeChangeComplete", handleLoading);
-
-    return () => {
-      events.off("routeChangeStart", handleLoading);
-      events.off("routeChangeComplete", handleLoading);
-    };
+    events.on("routeChangeStart", () => setIsLoading(true));
+    events.on("routeChangeComplete", () => setIsLoading(false));
   }, [events]);
 
   return (

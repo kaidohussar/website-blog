@@ -6,12 +6,11 @@ import { SocialList } from "./SocialList";
 import { getAuthor } from "../lib/authors";
 import { getTag } from "../lib/tags";
 import ContentWrapper from "@components/ContentWrapper";
-import { Button, Heading, ProgressBar } from "kaidohussar-ui";
+import { Button, Heading } from "kaidohussar-ui";
 import PostMeta from "@components/PostMeta";
 import MetaData from "@components/meta/MetaData";
 import styles from "@styles/modules/postLayout.module.scss";
 import { useRouter } from "next/router";
-import { useGetReadingBarInfo } from "@src/utils/useGetReadingBarInfo";
 
 type Props = {
   title: string;
@@ -38,7 +37,6 @@ const PostLayout = ({
     undefined
   );
 
-  const { percentage } = useGetReadingBarInfo(contentRef);
   return (
     <Layout>
       <MetaData
@@ -49,8 +47,6 @@ const PostLayout = ({
         author={authorName}
         description={description}
       />
-
-      <ProgressBar percentage={percentage} />
 
       <ContentWrapper ref={setContentRef}>
         <Button
