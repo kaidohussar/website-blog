@@ -11,19 +11,27 @@ type Props = {
 const googleTrackingId = "G-9DDQJQ0KZ1";
 
 const Layout = ({ children }: Props) => {
+  const router = useRouter();
   const [loading, setIsLoading] = useState(false);
 
   const { events } = useRouter();
 
   useEffect(() => {
-    events.on("routeChangeStart", () => setIsLoading(true));
-    events.on("routeChangeComplete", () => setIsLoading(false));
+    const handleSetLoading = (url) => {
+      url !== router.asPath && setIsLoading(true);
+    };
+    const handleEndLoading = (url) => {
+      url === router.asPath && setIsLoading(false);
+    };
+
+    events.on("routeChangeStart", handleSetLoading);
+    events.on("routeChangeComplete", handleEndLoading);
 
     return () => {
-      events.off("routeChangeStart", () => setIsLoading(false));
-      events.off("routeChangeComplete", () => setIsLoading(false));
+      events.off("routeChangeStart", handleSetLoading);
+      events.off("routeChangeComplete", handleEndLoading);
     };
-  }, [events]);
+  }, [events, router.asPath]);
 
   return (
     <>

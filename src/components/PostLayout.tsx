@@ -11,6 +11,8 @@ import PostMeta from "@components/PostMeta";
 import MetaData from "@components/meta/MetaData";
 import styles from "@styles/modules/postLayout.module.scss";
 import { useRouter } from "next/router";
+import { useGetReadingBarInfo } from "@src/utils/useGetReadingBarInfo";
+import DisplayReadPercentage from "@components/DisplayReadPercentage";
 
 type Props = {
   title: string;
@@ -37,6 +39,7 @@ const PostLayout = ({
     undefined
   );
 
+  const { percentage, isHidden } = useGetReadingBarInfo(contentRef);
   return (
     <Layout>
       <MetaData
@@ -47,6 +50,8 @@ const PostLayout = ({
         author={authorName}
         description={description}
       />
+
+      <DisplayReadPercentage percentage={percentage} isHidden={isHidden} />
 
       <ContentWrapper ref={setContentRef}>
         <Button
