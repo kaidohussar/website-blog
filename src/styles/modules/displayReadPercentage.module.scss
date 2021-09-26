@@ -5,12 +5,7 @@
   top: h.$gridunit * 2;
   left: h.$gridunit * 2;
 
-  @media only screen and (max-width: h.$breakpoint-mobile) {
-    left: 1px;
-    top: 1px;
-
-    span {
-      font-size: 12px;
-    }
+  @media only screen and (max-width: h.$breakpoint-tablet) {
+    display: none;
   }
 }
