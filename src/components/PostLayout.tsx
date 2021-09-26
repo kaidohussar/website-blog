@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Copyright from "./Copyright";
 import Date from "./Date";
 import Layout from "./Layout";
@@ -6,11 +6,12 @@ import { SocialList } from "./SocialList";
 import { getAuthor } from "../lib/authors";
 import { getTag } from "../lib/tags";
 import ContentWrapper from "@components/ContentWrapper";
-import { Button, Heading } from "kaidohussar-ui";
+import { Button, Heading, ProgressBar } from "kaidohussar-ui";
 import PostMeta from "@components/PostMeta";
 import MetaData from "@components/meta/MetaData";
 import styles from "@styles/modules/postLayout.module.scss";
 import { useRouter } from "next/router";
+import { useGetReadingBarInfo } from "@src/utils/useGetReadingBarInfo";
 
 type Props = {
   title: string;
@@ -21,7 +22,7 @@ type Props = {
   description?: string;
   children: React.ReactNode;
 };
-export default function PostLayout({
+const PostLayout = ({
   title,
   date,
   slug,
@@ -29,10 +30,15 @@ export default function PostLayout({
   tags,
   description = "",
   children,
-}: Props) {
+}: Props) => {
   const router = useRouter();
   const keywords = tags.map((it) => getTag(it).name);
   const authorName = getAuthor(author).name;
+  const [contentRef, setContentRef] = useState<HTMLDivElement | undefined>(
+    undefined
+  );
+
+  const { percentage } = useGetReadingBarInfo(contentRef);
   return (
     <Layout>
       <MetaData
@@ -43,7 +49,10 @@ export default function PostLayout({
         author={authorName}
         description={description}
       />
-      <ContentWrapper>
+
+      <ProgressBar percentage={percentage} />
+
+      <ContentWrapper ref={setContentRef}>
         <Button
           onClick={() => router.push("/posts", undefined, { shallow: true })}
           className={styles.backLink}
@@ -70,4 +79,6 @@ export default function PostLayout({
       </ContentWrapper>
     </Layout>
   );
-}
+};
+
+export default PostLayout;

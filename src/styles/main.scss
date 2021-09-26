@@ -18,6 +18,7 @@ html[data-kh-theme='light'] {
     --kh-color-grey-extra-light: #f1f1f1;
 
     --kh-color-link: #0089c7;
+    --kh-color-link-visited: #056996;
 }
 
 html[data-kh-theme='dark'] {
@@ -27,7 +28,8 @@ html[data-kh-theme='dark'] {
     --kh-color-grey-light: #464545;
     --kh-color-grey-extra-light: #313131;
 
-    --kh-color-link: #0089c7;
+    --kh-color-link: #40a4dd;
+    --kh-color-link-visited: #5b99c4;
 }
 
 body {

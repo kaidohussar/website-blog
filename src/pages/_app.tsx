@@ -15,7 +15,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <StylesProvider customThemes={[commonOverWrites, commonOverWrites]}>
-      <Frame backgroundColor="backgroundColor" maxWidth="large">
+      <Frame backgroundColor="backgroundColor" maxWidth="large" id="main-frame">
         <Component {...pageProps} />
       </Frame>
     </StylesProvider>

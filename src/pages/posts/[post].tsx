@@ -7,10 +7,9 @@ import { parseISO } from "date-fns";
 import PostLayout from "@components/PostLayout";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
-import { Heading, Text } from "kaidohussar-ui";
-import CodeHighlighter from "@components/CodeHighlighter";
+import components from "@src/pages/posts/components";
 
-export type Props = {
+export type PostProps = {
   title: string;
   dateString: string;
   slug: string;
@@ -18,55 +17,6 @@ export type Props = {
   author: string;
   description?: string;
   source: any;
-};
-
-const components = {
-  h1: ({ children }) => (
-    <Heading type="h1" size="xxl">
-      {children}
-    </Heading>
-  ),
-  h2: ({ children }) => (
-    <Heading type="h2" size="xl">
-      {children}
-    </Heading>
-  ),
-  h3: ({ children }) => (
-    <Heading type="h3" size="lg">
-      {children}
-    </Heading>
-  ),
-  h4: ({ children }) => (
-    <Heading type="h4" size="md">
-      {children}
-    </Heading>
-  ),
-  em: ({ children }) => (
-    <Text type="p" size="lg">
-      {children}
-    </Text>
-  ),
-  p: ({ children }) => (
-    <Text type="p" size="md">
-      {children}
-    </Text>
-  ),
-  // eslint-disable-next-line react/display-name
-  pre: (props) => {
-    const className = props.children.props.className || "";
-    const matches = className.match(/language-(?<lang>.*)/);
-
-    return (
-      <CodeHighlighter
-        code={props.children.props.children.trim()}
-        language={
-          matches && matches.groups && matches.groups.lang
-            ? matches.groups.lang
-            : ""
-        }
-      />
-    );
-  },
 };
 
 const slugToPostContent = ((postContents) => {
@@ -83,7 +33,7 @@ const Post = ({
   author,
   description = "",
   source,
-}: Props) => {
+}: PostProps) => {
   return (
     <PostLayout
       title={title}

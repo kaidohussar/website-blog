@@ -23,7 +23,7 @@ The OWASP Top 10 is a standard awareness document for developers, that represent
 #### Cheat Sheet Series
 The **OWASP Cheat Sheet Series** was created to provide a concise collection of high value information on specific application security topics.
 
-[View OWASP Cheatsheet Series](https://cheatsheetseries.owasp.org/index.html/)
+[View OWASP Cheatsheet Series](https://cheatsheetseries.owasp.org/index.html)
 
 ## Authentication
 Authentication is the process of **verifying** that an individual, entity or website **is whom it claims to be**.
@@ -131,7 +131,7 @@ Subresource Integrity (SRI) is a security feature that enables browsers to verif
 Cross-Origin Resource Sharing (CORS) is an HTTP-header based mechanism that allows a server to indicate any origins (domain, scheme, or port) other than its own from which a browser should permit loading of resources. CORS also relies on a mechanism by which browsers make a "preflight" request to the server hosting the cross-origin resource, in order to check that the server will permit the actual request. In that preflight, the browser sends headers that indicate the HTTP method and headers that will be used in the actual request.
 
 #### Content Security Policy (CSP)
-Content Security Policy (CSP) makes it possible to specify the domains that the browser should consider to be valid sources of executable scripts. A CSP compatible browser will then only execute scripts loaded in source files received from those allowed domains, ignoring all other scripts (including inline scripts and event-handling HTML attributes).
+CSP makes it possible to specify the domains that the browser should consider to be valid sources of executable scripts. A CSP compatible browser will then only execute scripts loaded in source files received from those allowed domains, ignoring all other scripts (including inline scripts and event-handling HTML attributes).
 
 * A primary goal of CSP is to mitigate and report XSS attacks. XSS attacks exploit the browser's trust in the content received from the server. Malicious scripts are executed by the victim's browser because the browser trusts the source of the content, even when it's not coming from where it seems to be coming from.
 * In addition to restricting the domains from which content can be loaded, the server can specify which protocols are allowed to be used
@@ -169,7 +169,7 @@ The injected script is stored permanently on the target servers. The victim then
 
 3) The malicious script reaches back-end systems via a form field data and is saved in the database.
 
-4) When some legitimate user accesses the application, he is served with the malicious script by the application’s backend. The browser doesn’t know it is a malicious script and executes it.
+4) When some legitimate user accesses the application, he is served with the malicious script by the application’s back-end. The browser doesn’t know it is a malicious script and executes it.
 
 #### Reflected XSS Attacks
 When a user is tricked into clicking a malicious link, submitting a specially crafted form, or browsing to a malicious site, the injected code travels to the vulnerable website. The Web server reflects the injected script back to the user's browser, such as in an error message, search result, or any other response that includes data sent to the server as part of the request. The browser executes the code because it assumes the response is from a "trusted" server which the user has already interacted with.

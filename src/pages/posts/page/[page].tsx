@@ -35,12 +35,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     pages: Math.ceil(countPosts() / config.posts_per_page),
   };
   return {
-    props: {
-      page,
-      posts,
-      tags,
-      pagination,
-    },
+    props: { page, posts, tags, pagination },
   };
 };
 
@@ -49,10 +44,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = Array.from(Array(pages - 1).keys()).map((it) => ({
     params: { page: (it + 2).toString() },
   }));
-  return {
-    paths: paths,
-    fallback: false,
-  };
+  return { paths: paths, fallback: false };
 };
 
 export default Page;

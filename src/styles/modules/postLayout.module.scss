@@ -88,16 +88,6 @@ button.backLink {
     border-radius: h.$gridunit / 2;
     font-size: 14px;
   }
-
-  a {
-    text-decoration: underline;
-    color: h.$color-link;
-    word-break: break-word;
-
-    &:visited {
-      color: #056996;
-    }
-  }
 }
 
 .footer {

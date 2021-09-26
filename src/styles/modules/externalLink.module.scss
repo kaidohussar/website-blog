@@ -1,0 +1,13 @@
+@use './src/styles/helpers' as h;
+
+.link {
+  text-decoration: underline;
+  color: h.$color-link;
+  word-break: break-word;
+
+  &:visited,
+  &:hover,
+  &:active {
+    color: h.$color-link-visited;
+  }
+}

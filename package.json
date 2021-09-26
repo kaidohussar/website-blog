@@ -19,7 +19,7 @@
     "date-fns": "^2.23.0",
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",
-    "kaidohussar-ui": "1.0.35",
+    "kaidohussar-ui": "1.0.39",
     "next": "11.0.1",
     "next-mdx-remote": "^3.0.4",
     "normalize.css": "^8.0.1",
@@ -37,9 +37,7 @@
     "babel-plugin-styled-components": "^1.12.0",
     "eslint": "^7.32.0",
     "eslint-config-next": "^11.1.0",
-    "jest": "^27.0.6",
     "styled-components": "^5.3.0",
-    "ts-jest": "^27.0.4",
     "typescript": "^4.3.5",
     "yaml-loader": "^0.6.0"
   }
