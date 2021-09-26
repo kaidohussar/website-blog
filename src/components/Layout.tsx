@@ -18,6 +18,11 @@ const Layout = ({ children }: Props) => {
   useEffect(() => {
     events.on("routeChangeStart", () => setIsLoading(true));
     events.on("routeChangeComplete", () => setIsLoading(false));
+
+    return () => {
+      events.off("routeChangeStart", () => setIsLoading(false));
+      events.off("routeChangeComplete", () => setIsLoading(false));
+    };
   }, [events]);
 
   return (
