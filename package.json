@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "export": "next build && next export -o ./dist",
-    "typecheck": "tsc --noEmit",
-    "test": "jest"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@mapbox/rehype-prism": "^0.7.0",
@@ -31,7 +30,6 @@
     "schema-dts": "^0.10.0"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.24",
     "@types/node": "^16.4.12",
     "@types/react": "^17.0.15",
     "babel-plugin-styled-components": "^1.12.0",
