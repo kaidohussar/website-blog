@@ -1,13 +1,19 @@
 {
   "base_url": "kaidohussar.dev",
-  "site_title": "Kaido Hussar | Front-end developer & UX designer",
+  "site_title": "Kaido Hussar | Front-end developer",
   "site_description": "Personal website for Kaido Hussar",
   "site_keywords": [
+    {
+      "keyword": "Front-end"
+    },
+    {
+      "keyword": "React"
+    },
     {
       "keyword": "Design"
     },
     {
-      "keyword": "React"
+      "keyword": "UX"
     }
   ],
   "posts_per_page": 5,
