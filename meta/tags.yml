@@ -1,7 +1,9 @@
 tags:
   - slug: design
     name: design
-  - slug: web
-    name: web
+  - slug: web-development
+    name: web development
   - slug: accessibility
     name: accessibility
+  - slug: javascript
+    name: javascript

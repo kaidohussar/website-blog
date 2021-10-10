@@ -36,6 +36,11 @@ export const components = {
   a: ({ children, href }) => (
     <ExternalLink href={href}>{children}</ExternalLink>
   ),
+  small: ({ children, href }) => (
+    <Text type="span" size="xs">
+      {children}
+    </Text>
+  ),
   // eslint-disable-next-line react/display-name
   pre: (props) => {
     const className = props.children.props.className || "";
