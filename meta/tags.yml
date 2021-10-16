@@ -5,3 +5,5 @@ tags:
     name: web
   - slug: accessibility
     name: accessibility
+  - slug: ux
+    name: UX
