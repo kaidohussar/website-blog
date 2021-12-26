@@ -5,3 +5,7 @@ tags:
     name: web
   - slug: accessibility
     name: accessibility
+  - slug: javascript
+    name: javascript
+  - slug: react
+    name: react
