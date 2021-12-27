@@ -12,7 +12,6 @@ export default function Navigation() {
         {
           title: "About",
           onClick: (e) => {
-            console.log("router push");
             e.preventDefault();
             router.push("/", undefined, { shallow: true });
           },
@@ -21,7 +20,6 @@ export default function Navigation() {
         {
           title: "Blog",
           onClick: (e) => {
-            console.log("router push");
             e.preventDefault();
             router.push("/posts", undefined, { shallow: true });
           },
