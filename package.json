@@ -18,7 +18,7 @@
     "date-fns": "^2.23.0",
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",
-    "kaidohussar-ui": "1.0.39",
+    "kaidohussar-ui": "1.0.40",
     "next": "11.1.2",
     "next-mdx-remote": "^3.0.4",
     "normalize.css": "^8.0.1",

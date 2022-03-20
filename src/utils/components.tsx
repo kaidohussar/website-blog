@@ -13,8 +13,8 @@ export const components = {
       {children}
     </Heading>
   ),
-  h3: ({ children }) => (
-    <Heading type="h3" size="lg">
+  h3: ({ children, ...rest }) => (
+    <Heading type="h3" size="lg" {...rest}>
       {children}
     </Heading>
   ),
@@ -35,6 +35,9 @@ export const components = {
   ),
   a: ({ children, href }) => (
     <ExternalLink href={href}>{children}</ExternalLink>
+  ),
+  anchor: ({ children, ...rest }) => (
+      <a {...rest}>{children}</a>
   ),
   // eslint-disable-next-line react/display-name
   pre: (props) => {

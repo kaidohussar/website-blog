@@ -40,6 +40,16 @@ body {
         padding: 0;
         list-style: none;
     }
+
+    a {
+        color: h.$color-link;
+
+        &:visited,
+        &:hover,
+        &:active {
+            color: h.$color-link-visited;
+        }
+    }
 }
 
 

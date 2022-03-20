@@ -1,0 +1,385 @@
+---
+slug: html-semantics
+title: HTML Semantics
+date: 2022-02-24
+author: kaidohussar
+tags:
+  - accessibility
+  - web
+---
+
+<em>
+    Semantic HTML introduces meaning to the web page rather than just presentation.
+</em>
+
+Writing semantic HTML is about creating web content that is readable to both humans and computers. It's pretty much mandatory if you want your website to be <b>accessible to all users</b>,
+to have a <b>high search engine ranking</b> and to be <b>readable to developers</b> who are interacting with it.
+
+## Benefits of good semantic HTML
+
+### Better SEO
+Search engines crawl the web and index your webpage. Good semantic markup makes webpages more informative, adaptable and easier for search engines to interpret the content.
+
+### Helping screen readers
+Screen readers can use it as a signpost to help visually impaired users navigate a page. One of the first things screen readers do is they scan the Document Object Model (DOM) and retrieve information about the page.
+
+### Readable code
+It's a lot easier to read & understand code - rather than having multiple meaningless ```<div>```'s the HTML structure has a stricter layout and sets boundaries of which type of content is expected.
+
+### Use semantic names to name components
+Knowing the correct semantic markup helps naming components in your web app.
+
+## Example of good semantic HTML:
+```html
+<header>
+    <nav aria-label="main navigation">
+        <ul>
+            <li><a href="#">Main navigation link 1</a></li>
+            <li><a href="#">Main navigation link 2</a></li>
+            <li><a href="#">Main navigation link 3</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Page title</h1>
+
+    <aside>
+        <nav aria-label="navigation area 2">
+            <ul>
+                <li><a href="#">Sidebar navigation link 1</a></li>
+                <li><a href="#">Sidebar navigation link 2</a></li>
+                <li><a href="#">Sidebar navigation link 3</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <section aria-labelledby="section-1">
+        <h2 id="section-1">Section title</h2>
+    </section>
+
+    <section aria-labelledby="section-2">
+        <h2 id="section-2">Section title</h2>
+    </section>
+</main>
+```
+
+#### Key takeaways from this example markup:
+- Wrap your navigation elements within the ```<nav>``` tag. This is equivalent of doing ```<div role="navigation">```
+- Having multiple ```<nav>``` tags is totally fine, just have them labelled to provide context.
+- Using more than one ```h1``` is allowed by the HTML specification, but is not considered a best practice. Using only one ```h1``` is beneficial for screenreader users.
+- The main content of your page should be inside the ```<main>``` tag, and sidebar which is related to main content should be inside ```<aside>``` - section that relates to the main content, yet can stand alone when separated.
+- ```<section>``` tags should have ```aria-label```, ```aria-labelledby``` or ```title``` properties, otherwise the accessible role of ```region```, that we would often want with ```<section>``` element is [not added](https://www.w3.org/TR/wai-aria-practices/examples/landmarks/HTML5.html).
+- Use ```aria-labelledby``` to reference **other elements on the page** to define an accessible name if possible.
+
+## Semantic HTML elements and use cases
+
+Even though there are roughly [100 semantic elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) available, this article will be focusing on these ones (more will be added in the future):
+
+<nav>
+    <ul class="nav-main">
+        <li><anchor href="#article">article</anchor></li>
+        <li><anchor href="#section">section</anchor></li>
+        <li><anchor href="#aside">aside</anchor></li>
+        <li><anchor href="#nav">nav</anchor></li>
+        <li><anchor href="#main">main</anchor></li>
+        <li><anchor href="#header">header</anchor></li>
+        <li><anchor href="#footer">footer</anchor></li>
+        <li><anchor href="#mark">mark</anchor></li>
+        <li><anchor href="#details">details</anchor></li>
+        <li><anchor href="#summary">summary</anchor></li>
+        <li><anchor href="#figure">figure</anchor></li>
+        <li><anchor href="#figcaption">figcaption</anchor></li>
+        <li><anchor href="#time">time</anchor></li>
+    </ul>
+</nav>
+
+<h3 id="article">article</h3>
+
+The ```<article>``` element represents a complete, or self-contained composition in a document, page, application, or site.
+
+#### Examples where to use:
+- newspaper article
+- blog post
+- user submitted comment
+- any independent item of content
+
+#### Things to remember:
+- ```<article>``` content should have a heading ```<h1>```-```<h6>```.
+- An ```<article>``` should make sense on its own and it should be possible to distribute it independently from the rest of the site.
+- When nested, the inner ```<article>``` should be related to the contents of the parent ```<article>```. For example blog post comments could be inside ```<article>``` tags, but the blog post itself is also wrapped inside ```<article>```.
+
+<hr />
+
+<h3 id="section">section</h3>
+
+A ```<section>``` tag represents a standalone section of a document.
+
+#### Examples where to use:
+
+- On a page with distinct sections
+
+```html
+<h1>User settings</h1>
+<section aria-labelledby="section-1">
+    <h2 id="section-1">Change email</h2>
+    ...
+</section>
+
+<section aria-labelledby="section-2">
+    <h2 id="section-2">Change password</h2>
+    ...
+</section>
+```
+
+#### Things to remember:
+- ```<section>``` content should usually have a heading ```<h1>```-```<h6>```, but there are few [exceptions](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section#using_a_section_without_a_heading).
+- Should be only used when there isn't a more specific element to use.
+- Assistive technologies often provide ways for users to quickly navigate to a specific section.
+- Add ```aria-label```, ```aria-labelledby``` or ```title``` properties to apply the role of ```region```.
+
+<hr />
+
+<h3 id="aside">aside</h3>
+
+The ```<aside>``` HTML element represents a section of a page whose content is only indirectly related to the page's main content.
+
+#### Examples where to use:
+
+- Sidebar
+- Pull quote (section of the article pulled out of its context and repeated to give either emphasis, or to aid the reader in scanning the article)
+```html
+<p>Text content</p>
+<aside>
+    <q>Pull quote</q>
+</aside>
+<p>Text content continues</p>
+```
+- Advertising
+- Other content that is considered separate from the main content of the page
+
+#### Things to remember:
+- If ```<aside>``` is used within a ```<section>``` or an ```<article>``` tags, the content should be related to it.
+
+<hr />
+
+<h3 id="nav">nav</h3>
+
+The ```<nav>``` HTML element represents a section of a page whose purpose is to provide navigational links, either within the current document or to other documents.
+
+#### Examples where to use:
+- Header navigation
+- Menus
+- Tables of content
+- Indexes
+
+#### Things to remember:
+- Using HTML element ```nav``` applies the role of ```navigation```.
+- For example when setting up links in the ```footer```, there is no need for ```nav``` element.
+- Having multiple ```nav``` elements in a single page is fine, but be sure to provide ```aria-label``` or ```aria-labelledby``` when doing so.
+- Don't overuse it - not all links should be inside a ```nav``` tag, but **only major navigation blocks**
+- The ```nav``` tag cannot be nested in the ```address``` element.
+
+<hr />
+
+<h3 id="main">main</h3>
+
+The ```main``` HTML element represents the dominant content of the ```body``` of a document. The main content area consists of content that is directly related to or expands upon the central topic of a document, or the central functionality of an application.
+
+#### Examples where to use:
+- Main content of the page
+
+#### Things to remember:
+- Using it applies the role of ```main```, but prefer using the element when possible (not supported in IE).
+- It can be a target of a skip navigation link - so that assistive technology users could access main content of the page faster, if they wish.
+- ```<main>``` "represents the main content of the body of a document or application", while ```<body>``` "represents the content of the document".
+- The ```<main>``` element can only be used once in each HTML file, don't put it inside tags such as ```<article>```, ```<aside>```, ```<footer>```, ```<header>``` or ```<nav>```
+
+<hr />
+
+<h3 id="header">header</h3>
+
+```<header>``` can be used as a header for a whole page (the most common usage), but can also be used as the header for an **article** or **any other piece of on-page content**.
+
+#### Examples where to use:
+- Page header
+```jsx
+<header>
+    <a src="/" id="logo">Site Title</a>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+```
+- Section/article header
+
+#### Things to remember:
+- A single HTML document can have multiple ```<header>``` elements. A ```<header>``` is always related to the element that contains it.
+- When using it in an ```article``` or ```section```, a heading (```<h1>```–```<h6>```) element is commonly added.
+
+<hr />
+
+<h3 id="footer">footer</h3>
+
+The ```footer``` element represents a footer for its nearest ancestor sectioning content or sectioning root element. A footer typically contains information about its section such as who wrote it, links to related documents, copyright data, and the like.
+
+#### Examples where to use:
+
+- Copyright info
+- Contact details
+- Links to pages
+- Section actions
+
+#### Things to remember:
+
+- When it is an immediate descendant of the ```<body>``` using the ```<footer>``` element will automatically communicate a section has a role of ```contentinfo```
+- ```footer``` element nested within an ```article```, ```aside```, ```main```, ```nav```, or ```section``` is not considered ```contentinfo```.
+
+<hr />
+
+<h3 id="mark">mark</h3>
+
+```html
+<p>You searched for "blocked":</p>
+
+<hr>
+
+<p>If your account is <mark>blocked</mark> go through the password recovery flow to unblock it.</p>
+```
+
+The ```<mark>``` HTML element represents text which is marked or highlighted for reference or notation purposes
+
+#### Examples where to use:
+
+- Inside ```blockquote``` to mark text interesting/relevant to the user.
+- Highlighting search results
+
+
+#### Things to remember:
+
+- The presence of the mark element is not announced by most screen reading technology. It can be made to be announced by using the CSS ```content``` property, along with the ```::before``` and ```::after``` pseudo-elements.
+- By default, most browsers render text within ```<mark>``` tags as black text on a yellow background
+
+<hr />
+
+<h3 id="details">details</h3>
+
+```html
+<details>
+    <summary>Summary</summary>
+    More info
+</details>
+```
+
+The ```<details>``` element is used to pair a ```<summary>``` statement with additional related details. The ```<summary>``` is displayed, and a user can view or hide additional details by clicking on the ```summary```.
+
+#### Examples where to use:
+
+- Frequently asked questions page
+
+#### Things to remember:
+
+- Usually paired with ```summary``` element
+- When there is not a ```summary``` element found, browsers will display a text "Details" instead
+
+<hr />
+
+<h3 id="summary">summary</h3>
+
+The ```<summary>``` HTML element specifies a summary, caption, or legend for a ```<details>``` element's disclosure box. Clicking the ```<summary>``` element toggles the state of the parent ```<details>``` element open and closed.
+
+#### Examples where to use:
+
+- Frequently asked questions page
+
+#### Things to remember:
+
+- The ```<summary>``` element should be the first child element of the ```<details>``` element
+
+<hr />
+
+<h3 id="figure">figure</h3>
+
+```html
+<figure>
+    <img src="lion.png">
+    <figcaption>Lion in the wild</figcaption>
+</figure>
+```
+
+The ```<figure>``` HTML element represents self-contained content, potentially with an optional caption, which is specified using the ```<figcaption>``` element. The figure, its caption, and its contents are referenced as a single unit.
+
+#### Examples where to use:
+
+- Image
+- Illustration
+- Diagram
+- Code snippet
+
+
+#### Things to remember:
+
+<hr />
+
+<h3 id="figcaption">figcaption</h3>
+
+The ```<figcaption>``` HTML element represents a caption or legend describing the rest of the contents of its parent ```<figure>``` element.
+
+#### Examples where to use:
+
+- Image
+- Illustration
+- Diagram
+- Code snippet
+
+#### Things to remember:
+
+- When used with images, usually the ```alt``` tag should be empty when using ```figcaption```, otherwise screen readers will read the info twice.
+
+<hr />
+
+<h3 id="time">time</h3>
+
+```html
+    <p>The concert starts at <time datetime="20:00">20:00</time></p>
+```
+
+The ```<time>``` HTML element represents a specific period in time. It may include the ```datetime``` attribute to translate dates into machine-readable format, allowing for better search engine results or custom features such as reminders.
+
+#### Examples where to use:
+
+- When displaying time periods
+- When displaying a date for a specific event
+
+#### Things to remember:
+
+- The ```datetime``` value (the machine-readable value of the datetime) is the value of the element's datetime attribute, which must be in the correct format.
+
+It may represent one of the following:
+
+- A time on a 24-hour clock.
+- A precise date in the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar) (with optional time and timezone information).
+- [A valid time duration](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-duration-string).
+
+## Final words
+
+Constructing this article and researching about this topic has made me realize how common it is to write <b>semantically incorrect</b> HTML. So often I see a sea of ```<div>``` 's when in reality many more suitable elements could be used.
+
+Hopefully this article provided enough information and examples to inspire writing more semantically correct HTML.
+
+<hr />
+
+### Resources used:
+
+- https://developer.mozilla.org/en-US/docs/Glossary/Semantics
+- https://www.thoughtco.com/why-use-semantic-html-3468271
+- https://html.spec.whatwg.org/multipage/sections.html
+- https://www.w3docs.com/learn-html/html-nav-tag.html
+- https://html.com/tags/
+- https://developer.mozilla.org/en-US/docs/Web/HTML
+
+
