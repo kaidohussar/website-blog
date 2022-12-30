@@ -1,20 +1,20 @@
-import React from "react";
-import { PostContent } from "../lib/posts";
-import TagLink from "./TagLink";
-import { TagContent } from "../lib/tags";
-import styles from "../styles/modules/postList.module.scss";
-import ContentWrapper from "@components/ContentWrapper";
-import { Box } from "kaidohussar-ui";
-import PostList from "@components/PostList";
+import React from 'react'
+import { PostContent } from '../lib/posts'
+import TagLink from './TagLink'
+import { TagContent } from '../lib/tags'
+import styles from '../styles/modules/postList.module.scss'
+import ContentWrapper from '@components/ContentWrapper'
+import { Box } from 'kaidohussar-ui'
+import PostList from '@components/PostList'
 
 type Props = {
-  posts: PostContent[];
-  tags: TagContent[];
+  posts: PostContent[]
+  tags: TagContent[]
   pagination: {
-    current: number;
-    pages: number;
-  };
-};
+    current: number
+    pages: number
+  }
+}
 
 const PostListMain = ({ posts, tags, pagination }: Props) => {
   return (
@@ -30,7 +30,7 @@ const PostListMain = ({ posts, tags, pagination }: Props) => {
         </ul>
       </Box>
     </ContentWrapper>
-  );
-};
+  )
+}
 
-export default PostListMain;
+export default PostListMain

@@ -1,17 +1,17 @@
-import Date from "@components/Date";
-import React from "react";
-import BasicMeta from "@components/meta/BasicMeta";
-import OpenGraphMeta from "@components/meta/OpenGraphMeta";
-import JsonLdMeta from "@components/meta/JsonLdMeta";
+import Date from '@components/Date'
+import React from 'react'
+import BasicMeta from '@components/meta/BasicMeta'
+import OpenGraphMeta from '@components/meta/OpenGraphMeta'
+import JsonLdMeta from '@components/meta/JsonLdMeta'
 
 type Props = {
-  title?: string;
-  description?: string;
-  keywords?: string[];
-  author?: string;
-  date?: Date;
-  url: string;
-};
+  title?: string
+  description?: string
+  keywords?: string[]
+  author?: string
+  date?: Date
+  url: string
+}
 
 const MetaData = ({
   title,
@@ -38,6 +38,6 @@ const MetaData = ({
       description={description}
     />
   </>
-);
+)
 
-export default MetaData;
+export default MetaData

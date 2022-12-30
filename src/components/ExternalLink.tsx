@@ -1,9 +1,9 @@
-import React from "react";
-import styles from "@styles/modules/externalLink.module.scss";
+import React from 'react'
+import styles from '@styles/modules/externalLink.module.scss'
 
 type ExternalLinkProps = {
-  href: string;
-};
+  href: string
+}
 
 const ExternalLink: React.FC<ExternalLinkProps> = ({ children, href }) => {
   return (
@@ -15,7 +15,7 @@ const ExternalLink: React.FC<ExternalLinkProps> = ({ children, href }) => {
     >
       {children}
     </a>
-  );
-};
+  )
+}
 
-export default ExternalLink;
+export default ExternalLink

@@ -10,12 +10,13 @@ tags:
 ---
 
 <em>
-    Even though debounce and throttle both are used to have control over <b>how often a function or code is executed</b>,
-    they are a bit different.
+  Even though debounce and throttle both are used to have control over{' '}
+  <b>how often a function or code is executed</b>, they are a bit different.
 </em>
 
 <em>
-    In this post you will learn what debounce and throttling are, why we use them and what are the differences between these two.
+  In this post you will learn what debounce and throttling are, why we use them
+  and what are the differences between these two.
 </em>
 
 ## Debounce
@@ -25,45 +26,49 @@ as a cooldown and for example when spam calling a debounced function, the cooldo
 Only when the time between two function calls is <b>more than the predefined cooldown value</b>, the function is called.
 
 ### TypeScript implementation:
+
 ```typescript
-type Procedure = (...args: any[]) => void;
+type Procedure = (...args: any[]) => void
 
 export function debounce<F extends Procedure>(
   func: F,
   wait = 300,
-  immediate = true
+  immediate = true,
 ): (this: ThisParameterType<F>, ...args: Parameters<F>) => void {
-  let timeout: ReturnType<typeof setTimeout> | undefined | null;
+  let timeout: ReturnType<typeof setTimeout> | undefined | null
 
   return function (this: ThisParameterType<F>, ...args: Parameters<F>) {
-    const context = this;
-    const callNow = immediate && !timeout;
+    const context = this
+    const callNow = immediate && !timeout
 
-    if (timeout) clearTimeout(timeout);
+    if (timeout) clearTimeout(timeout)
 
     timeout = setTimeout(() => {
-      if (timeout) timeout = null;
+      if (timeout) timeout = null
 
-      if (!immediate) func.apply(context, args);
-    }, wait);
+      if (!immediate) func.apply(context, args)
+    }, wait)
 
-    if (callNow) func.apply(context, args);
-  };
+    if (callNow) func.apply(context, args)
+  }
 }
 ```
 
 ### Some common use cases
 
-* <b>Search input</b> - Often times we want to use the user input to search or find something from a database or from some 3rd party API - this will help to prevent spamming your API's.
-* <b>Resize/Scroll/Mousemove listeners</b> - Having listeners on either scroll or resize events might invoke a function way too often.
-For example if you want to do some height or width calculations based on window size, it probably would be a lot more performant do limit
-the frequency.
+- <b>Search input</b> - Often times we want to use the user input to search or find
+  something from a database or from some 3rd party API - this will help to prevent
+  spamming your API's.
+- <b>Resize/Scroll/Mousemove listeners</b> - Having listeners on either scroll or
+  resize events might invoke a function way too often. For example if you want to
+  do some height or width calculations based on window size, it probably would be
+  a lot more performant do limit the frequency.
 
 Keep in mind that your function will be executed <b>after</b> the user has finished or stopped to do these actions (scrolling/resizing/moving/typing). Because <b>during these actions</b> the cooldown period is most likely never passed.
 
 ### Example
 
-Here we have a search input where the ```handleChange()``` function will be called when the cooldown period of <b>300ms is passed</b>
+Here we have a search input where the `handleChange()` function will be called when the cooldown period of <b>300ms is passed</b>
 
 <img width={400} src="/images/debounced-search.webp" alt="Debounced search" />
 
@@ -75,15 +80,15 @@ Here we have a search input where the ```handleChange()``` function will be call
 
 ```jsx
 const SearchInput = () => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState('')
 
   const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setValue(target.value);
-  };
+    setValue(target.value)
+  }
 
   const handleDebouncedOnChange = useMemo(() => {
-    return debounce(handleChange, 300, false);
-  }, []);
+    return debounce(handleChange, 300, false)
+  }, [])
 
   return (
     <>
@@ -93,7 +98,7 @@ const SearchInput = () => {
         <div>{value}</div>
       </label>
     </>
-  );
+  )
 }
 ```
 
@@ -103,37 +108,38 @@ To throttle a function means to ensure that the function is <b>called at most on
 Throttling also ensures a function is run regularly at a fixed rate.
 
 ### TypeScript implementation:
+
 ```typescript
-type Procedure = (...args: never[]) => void;
+type Procedure = (...args: never[]) => void
 
 export function throttle<F extends Procedure>(
   func: F,
   wait = 300,
 ): (this: ThisParameterType<F>, ...args: Parameters<F>) => void {
-  let lastTime = 0;
+  let lastTime = 0
 
   return function (this: ThisParameterType<F>, ...args: Parameters<F>) {
-    const context = this;
-    const now = Date.now();
+    const context = this
+    const now = Date.now()
     if (now - lastTime >= wait) {
-      func.apply(context, args);
-      lastTime = now;
+      func.apply(context, args)
+      lastTime = now
     }
-  };
+  }
 }
 ```
 
 ### Some common use cases
 
 - **Games** - Let's say we have shooting game where a particular weapon shoots at most 1 bullet in every second. Although the
-user might spam the SHOOT button, throttling will help to call the ```shootWeapon()``` at most every 1s.
-- **Event listeners** - If you want to do a consistent action on ```resize```, ```scroll```, ```mousemove``` or other similar events.
+  user might spam the SHOOT button, throttling will help to call the `shootWeapon()` at most every 1s.
+- **Event listeners** - If you want to do a consistent action on `resize`, `scroll`, `mousemove` or other similar events.
 - **Button clicks**
 - **API calls**
 
 ### Example
 
-Here we have an example, where ```handleClick()``` function is called at most every 1s
+Here we have an example, where `handleClick()` function is called at most every 1s
 
 <img width={400} src="/images/throttled-click.webp" alt="Throttled click" />
 
@@ -145,15 +151,15 @@ Here we have an example, where ```handleClick()``` function is called at most ev
 
 ```jsx
 const ClickCounter = () => {
-  const [clickCounter, setClickCounter] = useState(0);
+  const [clickCounter, setClickCounter] = useState(0)
 
   const handleClick = () => {
-    setClickCounter((prevState) => prevState + 1);
-  };
+    setClickCounter((prevState) => prevState + 1)
+  }
 
   const handleThrottledClick = useMemo(() => {
-  	return throttle(handleClick, 1000)
-  }, [setClickCounter]);
+    return throttle(handleClick, 1000)
+  }, [setClickCounter])
 
   return (
     <div>
@@ -161,15 +167,10 @@ const ClickCounter = () => {
 
       <div>Click counter: {clickCounter}</div>
     </div>
-  );
-};
+  )
+}
 ```
 
 ## Conclusion
 
 Hopefully this post will help to eliminate any confusion of what are the debounce and throttle methods and what are the differences between them.
-
-
-
-
-

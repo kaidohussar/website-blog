@@ -1,6 +1,6 @@
-import React from "react";
-import config from "../lib/config";
-import { Box, Icon } from "kaidohussar-ui";
+import React from 'react'
+import config from '../lib/config'
+import { Box, Icon } from 'kaidohussar-ui'
 
 export function SocialList({}) {
   return (
@@ -23,5 +23,5 @@ export function SocialList({}) {
         />
       </Box>
     </Box>
-  );
+  )
 }

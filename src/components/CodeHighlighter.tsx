@@ -1,11 +1,11 @@
-import React from "react";
-import Highlight, { defaultProps, Language } from "prism-react-renderer";
-import styles from "@styles/modules/codeHighlighter.module.scss";
+import React from 'react'
+import Highlight, { defaultProps, Language } from 'prism-react-renderer'
+import styles from '@styles/modules/codeHighlighter.module.scss'
 
 type Props = {
-  code: string;
-  language: Language;
-};
+  code: string
+  language: Language
+}
 
 const CodeHighlighter = ({ code, language }: Props) => {
   return (
@@ -24,7 +24,7 @@ const CodeHighlighter = ({ code, language }: Props) => {
         )}
       </Highlight>
     </div>
-  );
-};
+  )
+}
 
-export default CodeHighlighter;
+export default CodeHighlighter

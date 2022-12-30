@@ -1,37 +1,37 @@
-import Head from "next/head";
-import Navigation from "./Navigation";
-import { Loading } from "kaidohussar-ui";
-import React, { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import Head from 'next/head'
+import Navigation from './Navigation'
+import { Loading } from 'kaidohussar-ui'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 type Props = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
-const googleTrackingId = "G-9DDQJQ0KZ1";
+const googleTrackingId = 'G-9DDQJQ0KZ1'
 
 const Layout = ({ children }: Props) => {
-  const router = useRouter();
-  const [loading, setIsLoading] = useState(false);
+  const router = useRouter()
+  const [loading, setIsLoading] = useState(false)
 
-  const { events } = useRouter();
+  const { events } = useRouter()
 
   useEffect(() => {
     const handleSetLoading = (url) => {
-      url !== router.asPath && setIsLoading(true);
-    };
+      url !== router.asPath && setIsLoading(true)
+    }
     const handleEndLoading = (url) => {
-      url === router.asPath && setIsLoading(false);
-    };
+      url === router.asPath && setIsLoading(false)
+    }
 
-    events.on("routeChangeStart", handleSetLoading);
-    events.on("routeChangeComplete", handleEndLoading);
+    events.on('routeChangeStart', handleSetLoading)
+    events.on('routeChangeComplete', handleEndLoading)
 
     return () => {
-      events.off("routeChangeStart", handleSetLoading);
-      events.off("routeChangeComplete", handleEndLoading);
-    };
-  }, [events, router.asPath]);
+      events.off('routeChangeStart', handleSetLoading)
+      events.off('routeChangeComplete', handleEndLoading)
+    }
+  }, [events, router.asPath])
 
   return (
     <>
@@ -43,8 +43,8 @@ const Layout = ({ children }: Props) => {
         <link rel="apple-touch-icon" href="/icon.png" />
         <meta name="theme-color" content="#fff" />
 
-        {process.env.NODE_ENV === "production" &&
-          window.location.hostname === "www.kaidohussar.dev" && (
+        {process.env.NODE_ENV === 'production' &&
+          window.location.hostname === 'www.kaidohussar.dev' && (
             <>
               <script
                 async
@@ -67,7 +67,7 @@ const Layout = ({ children }: Props) => {
       <Navigation />
       {loading ? <Loading size="fill-content" /> : children}
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

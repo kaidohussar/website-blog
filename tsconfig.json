@@ -17,9 +17,10 @@
     "paths": {
       "@src/*": ["src/*"],
       "@styles/*": ["src/styles/*"],
-      "@components/*": ["src/components/*"],
-    }
+      "@components/*": ["src/components/*"]
+    },
+    "incremental": true
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

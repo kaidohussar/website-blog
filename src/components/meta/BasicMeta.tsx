@@ -1,13 +1,13 @@
-import Head from "next/head";
-import config from "../../lib/config";
+import Head from 'next/head'
+import config from '../../lib/config'
 
 type Props = {
-  title?: string;
-  description?: string;
-  keywords?: string[];
-  author?: string;
-  url: string;
-};
+  title?: string
+  description?: string
+  keywords?: string[]
+  author?: string
+  url: string
+}
 export default function BasicMeta({
   title,
   description,
@@ -18,7 +18,7 @@ export default function BasicMeta({
   return (
     <Head>
       <title>
-        {title ? [title, config.site_title].join(" | ") : config.site_title}
+        {title ? [title, config.site_title].join(' | ') : config.site_title}
       </title>
       <meta
         name="description"
@@ -28,12 +28,12 @@ export default function BasicMeta({
         name="keywords"
         content={
           keywords
-            ? keywords.join(",")
-            : config.site_keywords.map((it) => it.keyword).join(",")
+            ? keywords.join(',')
+            : config.site_keywords.map((it) => it.keyword).join(',')
         }
       />
       {author ? <meta name="author" content={author} /> : null}
       <link rel="canonical" href={config.base_url + url} />
     </Head>
-  );
+  )
 }

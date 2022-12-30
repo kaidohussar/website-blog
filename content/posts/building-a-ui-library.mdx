@@ -9,11 +9,14 @@ tags:
 ---
 
 <em>
-    Building a UI component library is great for for multiple reasons, but choosing the right tools for it might be a bit tricky.
+  Building a UI component library is great for for multiple reasons, but
+  choosing the right tools for it might be a bit tricky.
 </em>
 
 <em>
-    In this post, I will list out my thoughts and opinions on how to construct a UI library, how to make it follow a <b>design system</b>, and what <b>tools to consider</b>.
+  In this post, I will list out my thoughts and opinions on how to construct a
+  UI library, how to make it follow a <b>design system</b>, and what{' '}
+  <b>tools to consider</b>.
 </em>
 
 ### What is a UI library?
@@ -22,6 +25,7 @@ A UI library is a set of ready-made reusable UI components.
 It is a tool that provides developers a wide range of building blocks, is usually <b>guided by clearly set up standards</b>, that can be assembled together to build <b>any number of applications</b>.
 
 ### Why would you need one?
+
 Having a UI library used for multiple applications is really good to:
 
 - Standardize development
@@ -29,15 +33,18 @@ Having a UI library used for multiple applications is really good to:
 - Improve collaboration between teams
 
 ### What is a design system?
+
 Design System is a comprehensive guide for project design – a collection of **rules**, **principles**, **constraints**, and **best practices**.
 
 It gives developers and designers a more structured and guided way to build solutions.
 
 ### Implementing a design system into the UI library
+
 Building a UI library usually comes with building a design system alongside it.
 All the components should follow strictly set patterns - spacings, colors, typography, etc.
 
 ### What technologies to use?
+
 After trying and investigating multiple technologies I personally think the 2 best options on building a UI library supported by a design system is
 either using [styled-components](https://styled-components.com/)
 or good old <b>CSS modules</b> with the addition of CSS custom properties.
@@ -45,33 +52,40 @@ or good old <b>CSS modules</b> with the addition of CSS custom properties.
 #### Styled-components
 
 Pros:
+
 - **Built-in theming** - styled-components is providing a context based ThemeProvider out of the box.
 - **Easily maintainable theming** - single source of truth theme object, that includes all the color pallets, spacings, typography options,etc.
+
 ```css
 padding: ${({theme}) => `0 ${theme.spacing.lg}`};
 ```
+
 - **TypeScript support in writing CSS** - benefits of being CSS in JS/TS, as the main variables are coming from the theme object.
 - **Customizable and dynamic** - can easily overwrite theme object and extend styled-components - in the same way that you can access your theme, as shown above, you can also access any
-props passed to the component, opening up powerful opportunities to create customizable and dynamic components.
+  props passed to the component, opening up powerful opportunities to create customizable and dynamic components.
+
 ```typescript
 const FlexContainerExtended = styled(FlexContainer)`
-    flex-direction: column-reverse;
-`;
+  flex-direction: column-reverse;
+`
 ```
 
 Cons:
-* **Learning curve** - Often considered a myth, but in my opinion as with any other framework or tool, bringing it into a team and expecting best practices might not be that easy when components are really complex.
-* **Separations of concern** - Even though there are ways to differentiate logic and styles, in many cases these 2 worlds still mix. With CSS it is really easy to understand which code changes logic, which one styles.
-* **No caching of stylesheets** - Class names are generated dynamically, which can cause issues with caching between builds or renders. With Sass for example, this issue doesn’t exist.
+
+- **Learning curve** - Often considered a myth, but in my opinion as with any other framework or tool, bringing it into a team and expecting best practices might not be that easy when components are really complex.
+- **Separations of concern** - Even though there are ways to differentiate logic and styles, in many cases these 2 worlds still mix. With CSS it is really easy to understand which code changes logic, which one styles.
+- **No caching of stylesheets** - Class names are generated dynamically, which can cause issues with caching between builds or renders. With Sass for example, this issue doesn’t exist.
 
 #### CSS modules with CSS variables
 
 Pros:
+
 - **Separation of logic and styles** - As styles and other logic is separated, it makes HTML a lot more clear.
 - **Working with regular (S)CSS** - You can use stylelint, SCSS mixins, functions, variables, etc
 - **Most mature option** - by now it's almost 100% standardized
 
 Cons:
+
 - **Global styles** - Even though you can write global styles you must use a syntax that does not belong to the CSS specification.
 - **Not as flexible theming** - Even though you could utilize CSS variables for it, it's not quite on the same level as using styled-components
 
@@ -80,10 +94,12 @@ Cons:
 I think both options are valid and can be really good in certain scenarios - so it really depends.
 
 I would choose Styled components when:
+
 - **Creating a UI library for multiple projects** - Every project could customize it for their needs.
 - **Multiple themes with different styles** - as styled-components is really flexible because of the nature of writing JS in CSS, it's a lot more convenient to apply different styles depending on theme.
 
 I would choose CSS modules when
+
 - **Projects are using SCSS** - UI library can export so much more than just components - helper variables, mixins, CSS keyframes, etc
 - **Opting for a safe option long term** - CSS is here to stay and will be here for years to come - can't say that about styled-components with the same certainty.
 - **Different developers maintaining code** - CSS in JS is still a bit controversial in my opinion, and some heavily dislike it. Going with SCSS is a lot safer option in that sense.
@@ -91,19 +107,22 @@ I would choose CSS modules when
 ### Tools for building, demonstrating and maintaining your UI library
 
 #### Bit.dev
+
 It's a platform that manages all your reusable components. It makes it easy to version components separately and update the dependencies. Testing, documentation, versioning are all handled by 1 platform.
 
 #### Storybook
+
 Storybook is more of a tool to build components in isolation. You can easily document, display and test your components there.
 
 #### Static docs site
+
 Sites to document and display your design system and UI components. Some popular options are for example [React Styleguidist](https://github.com/styleguidist/react-styleguidist) and [Docz](https://www.docz.site/).
 
 #### What I would use?
+
 If I were to start a large-scale project and would need a great out-of-the-box solution, I would definitely go with [bit.dev](https://bit.dev/). Going with modular applications and maintaining components as separate entities is the way to go in my opinion.
 
 For constructing a UI library for documentation and display purposes I would choose [Storybook](https://storybook.js.org/), as there is a lot of tools and addons available for different needs.
 For a more customizable option, I would choose any of the static docs generators.
 
 ### Thank you for reading
-

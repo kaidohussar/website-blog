@@ -3,5 +3,5 @@ export default function Copyright() {
     <>
       <p>&copy; kaidohussar.dev</p>
     </>
-  );
+  )
 }

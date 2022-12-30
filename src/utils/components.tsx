@@ -1,6 +1,6 @@
-import { Heading, Text } from "kaidohussar-ui";
-import ExternalLink from "@components/ExternalLink";
-import CodeHighlighter from "@components/CodeHighlighter";
+import { Heading, Text } from 'kaidohussar-ui'
+import ExternalLink from '@components/ExternalLink'
+import CodeHighlighter from '@components/CodeHighlighter'
 
 export const components = {
   h1: ({ children }) => (
@@ -36,13 +36,11 @@ export const components = {
   a: ({ children, href }) => (
     <ExternalLink href={href}>{children}</ExternalLink>
   ),
-  anchor: ({ children, ...rest }) => (
-      <a {...rest}>{children}</a>
-  ),
+  anchor: ({ children, ...rest }) => <a {...rest}>{children}</a>,
   // eslint-disable-next-line react/display-name
   pre: (props) => {
-    const className = props.children.props.className || "";
-    const matches = className.match(/language-(?<lang>.*)/);
+    const className = props.children.props.className || ''
+    const matches = className.match(/language-(?<lang>.*)/)
 
     return (
       <CodeHighlighter
@@ -50,9 +48,9 @@ export const components = {
         language={
           matches && matches.groups && matches.groups.lang
             ? matches.groups.lang
-            : ""
+            : ''
         }
       />
-    );
+    )
   },
-};
+}

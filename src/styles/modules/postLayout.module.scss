@@ -39,7 +39,8 @@ button.backLink {
     margin-top: h.$gridunit * 3;
   }
 
-  h2, h3 {
+  h2,
+  h3 {
     color: h.$color-text;
     font-weight: 600;
     margin-top: h.$gridunit * 3;
@@ -60,7 +61,8 @@ button.backLink {
     font-weight: 600;
   }
 
-  b, strong {
+  b,
+  strong {
     font-weight: 600;
   }
 
@@ -102,5 +104,7 @@ button.backLink {
   align-items: flex-end;
   margin-top: h.$gridunit * 5;
 
-  p { color: h.$color-text; }
+  p {
+    color: h.$color-text;
+  }
 }

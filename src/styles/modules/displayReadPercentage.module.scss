@@ -2,8 +2,18 @@
 
 .container {
   position: fixed;
-  top: h.$gridunit * 2;
-  left: h.$gridunit * 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  .progressBar {
+    height: 10px;
+    width: 100%;
+    background: h.$color-text;
+    transform-origin: 0 0;
+    margin: 0;
+    padding: 0;
+  }
 
   @media only screen and (max-width: h.$breakpoint-tablet) {
     display: none;

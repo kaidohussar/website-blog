@@ -1,40 +1,40 @@
-import { useRouter } from "next/router";
-import { NavHeader, Switch, useTheme } from "kaidohussar-ui";
+import { useRouter } from 'next/router'
+import { NavHeader, Switch, useTheme } from 'kaidohussar-ui'
 
 export default function Navigation() {
-  const router = useRouter();
-  const { setTheme, theme } = useTheme();
+  const router = useRouter()
+  const { setTheme, theme } = useTheme()
 
   return (
     <NavHeader
       alignment="right"
       navItems={[
         {
-          title: "About",
+          title: 'About',
           onClick: (e) => {
-            e.preventDefault();
-            router.push("/", undefined, { shallow: true });
+            e.preventDefault()
+            router.push('/about', undefined, { shallow: true })
           },
-          active: router.pathname === "/",
+          active: router.pathname === '/about',
         },
         {
-          title: "Blog",
+          title: 'Blog',
           onClick: (e) => {
-            e.preventDefault();
-            router.push("/posts", undefined, { shallow: true });
+            e.preventDefault()
+            router.push('/posts', undefined, { shallow: true })
           },
-          active: router.pathname.startsWith("/posts"),
+          active: router.pathname.startsWith('/posts'),
         },
       ]}
       addOn={
         <Switch
-          labels={{ left: "Lights ON", right: "Lights OFF" }}
-          isToggled={theme === "dark"}
+          labels={{ left: 'Lights ON', right: 'Lights OFF' }}
+          isToggled={theme === 'dark'}
           handleToggle={() => {
-            setTheme(theme === "light" ? "dark" : "light");
+            setTheme(theme === 'light' ? 'dark' : 'light')
           }}
         />
       }
     />
-  );
+  )
 }

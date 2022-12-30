@@ -9,55 +9,71 @@ tags:
 ---
 
 <em>
-    Accessibility is the practice of making your websites usable by as many people as possible.
+  Accessibility is the practice of making your websites usable by as many people
+  as possible.
 </em>
 
 <em>
-    It is often thought to be something mostly targeted for people with disabilities, but having websites with good accessibility is beneficial for everybody.
+  It is often thought to be something mostly targeted for people with
+  disabilities, but having websites with good accessibility is beneficial for
+  everybody.
 </em>
 
 <em>
-    I will use this post as a <b>collection of tips</b> and resources to refer to when the topic is accessibility in web.
+  I will use this post as a <b>collection of tips</b> and resources to refer to
+  when the topic is accessibility in web.
 </em>
 
 ## ARIA
 
 <p>
-    Even though ARIA attributes are helpful and make the web more accessible for people with disabilities (f. e with navigation, hints, error messages, content updates),
-    keep in mind that if possible, <b>always prefer to use the native HTML element</b> over using ARIA.
+  Even though ARIA attributes are helpful and make the web more accessible for
+  people with disabilities (f. e with navigation, hints, error messages, content
+  updates), keep in mind that if possible,{' '}
+  <b>always prefer to use the native HTML element</b> over using ARIA.
 </p>
 
 ### What to avoid when using ARIA
 
-* Do not change native semantics, only when you really have to.
-* Do not use ```role="presentation"``` or ```aria-hidden="true"``` on a focusable element.
+- Do not change native semantics, only when you really have to.
+- Do not use `role="presentation"` or `aria-hidden="true"` on a focusable element.
 
 ### What to keep in mind when using ARIA
-* Use ARIA role when a non-interactive element is being used as the basis for an interactive element.
-* All interactive ARIA controls must be usable with a keyboard. More information [here](https://www.w3.org/TR/wai-aria-practices/#keyboard)
-* If element is hidden from the page, then use `aria-hidden="true"`. This is not needed with `display:none` or `visibility: hidden`
-* All interactive elements must have an [accessible name](https://www.w3.org/TR/accname-1.1/#dfn-accessible-name)
-* Adding an ARIA role will not make an element look or act differently for people not using assistive technology. It does not change the behaviors, states and properties of the host element but only the native role semantics.
+
+- Use ARIA role when a non-interactive element is being used as the basis for an interactive element.
+- All interactive ARIA controls must be usable with a keyboard. More information [here](https://www.w3.org/TR/wai-aria-practices/#keyboard)
+- If element is hidden from the page, then use `aria-hidden="true"`. This is not needed with `display:none` or `visibility: hidden`
+- All interactive elements must have an [accessible name](https://www.w3.org/TR/accname-1.1/#dfn-accessible-name)
+- Adding an ARIA role will not make an element look or act differently for people not using assistive technology. It does not change the behaviors, states and properties of the host element but only the native role semantics.
 
 ### Practical Support: aria-label, aria-labelledby and aria-describedby
-* All three are OK on nav and main elements.
-* They are OK on `div` elements IF they have `role=navigation/search/main/img`.
-* They are OK on a table element (except ignored by VoiceOver on iOS).
-* `aria-label` should be reserved for when there is no visible text on the page to reference or when keeping track of id values would be too difficult.
+
+- All three are OK on nav and main elements.
+- They are OK on `div` elements IF they have `role=navigation/search/main/img`.
+- They are OK on a table element (except ignored by VoiceOver on iOS).
+- `aria-label` should be reserved for when there is no visible text on the page to reference or when keeping track of id values would be too difficult.
 
 ### Validation
+
 The easiest method is to use the HTML5 DOCTYPE with ARIA markup and validate using the [W3C Nu Markup Checker](http://validator.w3.org/nu/). Even though it's a work in progress, it's still excellent.
 
 ### Useful links
-* Recommendations: Refer to the [Document conformance requirements for use of ARIA attributes in HTML](https://www.w3.org/TR/html-aria/#docconformance) table in the [ARIA in HTML](http://www.w3.org/TR/html-aria/) specification.
-* ARIA Role, State, and Property Quick Reference: Refer to the [Allowed ARIA roles, states and properties](https://www.w3.org/TR/html-aria/#allowed-aria-roles-states-and-properties) table in the [ARIA in HTML](http://www.w3.org/TR/html-aria/) specification.
+
+- Recommendations: Refer to the [Document conformance requirements for use of ARIA attributes in HTML](https://www.w3.org/TR/html-aria/#docconformance) table in the [ARIA in HTML](http://www.w3.org/TR/html-aria/) specification.
+- ARIA Role, State, and Property Quick Reference: Refer to the [Allowed ARIA roles, states and properties](https://www.w3.org/TR/html-aria/#allowed-aria-roles-states-and-properties) table in the [ARIA in HTML](http://www.w3.org/TR/html-aria/) specification.
 
 ## Typography
 
-- <b>Use a large enough font size for body text so that people can comfortably read.</b> Use at least an effective size of 16px.
+- <b>
+    Use a large enough font size for body text so that people can comfortably
+    read.
+  </b> Use at least an effective size of 16px.
 - Maintain a line length that promotes comfortable reading. Use a minimum value of <b>1.5 for line-height for main paragraph content</b>.
 - Don’t make lines too long or too short: 45-75 characters per line is acceptable and approximately 66 characters per line is comfortable. Shorter pieces of text are fine for captions, marginal text, and forms.
-- <b>Use headings to communicate hierarchy.</b> Ensure heading styles differ from paragraph text by some combination of size, weight, face, or color. This ensures they’re distinct from paragraph text but are related to each other with some consistency, which helps with scanning.
+- <b>Use headings to communicate hierarchy.</b> Ensure heading styles differ from
+  paragraph text by some combination of size, weight, face, or color. This ensures
+  they’re distinct from paragraph text but are related to each other with some consistency,
+  which helps with scanning.
 
 ## Color contrast
 
@@ -69,9 +85,18 @@ If your type is at least 18 pt or 14 pt bold, the minimum contrast ratio drops t
 
 Aside from technical considerations, users usually prefer simple and short forms. <b>Only ask users to enter what is required to complete the transaction or process</b>. If irrelevant or excessive data is requested, users are more likely to abandon the form.
 
-<p><b>Using placeholder text as labels are one of the biggest mistakes when designing a form.</b> We might be tempted to go with this trend when real estate is limited or want to make our design more simple and modern—don’t. Placeholder text is usually gray and has low contrast, so it’s hard to read and often people will forget what they are even writing.</p>
+<p>
+  <b>
+    Using placeholder text as labels are one of the biggest mistakes when
+    designing a form.
+  </b>{' '}
+  We might be tempted to go with this trend when real estate is limited or want
+  to make our design more simple and modern—don’t. Placeholder text is usually
+  gray and has low contrast, so it’s hard to read and often people will forget
+  what they are even writing.
+</p>
 
-- **Labeling Controls:** Use the ```<label>``` element, and, in specific cases, other mechanisms (e.g. WAI-ARIA, title attribute etc.), to identify each form control.
+- **Labeling Controls:** Use the `<label>` element, and, in specific cases, other mechanisms (e.g. WAI-ARIA, title attribute etc.), to identify each form control.
 - **Grouping Controls:** Use the `<fieldset>` and `<legend>` elements to group and associate related form controls.
 - **Form Instructions:** Provide instructions to help users understand how to complete the form and individual form controls.
 - **Validating Input:** Validate input provided by the user and provide options to undo changes and confirm data entry.
@@ -81,22 +106,23 @@ Aside from technical considerations, users usually prefer simple and short forms
 Read more from [here](https://www.w3.org/WAI/tutorials/forms/)
 
 ## Links, Buttons, & Other Clickable Elements
+
 Provide distinct styles for interactive elements, such as links and buttons, to make them easy to identify. For example, change the appearance of links on mouse hover, keyboard focus, and touch-screen activation. Ensure that styles and naming for interactive elements are used consistently throughout the website.
 
 ## Write useful alternative text for your images and other non-text content
 
 People with low vision often make use of screen readers to “hear” the web. These tools convert text to speech so that the person can hear the words on a site.
 
-Try to avoid presenting informational images in CSS backgrounds. If your image contains important information for the end user, then it should be provided in an HTML ```img``` tag with proper alt text.
+Try to avoid presenting informational images in CSS backgrounds. If your image contains important information for the end user, then it should be provided in an HTML `img` tag with proper alt text.
 
 There are two ways that you can present alternative text.
 
-- Within the ```alt``` attribute of the image element.
+- Within the `alt` attribute of the image element.
 - Within context or surroundings of the image itself.
 
 Try to describe what’s happening in the image, and how it matters to the story, rather than just saying something like "picture" - context is everything.
 
-If the image is purely decorative or if it creates redundancy because the surrounding context already explains the content. Then adding an empty ```alt``` attribute will make screen readers skip it (```role=presentation``` can be used as well, but it might not be as widely supported). If you don’t write any alt text, some screen readers will read the file name to the individual. That’s the worst experience you can provide.
+If the image is purely decorative or if it creates redundancy because the surrounding context already explains the content. Then adding an empty `alt` attribute will make screen readers skip it (`role=presentation` can be used as well, but it might not be as widely supported). If you don’t write any alt text, some screen readers will read the file name to the individual. That’s the worst experience you can provide.
 
 ## Keyboard navigation
 
@@ -104,7 +130,7 @@ Keyboard accessibility is one of the most important aspects of web accessibility
 
 A keyboard user typically uses the Tab key to navigate through interactive elements on a web page — links, buttons, fields for inputting text, etc. When an item is tabbed to, it has keyboard "focus" and can be activated or manipulated with the keyboard.
 
-Avoid ```outline: 0``` or ```outline: none``` or other styles that remove or limit visibility of keyboard focus indicators.
+Avoid `outline: 0` or `outline: none` or other styles that remove or limit visibility of keyboard focus indicators.
 
 Read more from [here](https://webaim.org/techniques/keyboard/)
 
@@ -125,5 +151,3 @@ Hopefully these tips and tricks will help you reach level AA of the [Web Content
 - https://uxdesign.cc/designing-for-accessibility-is-not-that-hard-c04cc4779d94
 - https://www.w3.org/WAI/tutorials/forms/
 - https://webaim.org/techniques/keyboard/
-
-

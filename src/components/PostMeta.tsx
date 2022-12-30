@@ -1,13 +1,13 @@
-import TagButton from "@components/TagButton";
-import { getTag } from "@src/lib/tags";
-import Date from "@components/Date";
-import React from "react";
-import styles from "@styles/modules/postMeta.module.scss";
+import TagButton from '@components/TagButton'
+import { getTag } from '@src/lib/tags'
+import Date from '@components/Date'
+import React from 'react'
+import styles from '@styles/modules/postMeta.module.scss'
 
 type Props = {
-  tags: string[];
-  date: Date;
-};
+  tags: string[]
+  date: Date
+}
 
 const PostMeta = ({ tags, date }: Props) => (
   <div className={styles.container}>
@@ -21,6 +21,6 @@ const PostMeta = ({ tags, date }: Props) => (
     <span className={styles.separator} />
     <Date date={date} />
   </div>
-);
+)
 
-export default PostMeta;
+export default PostMeta
