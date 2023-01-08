@@ -1,1 +1,1 @@
-Website / Blog made with NextJS
+Website / Blog made with NextJS - https://www.kaidohussar.dev/
