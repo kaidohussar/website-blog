@@ -21,7 +21,7 @@
     "framer-motion": "^10.12.16",
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",
-    "kaidohussar-ui": "1.0.40",
+    "kaidohussar-ui": "1.0.41",
     "next": "12.3.2",
     "next-mdx-remote": "^3.0.4",
     "normalize.css": "^8.0.1",
