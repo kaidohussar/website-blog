@@ -23,7 +23,7 @@
     "js-yaml": "^4.1.0",
     "kaidohussar-ui": "1.0.41",
     "next": "12.3.2",
-    "next-mdx-remote": "^3.0.4",
+    "next-mdx-remote": "4.4.1",
     "normalize.css": "^8.0.1",
     "prism-react-renderer": "^1.2.1",
     "react": "^18.2.0",
