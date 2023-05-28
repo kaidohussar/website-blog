@@ -18,7 +18,7 @@
     "@types/js-yaml": "^4.0.2",
     "clsx": "^1.1.1",
     "date-fns": "^2.23.0",
-    "framer-motion": "^7.10.2",
+    "framer-motion": "^10.12.16",
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",
     "kaidohussar-ui": "1.0.40",
