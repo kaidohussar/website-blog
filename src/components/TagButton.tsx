@@ -7,7 +7,7 @@ type Props = {
 const TagButton = ({ tag }: Props) => {
   return (
     <Link href={'/posts/tags/[[...slug]]'} as={`/posts/tags/${tag.slug}`}>
-      <span>#{tag.name}</span>
+      <a>#{tag.name}</a>
     </Link>
   )
 }
