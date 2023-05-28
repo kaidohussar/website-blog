@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Navigation from './Navigation'
 import { Loading } from 'kaidohussar-ui'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 type Props = {
