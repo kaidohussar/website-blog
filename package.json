@@ -22,7 +22,7 @@
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",
     "kaidohussar-ui": "1.0.40",
-    "next": "^13.0.7",
+    "next": "12.2.2",
     "next-mdx-remote": "^3.0.4",
     "normalize.css": "^8.0.1",
     "prism-react-renderer": "^1.2.1",

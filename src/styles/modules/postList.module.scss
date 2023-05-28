@@ -1,10 +1,14 @@
-@use './src/styles/helpers' as h;
+@use 'src/styles/helpers' as h;
 
 .list {
   flex: 3;
   padding-right: h.$gridunit * 10;
 
   .listItem {
+    a {
+      color: h.$color-text;
+    }
+
     &:not(:first-child) {
       margin-top: h.$gridunit * 6;
     }

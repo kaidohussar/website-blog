@@ -13,9 +13,9 @@ export default function Navigation() {
           title: 'About',
           onClick: (e) => {
             e.preventDefault()
-            router.push('/about', undefined, { shallow: true })
+            router.push('/', undefined, { shallow: true })
           },
-          active: router.pathname === '/about',
+          active: router.pathname === '/',
         },
         {
           title: 'Blog',

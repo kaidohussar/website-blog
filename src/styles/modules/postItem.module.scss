@@ -1,13 +1,14 @@
-@use './src/styles/helpers' as h;
+@use 'src/styles/helpers.scss' as h;
 
 .postItem {
   text-decoration: none;
 
   time {
-    color: h.$color-grey;
+    color: h.$color-grey !important;
   }
 
   h2 {
     text-decoration: underline;
+    color: h.$color-text;
   }
 }
