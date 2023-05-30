@@ -12,6 +12,7 @@ body {
 }
 
 html[data-kh-theme='light'] {
+  --kh-color-background: #ffffff;
   --kh-color-text: #1a1a1a;
 
   --kh-color-grey: #464545;
@@ -23,6 +24,7 @@ html[data-kh-theme='light'] {
 }
 
 html[data-kh-theme='dark'] {
+  --kh-color-background: #1A1A1A;
   --kh-color-text: #ffffff;
 
   --kh-color-grey: #e5e5e5;

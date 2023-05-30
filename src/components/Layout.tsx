@@ -3,9 +3,10 @@ import Navigation from './Navigation'
 import { Loading } from 'kaidohussar-ui'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import IntroLoading from '@components/IntroLoading'
 
 type Props = {
-  children: React.ReactNode
+  children: React.ReactElement
 }
 
 const googleTrackingId = 'G-9DDQJQ0KZ1'
@@ -65,7 +66,7 @@ const Layout = ({ children }: Props) => {
           )}
       </Head>
       <Navigation />
-      {loading ? <Loading size="fill-content" /> : children}
+      <IntroLoading isLoadingPage={loading}>{children}</IntroLoading>
     </>
   )
 }
