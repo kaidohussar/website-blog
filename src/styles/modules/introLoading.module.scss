@@ -13,31 +13,45 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
+
+  .percentageTextWrapper {
+    overflow: hidden;
+  }
 }
 
 .root {
+  display: flex;
+  align-items: center;
   position: fixed;
   overflow: hidden;
   background: h.$color-background;
   width: 100vw;
-  display: flex;
+  height: 100vh;
   justify-content: space-around;
-  gap: 100px;
-
+  gap: 50px;
   top: 0;
   left: 0;
+  transform: translateX(-15vh);
 
   > div {
+    flex: 1;
+    height: 100vh;
+    position: relative;
     display: flex;
+    align-items: center;
+    justify-content: flex-start;
     flex-direction: column;
-    gap: 75px;
+    gap: 50px;
+
+    &:nth-child(odd) {
+      justify-content: flex-end;
+    }
 
     > div {
-      position: relative;
-      height: 20vh;
-      min-height: 400px;
-      width: 20vw;
-      background: gray;
+      position: absolute;
+      height: 250px;
+      min-width: 200px;
+      aspect-ratio: 16 / 9;
 
       img {
         object-fit: cover;
@@ -46,6 +60,7 @@
   }
 
   .contentDisplay {
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;

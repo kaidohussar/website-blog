@@ -5,6 +5,7 @@ import OpenGraphMeta from '@components/meta/OpenGraphMeta'
 import { SocialList } from '@components/SocialList'
 
 const Index = () => (
+  // @ts-ignore
   <Layout>
     <BasicMeta url={'/'} />
     <OpenGraphMeta url={'/'} />
