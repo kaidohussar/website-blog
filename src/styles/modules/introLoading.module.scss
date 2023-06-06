@@ -49,8 +49,7 @@
 
     > div {
       position: absolute;
-      height: 250px;
-      min-width: 200px;
+      width: 100%;
       aspect-ratio: 16 / 9;
 
       img {
@@ -62,9 +61,12 @@
   .contentDisplay {
     position: absolute;
     display: flex;
-    align-items: center;
     justify-content: center;
     background: h.$color-background;
     border: 1px solid var(--kh-color-grey-extra-light);
+
+    h1, h2 {
+      white-space: nowrap;
+    }
   }
 }

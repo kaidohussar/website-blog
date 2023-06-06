@@ -1,7 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion, MotionProps } from 'framer-motion'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import {
+  AnimatePresence,
+  motion,
+  MotionProps,
+  useAnimate,
+  useAnimationControls,
+} from 'framer-motion'
 import styles from '@styles/modules/introLoading.module.scss'
 import Image from 'next/image'
+import { Loading } from 'kaidohussar-ui'
 
 type Props = {
   children: React.ReactElement
@@ -98,20 +105,20 @@ const MOVE_PERCENTAGE_FROM_BOTTOM = {
 }
 
 const MOVE_PERCENTAGE_FROM_BOTTOM_CONTENT_COLUMN = {
-  0: 0.25,
-  1: 0.5,
-  2: 0.75,
+  0: 0.15,
+  1: 0.4,
+  2: 0.65,
   3: 0,
 }
 
 const CONTENT_COLUMN_IDX = 2
-const CONTENT_IMG_IDX = 2
 
 const IntroLoading = ({ children, isLoadingPage }: Props) => {
-  const rootRef = useRef(null)
-  const columnRef = useRef(null)
+  const [imagesWrapperScope, animateImagesWrapperInit] = useAnimate()
+
+  const initialLoadingPercentage = 100 / IMG_TOTAL_COUNT
   const [loadingPercentage, setLoadingPercentage] = useState(
-    100 / IMG_TOTAL_COUNT,
+    initialLoadingPercentage,
   )
 
   const handleImageLoaded = () => {
@@ -134,6 +141,38 @@ const IntroLoading = ({ children, isLoadingPage }: Props) => {
     return columnIdx % 2
       ? document.body.offsetHeight * MOVE_PERCENTAGE_FROM_TOP[imageIdx]
       : document.body.offsetHeight * -1 * MOVE_PERCENTAGE_FROM_BOTTOM[imageIdx]
+  }
+
+  const animateImagesWrapper = useCallback(async () => {
+    await animateImagesWrapperInit(
+      imagesWrapperScope.current,
+      { scale: 3.5 },
+      {
+        duration: 3,
+        delay: 3,
+        ease: [0.4, 0.0, 0.2, 1],
+      },
+    )
+    await animateImagesWrapperInit(
+      imagesWrapperScope.current,
+      { scale: 1 },
+      {
+        duration: 2,
+        ease: [0.4, 0.0, 0.2, 1],
+      },
+    )
+  }, [animateImagesWrapperInit, imagesWrapperScope])
+
+  useEffect(() => {
+    if (imagesLoaded) {
+      animateImagesWrapper().then(() => {
+        console.log('done')
+      })
+    }
+  }, [animateImagesWrapper, imagesLoaded])
+
+  if (isLoadingPage && loadingPercentage === initialLoadingPercentage) {
+    return <Loading />
   }
 
   return (
@@ -163,15 +202,13 @@ const IntroLoading = ({ children, isLoadingPage }: Props) => {
 
       <motion.div
         initial={{ scale: 1.1 }}
-        animate={{ scale: 3 }}
-        transition={{ duration: 3, delay: 3, ease: [0.4, 0.0, 0.2, 1] }}
         key="images-root"
         className={styles.root}
-        ref={rootRef}
+        ref={imagesWrapperScope}
       >
         {COLUMNS.map((columnImages, columnIndex) => {
           return (
-            <motion.div ref={columnRef} key={columnIndex}>
+            <motion.div key={columnIndex}>
               {columnImages.map((img, imageIndex) => {
                 const motionProps: MotionProps = {
                   initial: {
