@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import {
   AnimatePresence,
+  AnimationDefinition,
   motion,
   MotionProps,
   useAnimate,
@@ -55,49 +56,25 @@ const COLUMNS = [
   COLUMN5_IMAGES,
 ]
 
-const IMG_TOTAL_COUNT = COLUMNS.length * COLUMN1_IMAGES.length - 1
+const IMG_TOTAL_COUNT =
+  COLUMN1_IMAGES.length +
+  COLUMN2_IMAGES.length +
+  COLUMN3_IMAGES.length +
+  COLUMN4_IMAGES.length +
+  COLUMN5_IMAGES.length
 
-const COLUMN_DELAY_MAP = {
-  0: {
-    0: 4,
-    1: 3,
-    2: 2,
-    3: 1,
-  },
-  1: {
-    0: 0.5,
-    1: 2,
-    2: 3.5,
-    3: 4.6,
-  },
-  2: {
-    0: 4,
-    1: 3,
-    2: 2,
-    3: 1,
-  },
-  3: {
-    0: 0.5,
-    1: 2,
-    2: 3.5,
-    3: 4.6,
-  },
-  4: {
-    0: 4,
-    1: 3,
-    2: 2,
-    3: 1,
-  },
-}
+const COLUMN_DELAY_MAP_1 = [4, 3, 2, 1]
+const COLUMN_DELAY_MAP_2 = [0.5, 2, 3.5, 4.6]
+const COLUMN_DELAY_MAP_CONTENT = [3, 2, 1.5]
 
-const MOVE_PERCENTAGE_FROM_TOP = {
+const MOVE_PERCENTAGE_FROM_BOTTOM = {
   0: 0.75,
   1: 0.5,
   2: 0.25,
   3: 0,
 }
 
-const MOVE_PERCENTAGE_FROM_BOTTOM = {
+const MOVE_PERCENTAGE_FROM_TOP = {
   0: 0,
   1: 0.25,
   2: 0.5,
@@ -108,13 +85,15 @@ const MOVE_PERCENTAGE_FROM_BOTTOM_CONTENT_COLUMN = {
   0: 0.15,
   1: 0.4,
   2: 0.65,
-  3: 0,
 }
 
 const CONTENT_COLUMN_IDX = 2
 
 const IntroLoading = ({ children, isLoadingPage }: Props) => {
   const [imagesWrapperScope, animateImagesWrapperInit] = useAnimate()
+
+  const imageAnimationControls = useAnimationControls()
+  const contentAnimationControls = useAnimationControls()
 
   const initialLoadingPercentage = 100 / IMG_TOTAL_COUNT
   const [loadingPercentage, setLoadingPercentage] = useState(
@@ -129,8 +108,13 @@ const IntroLoading = ({ children, isLoadingPage }: Props) => {
 
   const imagesLoaded = Math.round(loadingPercentage) === 100
 
-  const getVerticalMovePx = (columnIdx, imageIdx) => {
-    if (columnIdx === CONTENT_COLUMN_IDX) {
+  const getVerticalMovePx = (
+    dir: 'top' | 'bot',
+    isContentColumn: boolean,
+    imageIdx,
+  ) => {
+    if (isContentColumn) {
+      console.log('imageIdx', imageIdx)
       return (
         document.body.offsetHeight *
         -1 *
@@ -138,10 +122,44 @@ const IntroLoading = ({ children, isLoadingPage }: Props) => {
       )
     }
 
-    return columnIdx % 2
-      ? document.body.offsetHeight * MOVE_PERCENTAGE_FROM_TOP[imageIdx]
-      : document.body.offsetHeight * -1 * MOVE_PERCENTAGE_FROM_BOTTOM[imageIdx]
+    return dir === 'top'
+      ? document.body.offsetHeight * -1 * MOVE_PERCENTAGE_FROM_TOP[imageIdx]
+      : document.body.offsetHeight * MOVE_PERCENTAGE_FROM_BOTTOM[imageIdx]
   }
+
+  const getImageAnimation = useCallback(
+    (dir: 'top' | 'bot', isContentColumn, imageIdx) => {
+      const modifier = 0.7
+
+      let delay =
+        dir === 'top'
+          ? COLUMN_DELAY_MAP_1[imageIdx] * modifier
+          : COLUMN_DELAY_MAP_2[imageIdx] * modifier
+
+      if (isContentColumn) {
+        delay = COLUMN_DELAY_MAP_CONTENT[imageIdx] * modifier
+      }
+
+      const animation: AnimationDefinition = {
+        opacity: 1,
+        y: getVerticalMovePx(dir, isContentColumn, imageIdx),
+        transition: {
+          duration: 1,
+          delay,
+          opacity: {
+            duration: 0.6,
+          },
+          y: {
+            duration: 2.5, // Total duration of the animation
+            ease: [0.4, 0.0, 0.2, 1],
+          },
+        },
+      }
+
+      return animation
+    },
+    [],
+  )
 
   const animateImagesWrapper = useCallback(async () => {
     await animateImagesWrapperInit(
@@ -155,21 +173,44 @@ const IntroLoading = ({ children, isLoadingPage }: Props) => {
     )
     await animateImagesWrapperInit(
       imagesWrapperScope.current,
-      { scale: 1 },
+      { opacity: 0 },
       {
-        duration: 2,
-        ease: [0.4, 0.0, 0.2, 1],
+        duration: 0.3,
       },
     )
   }, [animateImagesWrapperInit, imagesWrapperScope])
 
   useEffect(() => {
-    if (imagesLoaded) {
-      animateImagesWrapper().then(() => {
-        console.log('done')
-      })
+    const handleIntroAnimations = async () => {
+      await imageAnimationControls.start(({ dir, isContentColumn, index }) =>
+        getImageAnimation(dir, isContentColumn, index),
+      )
+      contentAnimationControls.start(() => ({
+        opacity: 1,
+        transition: {
+          duration: 0.2,
+        },
+      }))
+      contentAnimationControls.start(() => ({
+        //  scale: 1,
+        transition: {
+          duration: 3,
+          ease: [0.4, 0.0, 0.2, 1],
+        },
+      }))
     }
-  }, [animateImagesWrapper, imagesLoaded])
+
+    if (imagesLoaded) {
+      animateImagesWrapper()
+      handleIntroAnimations().then(() => console.log('animations finished'))
+    }
+  }, [
+    animateImagesWrapper,
+    contentAnimationControls,
+    getImageAnimation,
+    imageAnimationControls,
+    imagesLoaded,
+  ])
 
   if (isLoadingPage && loadingPercentage === initialLoadingPercentage) {
     return <Loading />
@@ -207,53 +248,55 @@ const IntroLoading = ({ children, isLoadingPage }: Props) => {
         ref={imagesWrapperScope}
       >
         {COLUMNS.map((columnImages, columnIndex) => {
+          const animatingFromBotToTop = columnIndex % 2 === 0
+
           return (
             <motion.div key={columnIndex}>
               {columnImages.map((img, imageIndex) => {
-                const motionProps: MotionProps = {
-                  initial: {
-                    opacity: 0,
-                    y: columnIndex % 2 ? '-100%' : '100%',
-                  },
-                  animate: {
-                    opacity: 1,
-                    y: getVerticalMovePx(columnIndex, imageIndex),
-                  },
-                  transition: {
-                    duration: 1,
-                    delay: COLUMN_DELAY_MAP[columnIndex][imageIndex] * 0.7,
-                    opacity: {
-                      duration: 0.3,
-                    },
-                    y: {
-                      duration: 2.5, // Total duration of the animation
-                      ease: [0.4, 0.0, 0.2, 1],
-                    },
-                  },
-                  exit: { opacity: 0 },
+                const initialAnimState = {
+                  opacity: 0,
+                  y: animatingFromBotToTop ? '100%' : '-100%',
                 }
 
                 if (img === 'content') {
                   return (
                     <motion.div
                       key="content"
-                      className={styles.contentDisplay}
-                      {...motionProps}
+                      custom={{
+                        dir: 'top',
+                        isContentColumn: true,
+                        index: imageIndex,
+                      }}
+                      className={styles.contentDisplayIntro}
+                      initial={initialAnimState}
+                      animate={imageAnimationControls}
                     >
-                      <div
+                      <motion.div
+                        initial={{
+                          scale: 0.2,
+                        }}
                         style={{
-                          transform: 'scale(0.2)',
                           pointerEvents: 'none',
                         }}
+                        layout
                       >
                         {children}
-                      </div>
+                      </motion.div>
                     </motion.div>
                   )
                 }
 
                 return (
-                  <motion.div key={`${img}-${imageIndex}`} {...motionProps}>
+                  <motion.div
+                    key={`${img}-${imageIndex}`}
+                    initial={initialAnimState}
+                    custom={{
+                      dir: animatingFromBotToTop ? 'top' : 'bot',
+                      isContentColumn: columnIndex === CONTENT_COLUMN_IDX,
+                      index: imageIndex,
+                    }}
+                    animate={imageAnimationControls}
+                  >
                     <Image
                       layout="fill"
                       priority
@@ -268,6 +311,18 @@ const IntroLoading = ({ children, isLoadingPage }: Props) => {
           )
         })}
       </motion.div>
+      <div className={styles.contentDisplay}>
+        <motion.div
+          initial={{
+            opacity: 0,
+            scale: 0.7,
+            pointerEvents: 'none',
+          }}
+          animate={contentAnimationControls}
+        >
+          {children}
+        </motion.div>
+      </div>
     </AnimatePresence>
   )
 }
