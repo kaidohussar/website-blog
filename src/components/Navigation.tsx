@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
-import { NavHeader, Switch, useTheme } from 'kaidohussar-ui'
+import { Switch, useTheme } from 'kaidohussar-ui'
+import { NavHeader } from '@components/NavHeader'
 
 export default function Navigation() {
   const router = useRouter()

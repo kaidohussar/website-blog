@@ -14,6 +14,8 @@ import { Loading } from 'kaidohussar-ui'
 type Props = {
   children: React.ReactElement
   isLoadingPage: boolean
+  animationShown: boolean
+  onAnimationFinished: () => void
 }
 
 type ColumnImages = (string | 'content')[]
@@ -75,7 +77,12 @@ const MOVE_PERCENTAGE_FROM_BOTTOM_CONTENT_COLUMN: [number, number, number] = [
 
 const CONTENT_COLUMN_IDX = 2
 
-const IntroLoading = ({ children, isLoadingPage }: Props) => {
+const IntroLoading = ({
+  children,
+  isLoadingPage,
+  onAnimationFinished,
+  animationShown,
+}: Props) => {
   const [imagesWrapperScope, animateImagesWrapperInit] = useAnimate()
   const contentRef = useRef(null)
   const [movePosPercentContent, setMovePosPercentContent] = useState<
@@ -83,13 +90,11 @@ const IntroLoading = ({ children, isLoadingPage }: Props) => {
   >(MOVE_PERCENTAGE_FROM_BOTTOM_CONTENT_COLUMN)
 
   const imageAnimationControls = useAnimationControls()
-  const contentAnimationControls = useAnimationControls()
 
   const initialLoadingPercentage = 100 / IMG_TOTAL_COUNT
   const [loadingPercentage, setLoadingPercentage] = useState(
     initialLoadingPercentage,
   )
-  const [introAnimationFinished, setIntroAnimationFinished] = useState(false)
 
   const handleImageLoaded = () => {
     setLoadingPercentage((prevState) => {
@@ -150,20 +155,13 @@ const IntroLoading = ({ children, isLoadingPage }: Props) => {
   const animateImagesWrapper = useCallback(async () => {
     await animateImagesWrapperInit(
       imagesWrapperScope.current,
-      { scale: 5 },
+      { scale: 5, pointerEvents: 'all' },
       {
         duration: 3,
         delay: 3,
         ease: [0.4, 0.0, 0.2, 1],
       },
     )
-    /*    await animateImagesWrapperInit(
-      imagesWrapperScope.current,
-      { opacity: 0 },
-      {
-        duration: 0.5,
-      },
-    )*/
   }, [animateImagesWrapperInit, imagesWrapperScope])
 
   useEffect(() => {
@@ -171,32 +169,25 @@ const IntroLoading = ({ children, isLoadingPage }: Props) => {
       await imageAnimationControls.start(({ dir, isContentColumn, index }) =>
         getImageAnimation(dir, isContentColumn, index),
       )
-      /*      contentAnimationControls.start(() => ({
-        opacity: 1,
-        transition: {
-          duration: 0.5,
-        },
-      }))
-      contentAnimationControls.start(() => ({
-        scale: 1,
-        pointerEvents: 'all',
-        transition: {
-          duration: 3,
-          ease: [0.4, 0.0, 0.2, 1],
-        },
-      }))*/
     }
 
-    if (imagesLoaded) {
+    if (imagesLoaded && !animationShown) {
       animateImagesWrapper()
-      handleIntroAnimations().then(() => setIntroAnimationFinished(false))
+      handleIntroAnimations().then(() => {
+        console.log('CALLL')
+        imageAnimationControls.set({
+          outline: 'none',
+        })
+        onAnimationFinished()
+      })
     }
   }, [
     animateImagesWrapper,
-    contentAnimationControls,
     getImageAnimation,
     imageAnimationControls,
     imagesLoaded,
+    imagesWrapperScope,
+    onAnimationFinished,
   ])
 
   useEffect(() => {
@@ -220,7 +211,7 @@ const IntroLoading = ({ children, isLoadingPage }: Props) => {
 
   return (
     <AnimatePresence>
-      {!imagesLoaded && (
+      {!imagesLoaded && !animationShown && (
         <motion.div
           key="loader"
           className={styles.percentageLoader}
@@ -243,93 +234,77 @@ const IntroLoading = ({ children, isLoadingPage }: Props) => {
         </motion.div>
       )}
 
-      {!introAnimationFinished && (
-        <motion.div
-          initial={{ scale: 1.2 }}
-          key="images-root"
-          className={styles.root}
-          ref={imagesWrapperScope}
-          exit={{ opacity: 0 }}
-        >
-          {COLUMNS.map((columnImages, columnIndex) => {
-            const animatingFromBotToTop = columnIndex % 2 === 0
+      <motion.div
+        initial={{ scale: 1.2, pointerEvents: 'none' }}
+        key="images-root"
+        className={styles.root}
+        ref={imagesWrapperScope}
+      >
+        {COLUMNS.map((columnImages, columnIndex) => {
+          const animatingFromBotToTop = columnIndex % 2 === 0
 
-            return (
-              <motion.div key={columnIndex}>
-                {columnImages.map((img, imageIndex) => {
-                  const initialAnimState = {
-                    opacity: 0,
-                    y: animatingFromBotToTop ? '100%' : '-100%',
-                  }
+          return (
+            <motion.div key={columnIndex}>
+              {columnImages.map((img, imageIndex) => {
+                const initialAnimState = {
+                  opacity: 0,
+                  y: animatingFromBotToTop ? '100%' : '-100%',
+                }
 
-                  if (img === 'content') {
-                    return (
-                      <motion.div
-                        key="content"
-                        custom={{
-                          dir: 'top',
-                          isContentColumn: true,
-                          index: imageIndex,
-                        }}
-                        className={styles.contentDisplayIntro}
-                        initial={initialAnimState}
-                        animate={imageAnimationControls}
-                        ref={contentRef}
-                      >
-                        <motion.div
-                          initial={{
-                            scale: 0.2,
-                          }}
-                          style={{
-                            pointerEvents: 'none',
-                          }}
-                        >
-                          {children}
-                        </motion.div>
-                      </motion.div>
-                    )
-                  }
-
+                if (img === 'content') {
                   return (
                     <motion.div
-                      key={`${img}-${imageIndex}`}
-                      initial={initialAnimState}
+                      key="content"
                       custom={{
-                        dir: animatingFromBotToTop ? 'top' : 'bot',
-                        isContentColumn: columnIndex === CONTENT_COLUMN_IDX,
+                        dir: 'top',
+                        isContentColumn: true,
                         index: imageIndex,
                       }}
+                      className={styles.contentDisplayIntro}
+                      initial={initialAnimState}
                       animate={imageAnimationControls}
+                      ref={contentRef}
                     >
-                      <Image
-                        layout="fill"
-                        priority
-                        src={img}
-                        alt={`intro-image-column-${columnIndex}-image-${imageIndex}`}
-                        onLoadingComplete={handleImageLoaded}
-                      />
+                      <motion.div
+                        initial={{
+                          scale: 0.2,
+                        }}
+                      >
+                        {children}
+                      </motion.div>
                     </motion.div>
                   )
-                })}
-              </motion.div>
-            )
-          })}
-        </motion.div>
-      )}
-      <div className={styles.contentDisplay}>
-        <motion.div
-          initial={{
-            opacity: 0,
-            scale: 1.5,
-            pointerEvents: 'none',
-          }}
-          animate={contentAnimationControls}
-        >
-          {children}
-        </motion.div>
-      </div>
+                }
+
+                return (
+                  <motion.div
+                    key={`${img}-${imageIndex}`}
+                    initial={initialAnimState}
+                    custom={{
+                      dir: animatingFromBotToTop ? 'top' : 'bot',
+                      isContentColumn: columnIndex === CONTENT_COLUMN_IDX,
+                      index: imageIndex,
+                    }}
+                    animate={imageAnimationControls}
+                  >
+                    <Image
+                      layout="fill"
+                      priority
+                      src={img}
+                      alt={`intro-image-column-${columnIndex}-image-${imageIndex}`}
+                      onLoadingComplete={handleImageLoaded}
+                    />
+                  </motion.div>
+                )
+              })}
+            </motion.div>
+          )
+        })}
+      </motion.div>
     </AnimatePresence>
   )
 }
+
+//<div className={styles.contentDisplayDefault}>{children}</div>
 
 export default IntroLoading
