@@ -2,6 +2,7 @@ import React, { ChangeEvent, HTMLAttributes } from 'react'
 import styles from '@styles/modules/navHeader.module.scss'
 import { Button } from 'kaidohussar-ui'
 import clsx from 'clsx'
+import { HTMLMotionProps, motion } from 'framer-motion'
 
 interface NavItem {
   title: string
@@ -29,9 +30,9 @@ export interface NavHeaderProps {
  */
 
 export const NavHeader: React.FC<
-  NavHeaderProps & HTMLAttributes<HTMLUnknownElement>
+  NavHeaderProps & HTMLAttributes<HTMLUnknownElement> & HTMLMotionProps<'nav'>
 > = ({ alignment = 'right', navItems, addOn, className, ...rest }) => (
-  <nav
+  <motion.nav
     className={clsx(styles.root, className, {
       [styles.alignRight]: alignment === 'right',
       [styles.withAddon]: !!addOn,
@@ -57,7 +58,7 @@ export const NavHeader: React.FC<
       ))}
     </div>
     {addOn && <div className={styles.addOn}>{addOn}</div>}
-  </nav>
+  </motion.nav>
 )
 
 NavHeader.displayName = 'NavHeader'

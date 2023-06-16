@@ -1,12 +1,15 @@
 import { useRouter } from 'next/router'
 import { Switch, useTheme } from 'kaidohussar-ui'
 import { NavHeader } from '@components/NavHeader'
+import React, { ReactHTML } from 'react'
+import { HTMLMotionProps } from 'framer-motion'
 
-export default function Navigation() {
+export const Navigation = (props: HTMLMotionProps<'nav'>) => {
   const router = useRouter()
   const { setTheme, theme } = useTheme()
 
   return (
+    // @ts-ignore
     <NavHeader
       alignment="right"
       navItems={[
@@ -36,6 +39,7 @@ export default function Navigation() {
           }}
         />
       }
+      {...props}
     />
   )
 }

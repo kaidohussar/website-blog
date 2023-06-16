@@ -1,9 +1,8 @@
 import Head from 'next/head'
-import Navigation from './Navigation'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import IntroLoading from '@components/IntroLoading'
-import { motion, useAnimationControls } from 'framer-motion'
+import { Loading } from 'kaidohussar-ui'
+import { Navigation } from '@components/Navigation'
 
 type Props = {
   children: any
@@ -14,11 +13,9 @@ const googleTrackingId = 'G-9DDQJQ0KZ1'
 const Layout = ({ children }: Props) => {
   const router = useRouter()
   const [loading, setIsLoading] = useState(false)
-  const [isIntroAnimationChecked, setIsIntroAnimationChecked] = useState(false)
-  const navAnimationControls = useAnimationControls()
 
   const { events } = useRouter()
-
+  console.log('router', router)
   useEffect(() => {
     const handleSetLoading = (url) => {
       url !== router.asPath && setIsLoading(true)
@@ -35,6 +32,8 @@ const Layout = ({ children }: Props) => {
       events.off('routeChangeComplete', handleEndLoading)
     }
   }, [events, router.asPath])
+  // @ts-ignore
+  console.log('window.isIntroAnimationChecked', window.isIntroAnimationChecked)
 
   return (
     <>
@@ -67,32 +66,13 @@ const Layout = ({ children }: Props) => {
             </>
           )}
       </Head>
-      <motion.div
-        animate={navAnimationControls}
-        initial={{ y: -20, opacity: 0, pointerEvents: 'none', zIndex: 2 }}
-      >
-        <Navigation />
-      </motion.div>
-      <IntroLoading
-        animationShown={isIntroAnimationChecked}
-        onAnimationFinished={async () => {
-          setIsIntroAnimationChecked(true)
-          await navAnimationControls.start({
-            y: -2,
-            opacity: 1,
-            pointerEvents: 'all',
-            transition: {
-              y: {
-                duration: 0.3,
-                ease: [0.4, 0.0, 0.2, 1],
-              },
-            },
-          })
-        }}
-        isLoadingPage={loading}
-      >
-        {children}
-      </IntroLoading>
+      {
+        // @ts-ignore
+        window.isIntroAnimationChecked === true || router.pathname !== '/' ? (
+          <Navigation />
+        ) : null
+      }
+      {loading ? <Loading size="fill-content" /> : children}
     </>
   )
 }

@@ -17,3 +17,11 @@ declare module '*.yml' {
   const value: any
   export default value
 }
+
+declare global {
+  interface Window {
+    isIntroAnimationChecked: boolean
+  }
+}
+
+let isIntroAnimationChecked = window.isIntroAnimationChecked

@@ -13,8 +13,6 @@ import { Loading } from 'kaidohussar-ui'
 
 type Props = {
   children: React.ReactElement
-  isLoadingPage: boolean
-  animationShown: boolean
   onAnimationFinished: () => void
 }
 
@@ -77,14 +75,10 @@ const MOVE_PERCENTAGE_FROM_BOTTOM_CONTENT_COLUMN: [number, number, number] = [
 
 const CONTENT_COLUMN_IDX = 2
 
-const IntroLoading = ({
-  children,
-  isLoadingPage,
-  onAnimationFinished,
-  animationShown,
-}: Props) => {
+const IntroLoading = ({ children, onAnimationFinished }: Props) => {
   const [imagesWrapperScope, animateImagesWrapperInit] = useAnimate()
-  const contentRef = useRef(null)
+  const [contentScope, contentScopeInit] = useAnimate()
+
   const [movePosPercentContent, setMovePosPercentContent] = useState<
     [number, number, number]
   >(MOVE_PERCENTAGE_FROM_BOTTOM_CONTENT_COLUMN)
@@ -107,7 +101,6 @@ const IntroLoading = ({
   const getVerticalMovePx = useCallback(
     (dir: 'top' | 'bot', isContentColumn: boolean, imageIdx) => {
       if (isContentColumn) {
-        console.log('movePosPercentContent', movePosPercentContent)
         return document.body.offsetHeight * -1 * movePosPercentContent[imageIdx]
       }
 
@@ -136,11 +129,11 @@ const IntroLoading = ({
         y: getVerticalMovePx(dir, isContentColumn, imageIdx),
         transition: {
           duration: 1,
-          delay,
           opacity: {
             duration: 0.6,
           },
           y: {
+            delay,
             duration: 2.5, // Total duration of the animation
             ease: [0.4, 0.0, 0.2, 1],
           },
@@ -171,18 +164,23 @@ const IntroLoading = ({
       )
     }
 
-    if (imagesLoaded && !animationShown) {
+    if (imagesLoaded) {
       animateImagesWrapper()
-      handleIntroAnimations().then(() => {
-        console.log('CALLL')
-        imageAnimationControls.set({
-          outline: 'none',
-        })
+      handleIntroAnimations().then(async () => {
         onAnimationFinished()
+        contentScopeInit(
+          contentScope.current,
+          {
+            borderColor: 'var(--kh-intro-border-end)',
+          },
+          { duration: 0.3, ease: 'easeInOut' },
+        )
       })
     }
   }, [
     animateImagesWrapper,
+    contentScope,
+    contentScopeInit,
     getImageAnimation,
     imageAnimationControls,
     imagesLoaded,
@@ -192,26 +190,20 @@ const IntroLoading = ({
 
   useEffect(() => {
     const screenHeight = imagesWrapperScope.current.offsetHeight
-    const imageHeight = contentRef.current.getBoundingClientRect()?.height
+    const imageHeight = contentScope.current.getBoundingClientRect()?.height
 
     if (screenHeight && imageHeight) {
       const screenHeightReal = screenHeight * 1.2
       const topPercentage =
         ((screenHeightReal - imageHeight) / screenHeightReal) * 50
-      console.log('topPercentage', topPercentage)
+
       setMovePosPercentContent([0.15, topPercentage / 100, 0.65])
     }
-
-    console.log({ screenHeight, imageHeight })
-  }, [imagesWrapperScope])
-
-  if (isLoadingPage && loadingPercentage === initialLoadingPercentage) {
-    return <Loading />
-  }
+  }, [contentScope, imagesWrapperScope])
 
   return (
     <AnimatePresence>
-      {!imagesLoaded && !animationShown && (
+      {!imagesLoaded && (
         <motion.div
           key="loader"
           className={styles.percentageLoader}
@@ -254,6 +246,7 @@ const IntroLoading = ({
                 if (img === 'content') {
                   return (
                     <motion.div
+                      ref={contentScope}
                       key="content"
                       custom={{
                         dir: 'top',
@@ -263,7 +256,6 @@ const IntroLoading = ({
                       className={styles.contentDisplayIntro}
                       initial={initialAnimState}
                       animate={imageAnimationControls}
-                      ref={contentRef}
                     >
                       <motion.div
                         initial={{
