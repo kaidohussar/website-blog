@@ -75,6 +75,26 @@ const MOVE_PERCENTAGE_FROM_BOTTOM_CONTENT_COLUMN: [number, number, number] = [
 
 const CONTENT_COLUMN_IDX = 2
 
+/*export default function App() {
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, Math.round);
+
+  useEffect(() => {
+    const animation = animate(count, 100, { duration: 10 });
+
+    return animation.stop;
+  }, []);
+
+  return <motion.h1>{rounded}</motion.h1>;
+}
+
+1. Set 3 sec count animation
+2. if half of images are loaded -> notify counter hook
+3. if animation not half way through -> make animation quicker
+4. if animation half way through -> continue animation as it is
+5. on 99 percentage check again -> if images loaded go to 100, if not -> wait for images to be loaded
+*/
+
 const IntroLoading = ({ children, onAnimationFinished }: Props) => {
   const [imagesWrapperScope, animateImagesWrapperInit] = useAnimate()
   const [contentScope, contentScopeInit] = useAnimate()
