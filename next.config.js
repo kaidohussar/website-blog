@@ -5,7 +5,7 @@ const prod = process.env.NODE_ENV === 'production'
 let csp = ``
 csp += `base-uri 'self';`
 csp += `form-action 'self';`
-csp += `default-src 'self';`
+csp += `default-src 'self' https://www.google.com;`
 csp += `font-src 'self' https://fonts.googleapis.com/ https://fonts.gstatic.com;`
 csp += `script-src 'self' ${prod ? '' : "'unsafe-eval'"};` // NextJS requires 'unsafe-eval' in dev (faster source maps)
 csp += `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;` // NextJS requires 'unsafe-inline'
