@@ -4,7 +4,7 @@ import BasicMeta from '@components/meta/BasicMeta'
 import OpenGraphMeta from '@components/meta/OpenGraphMeta'
 import { SocialList } from '@components/SocialList'
 import IntroLoading from '@components/IntroLoading'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useAnimationControls } from 'framer-motion'
 import { Navigation } from '@components/Navigation'
 

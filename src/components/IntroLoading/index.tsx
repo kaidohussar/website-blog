@@ -10,6 +10,7 @@ import {
 import styles from '@styles/modules/introLoading.module.scss'
 import Image from 'next/image'
 import { Loading } from 'kaidohussar-ui'
+import LoadingImagesPercentage from '@components/IntroLoading/LoadingImagesPercentage'
 
 type Props = {
   children: React.ReactElement
@@ -20,32 +21,32 @@ type ColumnImages = (string | 'content')[]
 
 const COLUMN1_IMAGES: ColumnImages = [
   '/intro-images/boat.webp',
-  '/intro-images/boat.webp',
-  '/intro-images/boat.webp',
+  '/intro-images/1.webp',
+  '/intro-images/8.jpeg',
   '/intro-images/boat.webp',
 ]
 const COLUMN2_IMAGES: ColumnImages = [
   '/intro-images/stairs.webp',
-  '/intro-images/stairs.webp',
-  '/intro-images/stairs.webp',
+  '/intro-images/3.jpeg',
+  '/intro-images/1.webp',
   '/intro-images/stairs.webp',
 ]
 const COLUMN3_IMAGES: ColumnImages = [
-  '/intro-images/vase.webp',
+  '/intro-images/5.webp',
   'content',
-  '/intro-images/vase.webp',
+  '/intro-images/7.jpeg',
 ]
 const COLUMN4_IMAGES: ColumnImages = [
   '/intro-images/vase2.webp',
-  '/intro-images/vase2.webp',
-  '/intro-images/vase2.webp',
+  '/intro-images/6.webp',
+  '/intro-images/3.jpeg',
   '/intro-images/vase2.webp',
 ]
 const COLUMN5_IMAGES: ColumnImages = [
   '/intro-images/image.webp',
+  '/intro-images/1.webp',
   '/intro-images/image.webp',
-  '/intro-images/image.webp',
-  '/intro-images/image.webp',
+  '/intro-images/6.webp',
 ]
 
 const COLUMNS = [
@@ -75,30 +76,13 @@ const MOVE_PERCENTAGE_FROM_BOTTOM_CONTENT_COLUMN: [number, number, number] = [
 
 const CONTENT_COLUMN_IDX = 2
 
-/*export default function App() {
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, Math.round);
-
-  useEffect(() => {
-    const animation = animate(count, 100, { duration: 10 });
-
-    return animation.stop;
-  }, []);
-
-  return <motion.h1>{rounded}</motion.h1>;
-}
-
-1. Set 3 sec count animation
-2. if half of images are loaded -> notify counter hook
-3. if animation not half way through -> make animation quicker
-4. if animation half way through -> continue animation as it is
-5. on 99 percentage check again -> if images loaded go to 100, if not -> wait for images to be loaded
-*/
-
 const IntroLoading = ({ children, onAnimationFinished }: Props) => {
   const [imagesWrapperScope, animateImagesWrapperInit] = useAnimate()
   const [contentScope, contentScopeInit] = useAnimate()
 
+  const [imagesLoadedAnimCompleted, setImagesLoadedAnimCompleted] =
+    useState(false)
+  const [imagesLoaded, setImagesLoaded] = useState(false)
   const [movePosPercentContent, setMovePosPercentContent] = useState<
     [number, number, number]
   >(MOVE_PERCENTAGE_FROM_BOTTOM_CONTENT_COLUMN)
@@ -106,17 +90,17 @@ const IntroLoading = ({ children, onAnimationFinished }: Props) => {
   const imageAnimationControls = useAnimationControls()
 
   const initialLoadingPercentage = 100 / IMG_TOTAL_COUNT
-  const [loadingPercentage, setLoadingPercentage] = useState(
-    initialLoadingPercentage,
-  )
+  const loadingPercentage = useRef(initialLoadingPercentage)
 
   const handleImageLoaded = () => {
-    setLoadingPercentage((prevState) => {
-      return prevState + 100 / IMG_TOTAL_COUNT
-    })
+    const newPercentage = loadingPercentage.current + 100 / IMG_TOTAL_COUNT
+    if (Math.round(newPercentage) === 100) {
+      console.log('Math.round(newPercentage)', Math.round(newPercentage))
+      setImagesLoaded(true)
+    } else {
+      loadingPercentage.current = newPercentage
+    }
   }
-
-  const imagesLoaded = Math.round(loadingPercentage) === 100
 
   const getVerticalMovePx = useCallback(
     (dir: 'top' | 'bot', isContentColumn: boolean, imageIdx) => {
@@ -176,7 +160,7 @@ const IntroLoading = ({ children, onAnimationFinished }: Props) => {
       },
     )
   }, [animateImagesWrapperInit, imagesWrapperScope])
-
+  console.count()
   useEffect(() => {
     const handleIntroAnimations = async () => {
       await imageAnimationControls.start(({ dir, isContentColumn, index }) =>
@@ -184,7 +168,7 @@ const IntroLoading = ({ children, onAnimationFinished }: Props) => {
       )
     }
 
-    if (imagesLoaded) {
+    if (imagesLoadedAnimCompleted) {
       animateImagesWrapper()
       handleIntroAnimations().then(async () => {
         onAnimationFinished()
@@ -204,6 +188,7 @@ const IntroLoading = ({ children, onAnimationFinished }: Props) => {
     getImageAnimation,
     imageAnimationControls,
     imagesLoaded,
+    imagesLoadedAnimCompleted,
     imagesWrapperScope,
     onAnimationFinished,
   ])
@@ -223,27 +208,11 @@ const IntroLoading = ({ children, onAnimationFinished }: Props) => {
 
   return (
     <AnimatePresence>
-      {!imagesLoaded && (
-        <motion.div
-          key="loader"
-          className={styles.percentageLoader}
-          initial={{ opacity: 1 }}
-          animate={imagesLoaded && { opacity: 0 }}
-          transition={{ ease: 'easeInOut', duration: 0.6, delay: 0.3 }}
-          exit={{ opacity: 0 }}
-        >
-          <div className={styles.percentageTextWrapper}>
-            <motion.div
-              key="loader"
-              initial={{ y: 0, opacity: 1 }}
-              animate={imagesLoaded && { y: -20, opacity: 0 }}
-              transition={{ ease: 'easeInOut', duration: 0.4 }}
-              exit={{ y: -30, opacity: 0 }}
-            >
-              {`${Math.round(loadingPercentage)}%`}
-            </motion.div>
-          </div>
-        </motion.div>
+      {!imagesLoadedAnimCompleted && (
+        <LoadingImagesPercentage
+          imagesLoaded={imagesLoaded}
+          onImagesLoadedAnimCompleted={() => setImagesLoadedAnimCompleted(true)}
+        />
       )}
 
       <motion.div

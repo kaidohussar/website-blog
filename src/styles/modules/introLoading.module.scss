@@ -16,6 +16,10 @@
 
   .percentageTextWrapper {
     overflow: hidden;
+
+    > div {
+      color: h.$color-text
+    }
   }
 }
 
