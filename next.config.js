@@ -42,6 +42,10 @@ const moduleExports = {
     )
     return config
   },
+  images: {
+    loader: 'akamai',
+    path: '',
+  },
   async headers() {
     return [
       {
