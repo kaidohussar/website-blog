@@ -12,17 +12,19 @@ const LoadingImagesPercentage = ({
   onImagesLoadedAnimCompleted,
 }: Props) => {
   const nodeRef = useRef<HTMLDivElement>(null)
+  const memodPercentage = useRef(0)
   const [animStatus, setAnimStatus] = useState<'idle' | 'paused' | 'completed'>(
     'idle',
   )
 
   useEffect(() => {
-    const controls = animate(0, 99, {
+    const controls = animate(memodPercentage.current, 99, {
       duration: 3,
       ease: 'easeInOut',
       onUpdate(value) {
         if (nodeRef.current) {
           const val = Math.round(value)
+          memodPercentage.current = val
           nodeRef.current.textContent = `${val.toString()}`
         }
       },

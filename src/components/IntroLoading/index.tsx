@@ -160,7 +160,7 @@ const IntroLoading = ({ children, onAnimationFinished }: Props) => {
       },
     )
   }, [animateImagesWrapperInit, imagesWrapperScope])
-  console.count()
+
   useEffect(() => {
     const handleIntroAnimations = async () => {
       await imageAnimationControls.start(({ dir, isContentColumn, index }) =>
@@ -187,9 +187,7 @@ const IntroLoading = ({ children, onAnimationFinished }: Props) => {
     contentScopeInit,
     getImageAnimation,
     imageAnimationControls,
-    imagesLoaded,
     imagesLoadedAnimCompleted,
-    imagesWrapperScope,
     onAnimationFinished,
   ])
 
