@@ -11,16 +11,22 @@ const StylesProvider = dynamic(
   { ssr: false },
 )
 
+export let isIntroAnimationChecked = true
+export const setIntroAnimationChecked = () => (isIntroAnimationChecked = true)
+
 const App = ({ Component, pageProps }: AppProps) => {
   const commonOverWrites = { fontFamily: "Poppins, 'sans-serif'" }
 
   useEffect(() => {
+    console.log(
+      "window.matchMedia('(max-width: 1100px)').matches",
+      !!navigator.userAgent.match(/Android/i) ||
+        !!window.matchMedia('(max-width: 1100px)').matches,
+    )
     if (window !== undefined) {
       // @ts-ignore
-      window.isIntroAnimationChecked =
-        !!navigator.userAgent.match(/Android/i) ||
-        !!navigator.userAgent.match(/iPhone/i) ||
-        !!window.matchMedia('(max-width: 1100px)').matches
+      isIntroAnimationChecked = !!window.matchMedia('(max-width: 1100px)')
+        .matches
     }
   }, [])
 

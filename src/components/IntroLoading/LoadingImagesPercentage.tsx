@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { animate, motion, motionValue, useMotionValue } from 'framer-motion'
-import styles from '@styles/modules/introLoading.module.scss'
+import React, { useEffect, useRef, useState } from 'react'
+import { animate, motion } from 'framer-motion'
+import styles from '@styles/modules/loadingImagesPercentage.module.scss'
 
 type Props = {
   imagesLoaded: boolean
@@ -32,7 +32,7 @@ const LoadingImagesPercentage = ({
           ) {
             onImagesLoadedAnimCompleted()
           } else {
-            nodeRef.current.textContent = `${val.toString()}%`
+            nodeRef.current.textContent = `${val.toString()}`
           }
         }
       },
@@ -63,7 +63,6 @@ const LoadingImagesPercentage = ({
     >
       <div className={styles.percentageTextWrapper}>
         <motion.div
-          ref={nodeRef}
           key="loader"
           initial={{ y: 0, opacity: 1 }}
           animate={
@@ -71,7 +70,10 @@ const LoadingImagesPercentage = ({
           }
           transition={{ ease: 'easeInOut', duration: 0.4 }}
           exit={{ y: -30, opacity: 0 }}
-        />
+        >
+          <span className={styles.percentage} ref={nodeRef} />
+          <span>%</span>
+        </motion.div>
       </div>
     </motion.div>
   )

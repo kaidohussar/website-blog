@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Loading } from 'kaidohussar-ui'
 import { Navigation } from '@components/Navigation'
+import { isIntroAnimationChecked } from '@src/pages/_app'
 
 type Props = {
   children: any
@@ -15,7 +16,6 @@ const Layout = ({ children }: Props) => {
   const [loading, setIsLoading] = useState(false)
 
   const { events } = useRouter()
-  console.log('router', router)
   useEffect(() => {
     const handleSetLoading = (url) => {
       url !== router.asPath && setIsLoading(true)
@@ -32,8 +32,6 @@ const Layout = ({ children }: Props) => {
       events.off('routeChangeComplete', handleEndLoading)
     }
   }, [events, router.asPath])
-  // @ts-ignore
-  console.log('window.isIntroAnimationChecked', window.isIntroAnimationChecked)
 
   return (
     <>
@@ -66,12 +64,9 @@ const Layout = ({ children }: Props) => {
             </>
           )}
       </Head>
-      {
-        // @ts-ignore
-        window.isIntroAnimationChecked === true || router.pathname !== '/' ? (
-          <Navigation />
-        ) : null
-      }
+      {isIntroAnimationChecked === true || router.pathname !== '/' ? (
+        <Navigation />
+      ) : null}
       {loading ? <Loading size="fill-content" /> : children}
     </>
   )

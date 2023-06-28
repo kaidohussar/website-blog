@@ -7,6 +7,10 @@ import IntroLoading from '@components/IntroLoading'
 import React from 'react'
 import { useAnimationControls } from 'framer-motion'
 import { Navigation } from '@components/Navigation'
+import {
+  isIntroAnimationChecked,
+  setIntroAnimationChecked,
+} from '@src/pages/_app'
 
 const Index = () => {
   const navAnimationControls = useAnimationControls()
@@ -17,10 +21,7 @@ const Index = () => {
       justifyContent="center"
       cssProps={{
         height: '100%',
-        // @ts-ignore
-        transform: window.isIntroAnimationChecked
-          ? 'translateY(-100px)'
-          : undefined,
+        transform: isIntroAnimationChecked ? 'translateY(-50px)' : undefined,
       }}
     >
       <Box flexDirection="column" justifyContent="center">
@@ -39,44 +40,37 @@ const Index = () => {
 
   return (
     <Layout>
-      {
-        // @ts-ignore
-        !window.isIntroAnimationChecked && (
-          <Navigation
-            animate={navAnimationControls}
-            initial={{ y: -20, opacity: 0, pointerEvents: 'none', zIndex: 2 }}
-          />
-        )
-      }
+      {!isIntroAnimationChecked && (
+        <Navigation
+          animate={navAnimationControls}
+          initial={{ y: -20, opacity: 0, pointerEvents: 'none', zIndex: 2 }}
+        />
+      )}
       <BasicMeta url={'/'} />
       <OpenGraphMeta url={'/'} />
 
-      {
-        // @ts-ignore
-        window.isIntroAnimationChecked ? (
-          content
-        ) : (
-          <IntroLoading
-            onAnimationFinished={async () => {
-              // @ts-ignore
-              window.isIntroAnimationChecked = true
-              await navAnimationControls.start({
-                y: 0,
-                opacity: 1,
-                pointerEvents: 'all',
-                transition: {
-                  y: {
-                    duration: 0.3,
-                    ease: [0.4, 0.0, 0.2, 1],
-                  },
+      {isIntroAnimationChecked ? (
+        content
+      ) : (
+        <IntroLoading
+          onAnimationFinished={async () => {
+            setIntroAnimationChecked()
+            await navAnimationControls.start({
+              y: 0,
+              opacity: 1,
+              pointerEvents: 'all',
+              transition: {
+                y: {
+                  duration: 0.3,
+                  ease: [0.4, 0.0, 0.2, 1],
                 },
-              })
-            }}
-          >
-            {content}
-          </IntroLoading>
-        )
-      }
+              },
+            })
+          }}
+        >
+          {content}
+        </IntroLoading>
+      )}
     </Layout>
   )
 }

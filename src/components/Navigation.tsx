@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { Switch, useTheme } from 'kaidohussar-ui'
 import { NavHeader } from '@components/NavHeader'
-import React, { ReactHTML } from 'react'
+import React from 'react'
 import { HTMLMotionProps } from 'framer-motion'
 
 export const Navigation = (props: HTMLMotionProps<'nav'>) => {

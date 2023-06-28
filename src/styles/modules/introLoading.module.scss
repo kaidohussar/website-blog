@@ -1,28 +1,5 @@
 @use 'src/styles/helpers' as h;
 
-.percentageLoader {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  background: h.$color-background;
-
-  top: 0;
-  left: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-
-  .percentageTextWrapper {
-    overflow: hidden;
-
-    > div {
-      color: h.$color-text
-    }
-  }
-}
-
 .root {
   display: flex;
   align-items: center;
