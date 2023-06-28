@@ -1,0 +1,62 @@
+@use 'src/styles/helpers' as h;
+
+.root {
+  position: relative;
+  top:0;
+  width: 100%;
+  max-width: 1984px;
+  display: flex;
+  padding: 32px 16px;
+  height: 100px;
+  z-index: 2;
+
+  .navItems {
+    display: flex;
+    font-weight: 300;
+
+    .navItem {
+      font-weight: 600;
+
+      button {
+        position: relative;
+        text-transform: capitalize;
+        padding-bottom: 2px;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -5px;
+          width: 100%;
+          height: 2px;
+          left: 0;
+          background: #1A1A1A;
+        }
+      }
+    }
+
+    button {
+      margin-right: 32px;
+    }
+  }
+
+  &.alignRight {
+    justify-content: flex-end;
+
+    &.withAddon {
+      flex-direction: row-reverse;
+    }
+
+    .navItems button {
+      margin-left: 32px;
+    }
+  }
+
+  &.withAddon {
+    justify-content: space-between;
+  }
+
+  .addOn {
+    display: flex;
+    align-items: center;
+  }
+}

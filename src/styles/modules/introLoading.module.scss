@@ -1,0 +1,67 @@
+@use 'src/styles/helpers' as h;
+
+.root {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  overflow: hidden;
+  background: h.$color-background;
+  width: 100vw;
+  height: 100vh;
+  justify-content: space-around;
+  gap: 50px;
+  top: 0;
+  left: 0;
+  transform: translateX(-15vh);
+
+  > div {
+    flex: 1;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 50px;
+
+    &:nth-child(odd) {
+      justify-content: flex-end;
+    }
+
+    > div {
+      position: absolute;
+      width: 100%;
+      max-height: 20%;
+      aspect-ratio: 16 / 9;
+
+      img {
+        object-fit: cover;
+      }
+    }
+  }
+
+  .contentDisplayIntro {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    background: h.$color-background;
+    border-style: solid;
+    border-width: 3px;
+    border-color: var(--kh-intro-border-start);
+
+    > div {
+      display: flex;
+    }
+
+    h1, h2 {
+      white-space: nowrap;
+    }
+  }
+}
+
+.contentDisplayDefault {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

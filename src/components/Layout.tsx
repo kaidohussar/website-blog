@@ -1,11 +1,12 @@
 import Head from 'next/head'
-import Navigation from './Navigation'
-import { Loading } from 'kaidohussar-ui'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { Loading } from 'kaidohussar-ui'
+import { Navigation } from '@components/Navigation'
+import { isIntroAnimationChecked } from '@src/pages/_app'
 
 type Props = {
-  children: React.ReactNode
+  children: any
 }
 
 const googleTrackingId = 'G-9DDQJQ0KZ1'
@@ -15,7 +16,6 @@ const Layout = ({ children }: Props) => {
   const [loading, setIsLoading] = useState(false)
 
   const { events } = useRouter()
-
   useEffect(() => {
     const handleSetLoading = (url) => {
       url !== router.asPath && setIsLoading(true)
@@ -64,7 +64,9 @@ const Layout = ({ children }: Props) => {
             </>
           )}
       </Head>
-      <Navigation />
+      {isIntroAnimationChecked === true || router.pathname !== '/' ? (
+        <Navigation />
+      ) : null}
       {loading ? <Loading size="fill-content" /> : children}
     </>
   )
