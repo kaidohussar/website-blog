@@ -17,23 +17,13 @@ const LoadingImagesPercentage = ({
   )
 
   useEffect(() => {
-    const controls = animate(0, 100, {
+    const controls = animate(0, 99, {
       duration: 3,
       ease: 'easeInOut',
       onUpdate(value) {
         if (nodeRef.current) {
           const val = Math.round(value)
-          if (!imagesLoaded && val === 100) {
-            controls.pause()
-          } else if (
-            imagesLoaded &&
-            val === 100 &&
-            animStatus !== 'completed'
-          ) {
-            onImagesLoadedAnimCompleted()
-          } else {
-            nodeRef.current.textContent = `${val.toString()}`
-          }
+          nodeRef.current.textContent = `${val.toString()}`
         }
       },
       onComplete() {
@@ -42,12 +32,11 @@ const LoadingImagesPercentage = ({
     })
 
     return () => controls.stop()
-  }, [animStatus, imagesLoaded, onImagesLoadedAnimCompleted])
+  }, [onImagesLoadedAnimCompleted])
 
   useEffect(() => {
-    if (animStatus === 'paused' && imagesLoaded) {
+    if (animStatus === 'completed' && imagesLoaded) {
       nodeRef.current.textContent = `100%`
-      setAnimStatus('completed')
       onImagesLoadedAnimCompleted()
     }
   }, [animStatus, imagesLoaded, onImagesLoadedAnimCompleted])
@@ -69,7 +58,7 @@ const LoadingImagesPercentage = ({
             imagesLoaded && animStatus === 'completed' && { y: -20, opacity: 0 }
           }
           transition={{ ease: 'easeInOut', duration: 0.4 }}
-          exit={{ y: -30, opacity: 0 }}
+          exit={{ y: -20, opacity: 0 }}
         >
           <span className={styles.percentage} ref={nodeRef} />
           <span>%</span>

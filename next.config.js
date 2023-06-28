@@ -44,7 +44,7 @@ const moduleExports = {
   },
   images: {
     loader: 'akamai',
-    path: '',
+    path: './',
   },
   async headers() {
     return [
