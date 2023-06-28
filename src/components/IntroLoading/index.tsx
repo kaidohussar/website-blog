@@ -3,13 +3,11 @@ import {
   AnimatePresence,
   AnimationDefinition,
   motion,
-  MotionProps,
   useAnimate,
   useAnimationControls,
 } from 'framer-motion'
 import styles from '@styles/modules/introLoading.module.scss'
 import Image from 'next/image'
-import { Loading } from 'kaidohussar-ui'
 import LoadingImagesPercentage from '@components/IntroLoading/LoadingImagesPercentage'
 
 type Props = {
@@ -95,7 +93,6 @@ const IntroLoading = ({ children, onAnimationFinished }: Props) => {
   const handleImageLoaded = () => {
     const newPercentage = loadingPercentage.current + 100 / IMG_TOTAL_COUNT
     if (Math.round(newPercentage) === 100) {
-      console.log('Math.round(newPercentage)', Math.round(newPercentage))
       setImagesLoaded(true)
     } else {
       loadingPercentage.current = newPercentage
