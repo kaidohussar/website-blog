@@ -1,0 +1,12 @@
+@use 'src/styles/helpers' as h;
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+
+  > div {
+    margin-top: -100px;
+  }
+}

@@ -39,24 +39,6 @@
       }
     }
   }
-
-  .contentDisplayIntro {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    background: h.$color-background;
-    border-style: solid;
-    border-width: 3px;
-    border-color: var(--kh-intro-border-start);
-
-    > div {
-      display: flex;
-    }
-
-    h1, h2 {
-      white-space: nowrap;
-    }
-  }
 }
 
 .contentDisplayDefault {

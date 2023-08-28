@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Loading } from 'kaidohussar-ui'
 import { Navigation } from '@components/Navigation'
-import { isIntroAnimationChecked } from '@src/pages/_app'
 
 type Props = {
   children: any
@@ -64,9 +63,7 @@ const Layout = ({ children }: Props) => {
             </>
           )}
       </Head>
-      {isIntroAnimationChecked === true || router.pathname !== '/' ? (
-        <Navigation />
-      ) : null}
+      <Navigation />
       {loading ? <Loading size="fill-content" /> : children}
     </>
   )
