@@ -1,13 +1,12 @@
 import { useRouter } from 'next/router'
-import { Switch, useTheme } from 'kaidohussar-ui'
 import { NavHeader } from '@components/NavHeader'
 import React from 'react'
 import { HTMLMotionProps } from 'framer-motion'
+import ThemeSwitcher from '@components/ThemeSwitcher'
 
 export const Navigation = (props: HTMLMotionProps<'nav'>) => {
   const router = useRouter()
-  const { setTheme, theme } = useTheme()
-
+  console.log('router', router)
   return (
     // @ts-ignore
     <NavHeader
@@ -22,6 +21,14 @@ export const Navigation = (props: HTMLMotionProps<'nav'>) => {
           active: router.pathname === '/',
         },
         {
+          title: 'Services',
+          onClick: (e) => {
+            e.preventDefault()
+            router.push('/services', undefined, { shallow: true })
+          },
+          active: router.pathname.startsWith('/services'),
+        },
+        {
           title: 'Blog',
           onClick: (e) => {
             e.preventDefault()
@@ -30,15 +37,7 @@ export const Navigation = (props: HTMLMotionProps<'nav'>) => {
           active: router.pathname.startsWith('/posts'),
         },
       ]}
-      addOn={
-        <Switch
-          labels={{ left: 'Lights ON', right: 'Lights OFF' }}
-          isToggled={theme === 'dark'}
-          handleToggle={() => {
-            setTheme(theme === 'light' ? 'dark' : 'light')
-          }}
-        />
-      }
+      addOn={<ThemeSwitcher />}
       {...props}
     />
   )

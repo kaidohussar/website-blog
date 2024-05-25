@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { Frame } from 'kaidohussar-ui'
 
 import '@styles/main.scss'
+import React from 'react'
 
 const StylesProvider = dynamic(
   () => import('kaidohussar-ui').then((mod) => mod.StylesProvider),

@@ -1,0 +1,80 @@
+---
+slug: frontend-problems-you-might-not-know
+title: Frontend problems you might not know
+date: 2024-03-27
+author: kaidohussar
+tags:
+  - web
+  - javascript
+  - react
+---
+
+As web solutions improve in time, it often comes from the cost of having a more complex system behind the scenes. If you add countless factors like browser compatibility or fluctuating network speeds, bugs and problems are easy to happen.
+
+In this article I will go over few topics I’ve found myself dealing with and none of them are actually that obvious at first, so you are left with “what the f is going on”
+
+### Runtime crashes because of browser translations
+
+Here I mean translations that are auto-generated from the browser itself.
+
+So why is it even causing issues? Well, this is just one example, but the problem is pretty straightforward - something is mutating your application DOM tree.
+
+Right click in Chrome and select “Translate to X language” - the text is wrapped with new DOM elements and your JavaScript which you wrote has no idea about it.
+
+```jsx
+<font style="vertical-align: inherit;">
+  <font style="vertical-align: inherit;">
+    Text what was translated
+  </font>
+</font>
+```
+
+This problem is especially easy to reproduce, when your React code has something like this:
+
+```jsx
+{showGreeting && <FormattedMessage id="greeting.title" />}
+```
+
+The problem here is that when `showGreeting` state changes from `true` to `false` React gets really confused about what elements to remove from DOM. From React’s point of view `FormattedMessage` is a component that returns a text string and not a nested ``<font>`` element, not if needed to remove this text from DOM, users will be greeted with this wonderful error:
+
+`Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node.`
+
+Now this is a runtime error which bubbles all the way to the root level and if you don’t have an error boundary set, there will be a ugly looking fatal error screen - sooo, pretty bad.
+
+Even though up there is a valid React code, it can easily still cause crashes.
+
+So whats the solution to this? I’ve found that the cleanest way is to let React do the mounting/unmounting on higher level, as this just prevents this situation from even happening, but if that’s not an option or will create code you otherwise would not write, just wrapping the `FormattedMessage`  with a `span` will also do the trick.
+
+### Playing audio or sound cues in inactive browser tabs
+
+So, here I will go through 2 areas where having experience on how inactive tabs work in different browsers come in handy - autoplaying audio and dealing with timers.
+
+Let’s imagine we have a chat app and we play a sound every time user receives a message. For better user experience we obviously would want that a subtle **bing** will also play in inactive tabs. Problem is that browsers are not that keen to play audio, which is not the result of user action:
+
+The first thing browsers track is activity on the tab, if user just does a refresh and then moves to other tabs leaving our chat app inactive, the audio will not be played. Discord for example has added a little check, to deal with that issue:
+
+<img width={400} src="/images/discord-audio-activity.png" alt="Discord interactivity check" />
+
+Now also different browsers come into play - for example Safari decides that it just does not play audio and thats it. For Chrome there is a nice [article](https://developer.chrome.com/blog/autoplay/), which gives more insights to when and why audio will not be played - although, one thing to take from this is that autoplaying audio is tricky, and in web we cannot rely that audio will always play - so it’s almost necessary to grab users attention with either changing the browser tab title/text with a short interval or for example push notifications.
+
+At my job we are also experimenting by informing users why audio could not be played, the idea being to shift the blame from us and also informing users to be more aware of these things.
+
+### New deployment → files not found → grey screen
+
+A common way to improve a modern web application’s performance is to divide JavaScript into smaller chunks, as then the user’s browser would download the necessary JS only when it’s actually needed.
+
+So now let’s imagine a common scenario where we have static website hosted somewhere, user will come to your website and as your application is bundled in way that it’s smart enough to let user download only the JS needed for home page.
+But it also retrieves the necessary info about what hashed JS chunk it needs to download if navigated to contact’s page… see the problem? So if you were to do a new deployment which updates the contacts page and therefor changes the JS chunk hash, it creates a situation where on the server we have a different JS chunk than the user wants to download upon navigating to contacts page.
+
+As a result, the user will see something like this:
+
+`ChunkLoadError: Loading chunk 552 failed.`
+
+To prevent this issue from happening there are many different ways and it honestly would deserve a separate blog post to explain them more properly, but the easiest and most common way I’ve seen it solved is to basically build a mechanism which [reloads the application](https://www.google.com/search?q=lazy+retry) upon catching this error - not the best UX but at least better than crash screen.
+
+### How to know if it happens to your app users?
+
+The answer here is pretty simple, you need to have some kind of a error logging tool or method. My personal favorite is [Sentry](https://sentry.io), but there are many other tools out there which will do the job.
+
+Happy debugging!
+

@@ -1,45 +1,45 @@
-import React, { useState } from "react";
-import Copyright from "./Copyright";
-import Date from "./Date";
-import Layout from "./Layout";
-import { SocialList } from "./SocialList";
-import { getAuthor } from "../lib/authors";
-import { getTag } from "../lib/tags";
-import ContentWrapper from "@components/ContentWrapper";
-import { Button, Heading } from "kaidohussar-ui";
-import PostMeta from "@components/PostMeta";
-import MetaData from "@components/meta/MetaData";
-import styles from "@styles/modules/postLayout.module.scss";
-import { useRouter } from "next/router";
-import { useGetReadingBarInfo } from "@src/utils/useGetReadingBarInfo";
-import DisplayReadPercentage from "@components/DisplayReadPercentage";
+import React, { useState } from 'react'
+import Copyright from './Copyright'
+import Date from './Date'
+import Layout from './Layout'
+import { SocialList } from './SocialList'
+import { getAuthor } from '../lib/authors'
+import { getTag } from '../lib/tags'
+import ContentWrapper from '@components/ContentWrapper'
+import { Button, Heading } from 'kaidohussar-ui'
+import PostMeta from '@components/PostMeta'
+import MetaData from '@components/meta/MetaData'
+import styles from '@styles/modules/postLayout.module.scss'
+import { useRouter } from 'next/router'
+import { useGetReadingBarInfo } from '@src/utils/useGetReadingBarInfo'
+import DisplayReadPercentage from '@components/DisplayReadPercentage'
 
 type Props = {
-  title: string;
-  date: Date;
-  slug: string;
-  tags: string[];
-  author: string;
-  description?: string;
-  children: React.ReactNode;
-};
+  title: string
+  date: Date
+  slug: string
+  tags: string[]
+  author: string
+  description?: string
+  children: React.ReactNode
+}
 const PostLayout = ({
   title,
   date,
   slug,
   author,
   tags,
-  description = "",
+  description = '',
   children,
 }: Props) => {
-  const router = useRouter();
-  const keywords = tags.map((it) => getTag(it).name);
-  const authorName = getAuthor(author).name;
+  const router = useRouter()
+  const keywords = tags.map((it) => getTag(it).name)
+  const authorName = getAuthor(author).name
   const [contentRef, setContentRef] = useState<HTMLDivElement | undefined>(
-    undefined
-  );
+    undefined,
+  )
 
-  const { percentage, isHidden } = useGetReadingBarInfo(contentRef);
+  const { percentage, isHidden } = useGetReadingBarInfo(contentRef)
   return (
     <Layout>
       <MetaData
@@ -55,7 +55,7 @@ const PostLayout = ({
 
       <ContentWrapper ref={setContentRef}>
         <Button
-          onClick={() => router.push("/posts", undefined, { shallow: true })}
+          onClick={() => router.push('/posts', undefined, { shallow: true })}
           className={styles.backLink}
           appearance="text"
         >
@@ -63,7 +63,7 @@ const PostLayout = ({
         </Button>
         <article>
           <header className={styles.header}>
-            <Heading type="h1" size="xxl" weight="semibold">
+            <Heading type="h1" size="xxl" weight="semibold" lineHeight="xs">
               {title}
             </Heading>
 
@@ -79,7 +79,7 @@ const PostLayout = ({
         </footer>
       </ContentWrapper>
     </Layout>
-  );
-};
+  )
+}
 
-export default PostLayout;
+export default PostLayout

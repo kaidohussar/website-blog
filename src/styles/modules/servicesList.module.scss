@@ -1,0 +1,50 @@
+@use 'src/styles/helpers' as h;
+
+.row {
+  display: flex;
+  gap: 45px;
+
+  @media only screen and (max-width: h.$breakpoint-mobile) {
+    flex-direction: column;
+  }
+
+  @media only screen and (min-width: h.$breakpoint-mobile) {
+    & + .row {
+      border-top: 1px solid var(--kh-color-text);
+      padding-top: 45px;
+    }
+  }
+}
+
+.listItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 207px;
+  padding: 13px 38px;
+  gap: 10px;
+  color: var(--kh-color-text);
+  max-width: 360px;
+  border-left: 1px solid var(--kh-color-text);
+
+  .title {
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  .content {
+    color: var(--kh-color-grey);
+
+    svg {
+      color: var(--kh-theme-text);
+    }
+  }
+}
+
+.toolsList {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+}

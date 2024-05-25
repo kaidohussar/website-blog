@@ -1,6 +1,7 @@
 @use 'src/styles/helpers' as h;
 
 .content {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,5 +9,22 @@
 
   > div {
     margin-top: -100px;
+  }
+
+  .subHeading {
+    max-width: 505px;
+    display: block;
+  }
+
+  .button {
+    margin-top: 65px;
+    max-width: 230px;
+    text-transform: capitalize;
+  }
+
+  .socialLinks {
+    position: absolute;
+    left: 0;
+    bottom: 20px;
   }
 }

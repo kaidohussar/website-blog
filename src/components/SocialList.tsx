@@ -5,7 +5,7 @@ import { Box, Icon } from 'kaidohussar-ui'
 export function SocialList({}) {
   return (
     <Box>
-      <Box>
+      <Box cssProps={{ borderRadius: 6, overflow: 'hidden' }}>
         <Icon
           type="github"
           size="xxl"
@@ -14,7 +14,7 @@ export function SocialList({}) {
         />
       </Box>
 
-      <Box left="md">
+      <Box left="md" cssProps={{ borderRadius: 6, overflow: 'hidden' }}>
         <Icon
           type="linkedin"
           size="xxl"

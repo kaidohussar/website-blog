@@ -1,13 +1,15 @@
 import Layout from '@components/Layout'
-import { Box, Heading } from 'kaidohussar-ui'
+import { Box, Button, Heading } from 'kaidohussar-ui'
 import BasicMeta from '@components/meta/BasicMeta'
 import OpenGraphMeta from '@components/meta/OpenGraphMeta'
 import { SocialList } from '@components/SocialList'
 import React from 'react'
 import { motion } from 'framer-motion'
 import styles from '@styles/modules/index.module.scss'
+import { useRouter } from 'next/router'
 
 const Index = () => {
+  const router = useRouter()
   return (
     <Layout>
       <BasicMeta url={'/'} />
@@ -23,14 +25,26 @@ const Index = () => {
             <Heading type="h1" size="xxxl" weight="bold" lineHeight="xs">
               Kaido Hussar
             </Heading>
-            <Heading type="h2" size="xl">
-              Front-end developer
+            <Heading type="h2" size="lg">
+              <span className={styles.subHeading}>
+                Problem-solver at heart, helping SaaS products get kickstarted
+              </span>
             </Heading>
-            <Box top="lg">
-              <SocialList />
-            </Box>
+
+            <Button
+              onClick={() =>
+                router.push('/services', undefined, { shallow: true })
+              }
+              className={styles.button}
+              appearance="primary"
+            >
+              Check services
+            </Button>
           </Box>
         </Box>
+        <div role="contentinfo" className={styles.socialLinks}>
+          <SocialList />
+        </div>
       </motion.div>
     </Layout>
   )
