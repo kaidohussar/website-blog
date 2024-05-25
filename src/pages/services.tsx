@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import styles from '@styles/modules/services.module.scss'
 import React from 'react'
 import ServicesList from '@components/ServicesList'
+import { SocialList } from '@components/SocialList'
 
 export default function Index() {
   const url = '/services'
@@ -20,7 +21,10 @@ export default function Index() {
         <h1 className={styles.heading}>Services</h1>
         <ServicesList className={styles.servicesList} />
 
-        <div className={styles.emailLink}>kaidohus@gmail.com</div>
+        <div className={styles.contact}>
+          <SocialList />
+          <span>kaidohus@gmail.com</span>
+        </div>
       </motion.div>
     </Layout>
   )
