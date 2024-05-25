@@ -19,6 +19,8 @@ export default function Index() {
       >
         <h1 className={styles.heading}>Services</h1>
         <ServicesList className={styles.servicesList} />
+
+        <div className={styles.emailLink}>kaidohus@gmail.com</div>
       </motion.div>
     </Layout>
   )
