@@ -6,7 +6,7 @@ import ThemeSwitcher from '@components/ThemeSwitcher'
 
 export const Navigation = (props: HTMLMotionProps<'nav'>) => {
   const router = useRouter()
-  console.log('router', router)
+
   return (
     // @ts-ignore
     <NavHeader
