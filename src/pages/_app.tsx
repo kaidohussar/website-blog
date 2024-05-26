@@ -5,6 +5,7 @@ import { Frame } from 'kaidohussar-ui'
 
 import '@styles/main.scss'
 import React from 'react'
+import ThemeSwitcher from '@components/ThemeSwitcher'
 
 const StylesProvider = dynamic(
   () => import('kaidohussar-ui').then((mod) => mod.StylesProvider),
@@ -18,6 +19,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     <StylesProvider customThemes={[commonOverWrites, commonOverWrites]}>
       <Frame backgroundColor="backgroundColor" maxWidth="large" id="main-frame">
         <Component {...pageProps} />
+        <ThemeSwitcher />
       </Frame>
     </StylesProvider>
   )

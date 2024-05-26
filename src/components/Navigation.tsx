@@ -2,7 +2,6 @@ import { useRouter } from 'next/router'
 import { NavHeader } from '@components/NavHeader'
 import React from 'react'
 import { HTMLMotionProps } from 'framer-motion'
-import ThemeSwitcher from '@components/ThemeSwitcher'
 
 export const Navigation = (props: HTMLMotionProps<'nav'>) => {
   const router = useRouter()
@@ -37,7 +36,6 @@ export const Navigation = (props: HTMLMotionProps<'nav'>) => {
           active: router.pathname.startsWith('/posts'),
         },
       ]}
-      addOn={<ThemeSwitcher />}
       {...props}
     />
   )
