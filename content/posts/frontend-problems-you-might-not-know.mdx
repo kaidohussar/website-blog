@@ -47,8 +47,6 @@ So whats the solution to this? I’ve found that the cleanest way is to let Reac
 
 ### Playing audio or sound cues in inactive browser tabs
 
-So, here I will go through 2 areas where having experience on how inactive tabs work in different browsers come in handy - autoplaying audio and dealing with timers.
-
 Let’s imagine we have a chat app and we play a sound every time user receives a message. For better user experience we obviously would want that a subtle **bing** will also play in inactive tabs. Problem is that browsers are not that keen to play audio, which is not the result of user action:
 
 The first thing browsers track is activity on the tab, if user just does a refresh and then moves to other tabs leaving our chat app inactive, the audio will not be played. Discord for example has added a little check, to deal with that issue:
