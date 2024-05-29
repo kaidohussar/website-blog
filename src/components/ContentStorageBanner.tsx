@@ -16,11 +16,7 @@ export default function ContentStorageBanner() {
       <h2>Check out my translations and assets manager</h2>
 
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/images/promo.png"
-        alt="contentstorage.app promotional image"
-        width={635}
-      />
+      <img src="/images/promo.png" alt="contentstorage.app promotional image" />
     </div>
   )
 }
