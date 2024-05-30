@@ -45,7 +45,7 @@ Even though the React code is valid, it can still cause crashes.
 
 So what’s the solution to this? I’ve found that the cleanest way is to let React handle the mounting and unmounting at a higher level, preventing this situation from happening. However, if that’s not an option or creates code you wouldn’t normally write, wrapping the ``FormattedMessage`` with a ``<span>`` will also do the trick.
 
-### Playing audio or sound cues in inactive browser tabs
+### Playing audio or sound cues
 
 Let’s imagine we have a chat app and we play a sound every time a user receives a message. For a better user experience, we obviously want a subtle bing to play even in inactive tabs. The problem is that browsers are not keen on playing audio that is not the result of user action.
 
