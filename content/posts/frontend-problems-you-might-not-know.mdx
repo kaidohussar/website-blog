@@ -53,7 +53,7 @@ The first thing browsers track is activity on the tab. If a user refreshes the p
 
 <img width={400} src="/images/discord-audio-activity.png" alt="Discord interactivity check" />
 
-Now also different browsers come into play - for example Safari decides that it just does not play audio and thats it. For Chrome there is a nice [article](https://developer.chrome.com/blog/autoplay/), which gives more insights to when and why audio will not be played - although, one thing to take from this is that autoplaying audio is tricky, and in web we cannot rely that audio will always play - so it’s almost necessary to grab users attention with either changing the browser tab title/text with a short interval or for example push notifications.
+Now also different browsers come into play - for example Safari decides that it just does not play audio in inactive tabs and that's it. For Chrome there is a nice [article](https://developer.chrome.com/blog/autoplay/), which gives more insights to when and why audio will not be played - although, one thing to take from this is that autoplaying audio is tricky, and in web we cannot rely that audio will always play - so in many cases it’s almost necessary to grab users attention with either changing the browser tab title/text with a short interval or for example push notifications.
 
 At my job, we are also experimenting with informing users why audio could not be played. The idea is to shift the blame from us and also make users more aware of these things.
 
