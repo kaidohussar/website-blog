@@ -9,6 +9,12 @@ body {
 #__next {
   display: flex;
   height: 100%;
+  overflow: hidden;
+}
+
+#main-frame {
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
 }
 
 html[data-kh-theme='light'] {

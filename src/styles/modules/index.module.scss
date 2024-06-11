@@ -1,10 +1,17 @@
 @use 'src/styles/helpers' as h;
 
+.contentWrapper {
+  overflow: hidden;
+  display: flex;
+  flex: 1;
+}
+
 .content {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   flex: 1;
 
   > div {
