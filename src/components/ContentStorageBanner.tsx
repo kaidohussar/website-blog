@@ -4,6 +4,7 @@ import { ExternalLinkIcon } from '@src/assets/externalLink'
 export default function ContentStorageBanner() {
   return (
     <div className={styles.root}>
+      <h2>Check out my CMS for web apps</h2>
       <a
         className={styles.link}
         href="https://contentstorage.app"
@@ -12,11 +13,6 @@ export default function ContentStorageBanner() {
         contentstorage.app
         <ExternalLinkIcon />
       </a>
-
-      <h2>Check out my translations and assets manager</h2>
-
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/images/promo.png" alt="contentstorage.app promotional image" />
     </div>
   )
 }
