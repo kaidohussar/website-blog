@@ -16,6 +16,15 @@
   }
 }
 
+.lineThrough {
+  text-decoration: line-through;
+}
+
+.muted {
+  font-size: 12px;
+  color: var(--kh-color-grey)
+}
+
 .listItem {
   display: flex;
   flex-direction: column;

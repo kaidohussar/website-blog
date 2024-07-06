@@ -11,7 +11,7 @@ type ServicesListProps = {
 
 type ServiceListItemProps = {
   icon: React.ReactNode
-  title: string
+  title: React.ReactNode
   content: React.ReactNode
 }
 
@@ -115,10 +115,14 @@ export default function ServicesList({ className }: ServicesListProps) {
       <div className={styles.row}>
         <ServiceListItem
           icon={mvpIcon}
-          title="MVP building"
+          title={
+            <>
+              <span className={styles.lineThrough}>MVP building</span>{' '}
+            </>
+          }
           content={
             <>
-              <p>
+              <p className={styles.lineThrough}>
                 Building you the minimum viable product using popular tech stack
               </p>
               <div className={styles.toolsList}>
