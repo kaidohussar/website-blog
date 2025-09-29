@@ -16,7 +16,7 @@ export default function OpenGraphMeta({
   return (
     <Head>
       <meta property="og:site_name" content={config.site_title} />
-      <meta property="og:url" content={config.base_url + url} />
+      <meta property="og:url" content={`https://${config.base_url}${url}`} />
       <meta
         property="og:title"
         content={title ? [title, config.site_title].join(' | ') : ''}
@@ -27,9 +27,13 @@ export default function OpenGraphMeta({
       />
       <meta
         property="og:image"
-        content={image ? image : config.base_url + '/og_image.png'}
+        content={image ? image : `https://${config.base_url}/kaidohussar_dev.png`}
       />
       <meta property="og:type" content="article" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title ? [title, config.site_title].join(' | ') : ''} />
+      <meta name="twitter:description" content={description ? description : config.site_description} />
+      <meta name="twitter:image" content={image ? image : `https://${config.base_url}/kaidohussar_dev.png`} />
     </Head>
   )
 }
