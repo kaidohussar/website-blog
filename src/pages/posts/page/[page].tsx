@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Layout from '@components/Layout'
-import PostList from '@components/PostList'
+import PostListMain from '@components/PostListMain'
 import config from '@src/lib/config'
 import { countPosts, listPostContent, PostContent } from '@src/lib/posts'
 import { listTags, TagContent } from '@src/lib/tags'
@@ -15,13 +15,13 @@ type Props = {
     pages: number
   }
 }
-const Page = ({ posts, pagination, page }: Props) => {
+const Page = ({ posts, tags, pagination, page }: Props) => {
   const url = `/posts/page/${page}`
   const title = 'All posts'
   return (
     <Layout>
       <MetaData url={url} title={title} />
-      <PostList posts={posts} pagination={pagination} />
+      <PostListMain posts={posts} tags={tags} pagination={pagination} />
     </Layout>
   )
 }

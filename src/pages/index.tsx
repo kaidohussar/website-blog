@@ -28,7 +28,7 @@ const Index = () => {
               </Heading>
               <Heading type="h2" size="lg">
                 <span className={styles.subHeading}>
-                  Problem-solver at heart, helping SaaS products get kickstarted
+                  Problem-solver at heart, building products for web
                 </span>
               </Heading>
 

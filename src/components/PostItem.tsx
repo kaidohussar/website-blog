@@ -11,12 +11,10 @@ type Props = {
 
 const PostItem = ({ post }: Props) => (
   <Link className={styles.postItem} href={'/posts/' + post.slug}>
-    <a>
-      <Date date={parseISO(post.date)} />
-      <Heading size="xxl" type="h2" weight="semibold">
-        {post.title}
-      </Heading>
-    </a>
+    <Date date={parseISO(post.date)} />
+    <Heading size="xxl" type="h2" weight="semibold">
+      {post.title}
+    </Heading>
   </Link>
 )
 

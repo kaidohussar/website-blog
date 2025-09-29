@@ -1,4 +1,6 @@
 import { generatePagination } from '../lib/pagination'
+import styles from '@styles/modules/pagination.module.scss'
+import clsx from 'clsx'
 import Link from 'next/link'
 
 type Props = {
@@ -9,19 +11,22 @@ type Props = {
     as: (page: number) => string
   }
 }
+
 export default function Pagination({ current, pages, link }: Props) {
   const pagination = generatePagination(current, pages)
+
   return (
-    <ul>
+    <ul className={styles.container}>
       {pagination.map((it, i) => (
-        <li key={i}>
+        <li key={i} className={styles.item}>
           {it.excerpt ? (
-            '...'
+            <span className={styles.ellipsis}>...</span>
           ) : (
             <Link
-              className={it.page === current ? 'active' : null}
-              href={link.href(it.page)}
-              as={link.as(it.page)}
+              href={link.as(it.page) || link.href(it.page)}
+              className={clsx(styles.link, {
+                [styles.active]: it.page === current,
+              })}
             >
               {it.page}
             </Link>

@@ -1,0 +1,84 @@
+---
+slug: choosing-between-cms-tms
+title: Choosing between CMS and TMS tools
+date: 2025-09-25
+author: kaidohussar
+tags:
+  - web
+  - product
+---
+
+
+SaaS product teams increasingly face a critical choice: dedicated content management systems (CMS) or translation management systems (TMS).
+
+The core of the problem is that neither CMS or TMS tools were originally designed to perfectly solve the other's primary function. A CMS often lacks the deep, workflow-centric features required for efficient, at-scale localisation, while a TMS is not built for the complex structured rich content.
+
+## Content Management vs. Translation Management
+
+To make an informed decision, product teams must first understand the fundamental architectural and philosophical differences between a Content Management System and a Translation Management System.
+
+TMS is a centralised software platform designed to automate and streamline the entire translation and localisation workflow.
+Its primary purpose is not to manage the creation of source content, but to manage the process of transforming that content into multiple languages.
+
+Unlike CMS, which is presentation-centric is ideal for managing rich, complex content where the relationship between elements is as important as the elements themselves.
+
+## The cost of locking in a CMS or TMS tool
+
+Adopting any new tool is a commitment. Full integration demands a significant investment from development teams in learning, implementation, and integrating the tool into the existing codebase. This investment creates switching costs, meaning that as product strategies evolve, migrating to a different tool can become a costly and complex undertaking.
+
+This risk, known as vendor lock-in,
+isn't on the same par for CMS and TMS tools. A modern CMS often serves as an architectural backbone, capable of delivering everything from complex data structures in a dashboard to the final user interface. As a result, your application's code becomes tightly coupled with the CMS's specific APIs, data models, and paradigms, making a future migration a significant engineering challenge.
+
+In contrast, TMS tools present a much simpler scenario. Most TMS platforms operate on key-value pairs. Migrating from one TMS to another is often a relatively straightforward export-and-import process, requiring minimal code changes. The cost and effort are orders of magnitude lower.
+
+Making the right initial decision is always key, but understanding the degree of lock-in your chosen tool imposes is just as critical.
+
+## TMS scaling challenges
+
+Translation management systems face unique technical challenges at scale, particularly around key-value pair management.
+
+Pain points include key duplication from inconsistent naming conventions, context loss when keys are reused across UI components, and synchronization problems in Git workflows.
+The most successful tools implement automated key validation, and maintain strict governance around translation workflows.
+
+Choosing a good naming convention is definitely key. Like this [article from Lokalise](https://lokalise.com/blog/translation-keys-naming-and-organizing/#3__Group_translation_keys_into_namespaces) explains, you can do a lot to create organised naming conventions, but the fundamental problem still exists when keys grow into thousands - it's difficult to navigate.
+
+## Hybrid solutions
+
+For teams seeking a single platform that leans towards the simplicity of a TMS while offering more content control, a "content-aware" TMS is often the most suitable choice.
+Tools like [Phrase](https://phrase.com/), [Crowdin](https://crowdin.com/) or [Tolgee](https://tolgee.io/) are moving beyond simple key-value string management. They offer visual context for translators, allowing them to see how their translations through visual editors or letting users manage screenshots to have more context about particular text strings.
+
+These platforms are designed from the ground up to optimise the localisation workflow, and their expanding feature sets provide enough content management capabilities for many SaaS use cases without the overhead of a full-fledged CMS.
+
+[Contentstorage](https://contentstorage.app), the tool that I am working on positions itself as a hybrid solution as well - and even taking it a bit further in the CMS scale of what the tools mentioned above are doing.
+
+The hybrid value proposition centers on **eliminating integration complexity** that a CMS would bring and having the simplicity of a TMS to manage content. Though to be added, dedicated solutions still excel in specialised use cases requiring advanced features.
+
+## Decision framework for SaaS teams
+
+**Choose CMS when** your primary need is content creation with occasional translation with marketing-driven workflows. This fits content-heavy products with marketing-focused teams.
+
+**Choose TMS when** translation is core to your business, you're managing multiple languages, have developer-centric workflows, or need professional translation management. This suits products with rapid development cycles requiring continuous localisation.
+
+**Choose a Hybrid Solution** when developers, content managers, and marketers work in a highly collaborative, agile environment. This model is ideal when you need a single, lightweight source of truth to manage both UI strings and simple structured content (like FAQs or in-app announcements) without the financial and operational overhead of managing two separate, enterprise-scale systems.
+
+## Summary
+
+SaaS product teams must choose between a Content Management System (CMS), designed for creating complex, structured content, and a Translation Management System (TMS), built for localisation workflows.
+The core challenge is that neither tool is inherently good at the other's primary function.
+The decision carries significant weight, as choosing a CMS can lead to severe vendor lock-in, making future changes costly and difficult.
+In contrast, migrating between TMS platforms is simpler.
+
+As a solution to this dilemma, hybrid "content-aware" TMS platforms have emerged. These tools offer a middle ground, providing the simplicity and workflow focus of a TMS while adding enough content management features for many SaaS use cases. They help manage both UI strings and simple structured content without the operational overhead of integrating and maintaining two separate systems.
+
+Ultimately, the right choice depends on your primary focus. A CMS is best for content-heavy products with marketing-driven needs. A dedicated TMS is ideal when continuous, multi-language translation is core to the business. A hybrid solution fits best in collaborative, agile environments that require a single, lightweight source of truth for both content and localization.
+
+### Thank you for reading
+
+---
+
+### Resources used:
+
+- [https://lokalise.com/blog/translation-keys-naming-and-organizing/#3__Group_translation_keys_into_namespaces](https://lokalise.com/blog/translation-keys-naming-and-organizing/#3__Group_translation_keys_into_namespaces)
+- [https://hygraph.com/blog/best-cms-for-website](https://hygraph.com/blog/best-cms-for-website)
+- [https://www.contentful.com/headless-cms/](https://www.contentful.com/headless-cms/)
+- [https://phrase.com/blog/posts/phrase-contentful-integration-global-expansion/](https://phrase.com/blog/posts/phrase-contentful-integration-global-expansion/)

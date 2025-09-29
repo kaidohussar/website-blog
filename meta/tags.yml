@@ -9,3 +9,5 @@ tags:
     name: javascript
   - slug: react
     name: react
+  - slug: product
+    name: product
