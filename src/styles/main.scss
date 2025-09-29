@@ -42,7 +42,7 @@ html[data-kh-theme='dark'] {
 }
 
 body {
-  font-family: 'Poppins', 'sans-serif' !important;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
 
   ul {
     margin: 0;
@@ -67,7 +67,7 @@ main {
 
 #name {
   font-size: 32px;
-  font-family: 'Poppins', 'sans-serif';
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-weight: 600;
   cursor: pointer;
   color: var(--kh-color-text);

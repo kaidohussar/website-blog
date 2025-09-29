@@ -24,11 +24,14 @@ class MyDocument extends Document {
           />
           <link
             rel="stylesheet"
-            media="print"
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
-            // @ts-ignore
-            onLoad="this.media='all'"
           />
+          <noscript>
+            <link
+              rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+            />
+          </noscript>
         </Head>
         <body>
           <Main />
