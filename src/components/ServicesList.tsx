@@ -104,7 +104,7 @@ export default function ServicesList({ className }: ServicesListProps) {
         <ServiceListItem
           icon={techConsultancyIcon}
           title="Technical consultancy"
-          content="Giving my expertise to the design or operations of technical solutions needed to build your startup."
+          content="Giving my expertise to the design or operations of technical solutions needed to build your web product."
         />
         <ServiceListItem
           icon={uxIcon}
@@ -113,27 +113,27 @@ export default function ServicesList({ className }: ServicesListProps) {
         />
       </div>
       <div className={styles.row}>
-        <ServiceListItem
-          icon={mvpIcon}
-          title={
-            <>
-              <span className={styles.lineThrough}>MVP building</span>{' '}
-            </>
-          }
-          content={
-            <>
-              <p className={styles.lineThrough}>
-                Building you the minimum viable product using popular tech stack
-              </p>
-              <div className={styles.toolsList}>
-                <ReactIcon />
-                <NodejsIcon />
-                <PostgreSQLIcon />
-                <SassIcon />
-              </div>
-            </>
-          }
-        />
+        {/*<ServiceListItem*/}
+        {/*  icon={mvpIcon}*/}
+        {/*  title={*/}
+        {/*    <>*/}
+        {/*      <span className={styles.lineThrough}>MVP building</span>{' '}*/}
+        {/*    </>*/}
+        {/*  }*/}
+        {/*  content={*/}
+        {/*    <>*/}
+        {/*      <p className={styles.lineThrough}>*/}
+        {/*        Building you the minimum viable product using popular tech stack*/}
+        {/*      </p>*/}
+        {/*      <div className={styles.toolsList}>*/}
+        {/*        <ReactIcon />*/}
+        {/*        <NodejsIcon />*/}
+        {/*        <PostgreSQLIcon />*/}
+        {/*        <SassIcon />*/}
+        {/*      </div>*/}
+        {/*    </>*/}
+        {/*  }*/}
+        {/*/>*/}
       </div>
     </section>
   )

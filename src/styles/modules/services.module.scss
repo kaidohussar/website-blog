@@ -7,6 +7,7 @@
   max-width: 1200px;
   margin-top: 130px;
   margin-inline: auto;
+  height: 100%;
 }
 
 .heading {
@@ -27,6 +28,7 @@
   margin-top: 130px;
   max-width: 869px;
   width: 100%;
+  flex: 1;
   margin-left: auto;
 
   @media only screen and (max-width: h.$breakpoint-mobile) {
