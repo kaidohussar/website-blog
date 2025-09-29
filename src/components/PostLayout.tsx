@@ -13,7 +13,6 @@ import styles from '@styles/modules/postLayout.module.scss'
 import { useRouter } from 'next/router'
 import { useGetReadingBarInfo } from '@src/utils/useGetReadingBarInfo'
 import DisplayReadPercentage from '@components/DisplayReadPercentage'
-import ContentStorageBanner from '@components/ContentStorageBanner'
 
 type Props = {
   title: string
@@ -79,7 +78,6 @@ const PostLayout = ({
           <Copyright />
         </footer>
       </ContentWrapper>
-      <ContentStorageBanner />
     </Layout>
   )
 }

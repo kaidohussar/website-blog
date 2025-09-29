@@ -27,6 +27,9 @@ html[data-kh-theme='light'] {
 
   --kh-color-link: #0089c7;
   --kh-color-link-visited: #056996;
+
+  --kh-color-badge-bg: #ffffff;
+  --kh-color-badge-color: #1a1a1a;
 }
 
 html[data-kh-theme='dark'] {
@@ -39,6 +42,9 @@ html[data-kh-theme='dark'] {
 
   --kh-color-link: #40a4dd;
   --kh-color-link-visited: #5b99c4;
+
+  --kh-color-badge-bg: #1a1a1a;
+  --kh-color-badge-color: #ffffff;
 }
 
 body {

@@ -4,6 +4,7 @@ import { ReactIcon } from '@src/assets/react'
 import { NodejsIcon } from '@src/assets/nodejs'
 import { PostgreSQLIcon } from '@src/assets/psql'
 import { SassIcon } from '@src/assets/sass'
+import { ExternalLinkIcon } from '@src/assets/externalLink'
 
 type ServicesListProps = {
   className?: string
@@ -113,6 +114,17 @@ export default function ServicesList({ className }: ServicesListProps) {
         />
       </div>
       <div className={styles.row}>
+        <div className={styles.contentStorage}>
+          <p>{"Manage your web project's multilingual content:"}</p>
+          <a
+            className={styles.link}
+            href="https://contentstorage.app"
+            target="_blank"
+          >
+            contentstorage.app
+            <ExternalLinkIcon />
+          </a>
+        </div>
         {/*<ServiceListItem*/}
         {/*  icon={mvpIcon}*/}
         {/*  title={*/}

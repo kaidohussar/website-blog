@@ -5,7 +5,6 @@ import styles from '@styles/modules/services.module.scss'
 import React from 'react'
 import ServicesList from '@components/ServicesList'
 import { SocialList } from '@components/SocialList'
-import ContentStorageBanner from '@components/ContentStorageBanner'
 
 export default function Index() {
   const url = '/services'
@@ -26,8 +25,6 @@ export default function Index() {
           <SocialList />
           <span>kaidohus@gmail.com</span>
         </div>
-
-        <ContentStorageBanner />
       </motion.div>
     </Layout>
   )
