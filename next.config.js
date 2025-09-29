@@ -18,6 +18,8 @@ const securityHeaders = [
 ]
 
 const moduleExports = {
+  output: 'export',
+  trailingSlash: true,
   experimental: { esmExternals: true },
   pageExtensions: ['tsx'],
   optimizeFonts: true,
