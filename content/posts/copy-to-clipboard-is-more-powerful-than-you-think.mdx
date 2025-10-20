@@ -1,0 +1,49 @@
+---
+slug: copy-to-clipboard-is-more-powerful-than-you-think
+title: Copy-to-clipboard is way more powerful than I realized
+date: 2025-10-20
+author: kaidohussar
+tags:
+  - web
+---
+
+
+So I was building a file upload feature where users could upload JSON files with thousands of lines. Then I thought, why not add a paste option too? In some cases, letting users just copy-paste would be way smoother.
+
+That got me doing some research... Does it work the same across browsers? Also, can someone really copy-paste 5,000-10,000 lines of JSON/text without breaking things?
+
+Here's what I found interesting:
+
+### It's an OS thing, not really a browser thing
+
+If you're worried about how much you can copy, the browser matters less than you'd think. Most of the heavy lifting happens at the OS level, in RAM, so the clipboard can easily hold or store gigabytes of data. Keeping it at the OS level is also the reason why you can copy something in Chrome, close the browser completely, and still paste it somewhere else.
+
+### Multiple formats, one action
+
+When you copy formatted text from a webpage, your OS doesn't just save one version - it saves several. That single copy might include HTML (with all the styling), Rich Text (for compatibility), and plain text. When you paste, whatever app you're using just picks the format that works best for it.
+
+### Security is pretty tight (and for good reason)
+
+Browsers are paranoid about clipboard access, especially writing to it. You need a direct user action - like clicking a button - before a site can modify your clipboard. No background sneaky-peaky actions allowed.
+
+This blocks a real scam where sketchy sites would swap out copied crypto addresses with the attacker's address right before you paste.
+
+Even if you set Clipboard permissions to "block" in a browser, it means you can still copy-paste on the site, but it prevents the site's JavaScript from accessing it.
+
+### Copying is fast. Pasting... not so much
+
+I tested copying 100,000 lines of text. Took 296ms. But when I tried pasting it, it actually crashed the site I was testing on.
+
+The "copy" action itself is lightweight—it stores the data in memory without much processing. Pasting is where all the real work happens: retrieving the data, running security checks, converting formats if needed, and then actually rendering everything on screen.
+
+### How Apple's copy-paste between devices work
+
+Apple's feature where you copy on your iPhone and paste on your Mac works by using Bluetooth to detect nearby devices and Wi-Fi to transfer the data securely between them.
+
+### Web limitations
+
+Browsers mostly support text, HTML, and images for security reasons. So no, you can't copy that fancy Excel chart with all its linked data intact. You'll get a static version - usually an image or plain text.
+
+---
+
+The more you dig into "simple" features, the more you realize how much complexity is hiding underneath. Some of these points are rather common knowledge and features we take for granted, but still pretty fascinating stuff. 🤓
