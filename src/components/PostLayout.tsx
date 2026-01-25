@@ -6,7 +6,7 @@ import { SocialList } from './SocialList'
 import { getAuthor } from '../lib/authors'
 import { getTag } from '../lib/tags'
 import ContentWrapper from '@components/ContentWrapper'
-import { Button, Heading } from 'kaidohussar-ui'
+import { Button } from 'kaidohussar-ui'
 import PostMeta from '@components/PostMeta'
 import MetaData from '@components/meta/MetaData'
 import styles from '@styles/modules/postLayout.module.scss'
@@ -63,9 +63,7 @@ const PostLayout = ({
         </Button>
         <article>
           <header className={styles.header}>
-            <Heading type="h1" size="xxl" weight="semibold" lineHeight="xs">
-              {title}
-            </Heading>
+            <h1 className="heading-xxl font-semibold leading-xs">{title}</h1>
 
             <PostMeta tags={tags} date={date} />
           </header>

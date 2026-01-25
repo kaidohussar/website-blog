@@ -1,0 +1,166 @@
+---
+slug: building-cross-origin-visual-editor
+title: Building a cross-origin visual editor
+date: 2026-01-25
+author: kaidohussar
+tags:
+  - web
+  - javascript
+---
+
+I've been building a visual editor that overlays on external websites - click texts on a live site, edit them in a floating sidepanel.
+
+Your product lives on `https://customer-app.com`. My editor lives on `https://contentstorage.app`. Getting these to communicate and also persist communication was and still is an interesting problem to solve.
+
+There's no perfect solution. I use two approaches depending on the situation.
+
+## Iframe approach
+
+The classic approach. Embed the target site in an iframe, overlay your UI on top.
+
+Many tools use this - Storyblok, Builder.io, and other visual CMSs. It's convenient because everything stays in one browser tab.
+
+### When Iframes work well
+
+- JWT authentication (tokens in headers, no cookie issues)
+- Same-origin setups (not really relevant in my case, but still)
+- Sites that allow framing (whitelisted in `frame-ancestors` CSP or in `X-Frame-Options` header)
+
+### Why it gets tricky with Iframes
+
+- **OAuth providers block iframes.** Google, GitHub, and most providers set `X-Frame-Options: DENY`.
+- **Third-party cookies are dying.** Safari and Firefox already block them. Chrome is following.
+- **LocalStorage is partitioned.** Modern browsers give each iframe its own storage partition. The embedded app can't access its own data.
+
+### Storage Access API: A Partial Solution
+
+I investigated the [Storage Access API](https://developer.mozilla.org/en-US/docs/Web/API/Storage_Access_API) as a workaround for storage partitioning.
+Essentially it's a way to say that even though I am viewing this site through Iframe, give me the cookies/localStorage access of the actual site.
+
+```javascript
+// Request access to unpartitioned storage
+
+const hasAccess = await document.requestStorageAccess();
+```
+
+It helps in some cases:
+
+- Works for cookies across all major browsers
+- Chrome supports localStorage access via `requestStorageAccess({ localStorage: true })`
+- Requires user gesture (click) to activate
+
+But it has limits:
+
+- Firefox and Safari only grant cookie access, not localStorage
+- Doesn't solve OAuth blocking
+
+Useful for cookie-based auth in iframes, but not a complete solution.
+
+#### A workaround I saw for OAuth flows through Iframe
+
+You can basically detect that you are inside Iframe, and switch how the auth navigation works:
+
+```javascript
+const isInsideIframe = window.self !== window.top;
+
+if (needsAuthentication && isInsideIframe) {
+
+  // Redirect the WHOLE browser tab, not just the iframe
+  window.top.location.href = "https://your-site.com/auth/login";
+}
+```
+
+User completes auth normally, then returns to the editor. Needs for custom handling, but works.
+
+## Document PiP - the savior?
+
+The [Document Picture-in-Picture API](https://developer.mozilla.org/en-US/docs/Web/API/Document_Picture-in-Picture_API) was built for floating video players initially, but now can also be used as a general-purpose floating window (Chrome 116+).
+
+```javascript
+const pipWindow = await documentPictureInPicture.requestWindow({
+  width: 400,
+  height: 600,
+});
+
+pipWindow.document.body.innerHTML = `<div class="sidepanel">...</div>`;
+```
+
+### Why It's Useful
+
+- Floats above all windows (even other applications)
+- No CSP changes needed on target site
+- Auth can be handled without restrictions
+
+### How I Use It
+
+Open the customer's app in a separate tab, use PiP for the sidepanel:
+
+```javascript
+// 1. Create floating sidepanel
+const pipWindow = await documentPictureInPicture.requestWindow();
+
+// 2. Open customer's app
+const customerWindow = window.open(targetUrl, "_blank");
+
+// 3. Communicate via postMessage
+```
+
+Customer's app runs with full authentication. Sidepanel floats on top. Everybody's happy.
+
+## Communication
+
+Both approaches need a small script on the customer's site. The only difference is where you send messages:
+
+```javascript
+// Iframe: talk to parent
+window.parent.postMessage({ type: "content", data });
+
+// window.open: talk to opener
+window.opener.postMessage({ type: "content", data });
+```
+
+## The page refresh problem
+
+What happens when the user refreshes the customer's app?
+
+- `window.opener` child to parent communication is often lost after refresh
+- `window.open()` return value (parent → child) — usually survives
+
+The parent keeps its reference, but the child loses `window.opener`.
+
+### Therefor parent can initiate a reconnection
+
+```javascript
+// Parent polls for reconnection
+setInterval(() => {
+  if (customerWindow && !customerWindow.closed) {
+    customerWindow.postMessage({ type: "ping" }, targetOrigin);
+  }
+}, 2000);
+```
+
+## When to use what
+
+**Use Iframes when:**
+- JWT auth in a controlled environment
+- You need Firefox/Safari support (with auth workarounds)
+
+**Use PiP + window.open when:**
+- OAuth or cookie-based auth is required
+- Target site has strict CSP headers and unable to whitelist
+
+## Key takeaways
+
+1. **Iframes work great** for controlled environments with JWT auth
+2. **Storage Access API** helps with cookies, but doesn't solve everything
+3. **Document PiP** is useful - I expect more usage for this in the future, especially when other browsers besides Chrome start supporting it
+4. **window.opener is fragile** - have the parent initiate reconnection
+5. **sessionStorage** survives OAuth redirects
+6. **COOP (Cross-Origin-Opener-Policy) headers** can break the window.open approach entirely
+
+Browser security has evolved faster than cross-origin tooling patterns. But with the right combination of approaches, it works.
+
+### Resources used:
+
+- [https://developer.mozilla.org/en-US/docs/Web/API/Document_Picture-in-Picture_API](https://developer.mozilla.org/en-US/docs/Web/API/Document_Picture-in-Picture_API)
+- [https://developer.mozilla.org/en-US/docs/Web/API/Storage_Access_API](https://developer.mozilla.org/en-US/docs/Web/API/Storage_Access_API)

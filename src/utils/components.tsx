@@ -1,38 +1,18 @@
-import { Heading, Text } from 'kaidohussar-ui'
+import { Text } from 'kaidohussar-ui'
 import ExternalLink from '@components/ExternalLink'
 import CodeHighlighter from '@components/CodeHighlighter'
 
 export const components = {
-  h1: ({ children }) => (
-    <Heading type="h1" size="xxl">
-      {children}
-    </Heading>
-  ),
-  h2: ({ children }) => (
-    <Heading type="h2" size="xl">
-      {children}
-    </Heading>
-  ),
+  h1: ({ children }) => <h1 className="heading-xxl">{children}</h1>,
+  h2: ({ children }) => <h2 className="heading-xl">{children}</h2>,
   h3: ({ children, ...rest }) => (
-    <Heading type="h3" size="lg" {...rest}>
+    <h3 className="heading-lg" {...rest}>
       {children}
-    </Heading>
+    </h3>
   ),
-  h4: ({ children }) => (
-    <Heading type="h4" size="md">
-      {children}
-    </Heading>
-  ),
-  em: ({ children }) => (
-    <Text type="p" size="lg">
-      {children}
-    </Text>
-  ),
-  p: ({ children }) => (
-    <Text type="p" size="md">
-      {children}
-    </Text>
-  ),
+  h4: ({ children }) => <h4 className="heading-md">{children}</h4>,
+  em: ({ children }) => <em>{children}</em>,
+  p: ({ children }) => <p>{children}</p>,
   a: ({ children, href }) => (
     <ExternalLink href={href}>{children}</ExternalLink>
   ),

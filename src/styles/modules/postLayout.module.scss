@@ -70,12 +70,15 @@ button.backLink {
     list-style: disc;
     margin-left: h.$gridunit * 3;
     margin-bottom: h.$gridunit * 2;
+  }
+
+  ul, ol {
     color: h.$color-text;
 
     li {
       margin-top: h.$gridunit;
       line-height: 24px;
-      font-size: 18px;
+      font-size: 16px;
 
       > ul > li {
         list-style: circle;

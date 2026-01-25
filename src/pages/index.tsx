@@ -1,5 +1,5 @@
 import Layout from '@components/Layout'
-import { Box, Button, Heading } from 'kaidohussar-ui'
+import { Box, Button } from 'kaidohussar-ui'
 import BasicMeta from '@components/meta/BasicMeta'
 import OpenGraphMeta from '@components/meta/OpenGraphMeta'
 import { SocialList } from '@components/SocialList'
@@ -23,14 +23,14 @@ const Index = () => {
         >
           <Box alignItems="center" justifyContent="center">
             <Box flexDirection="column" justifyContent="center">
-              <Heading type="h1" size="xxxl" weight="bold" lineHeight="xs">
+              <h1 className="heading-xxxl font-bold leading-xs">
                 Kaido Hussar
-              </Heading>
-              <Heading type="h2" size="lg">
+              </h1>
+              <h2 className="heading-lg">
                 <span className={styles.subHeading}>
                   Problem-solver at heart, building products for web
                 </span>
-              </Heading>
+              </h2>
 
               <Button
                 onClick={() =>
