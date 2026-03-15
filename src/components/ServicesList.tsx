@@ -105,7 +105,7 @@ export default function ServicesList({ className }: ServicesListProps) {
         <ServiceListItem
           icon={techConsultancyIcon}
           title="Technical consultancy"
-          content="Giving my expertise to the design or operations of technical solutions needed to build your web product."
+          content="Providing expertise in the design and operation of technical solutions to build your application."
         />
         <ServiceListItem
           icon={uxIcon}
