@@ -115,13 +115,9 @@ export default function ServicesList({ className }: ServicesListProps) {
       </div>
       <div className={styles.row}>
         <div className={styles.contentStorage}>
-          <p>{"Manage your web project's multilingual content:"}</p>
-          <a
-            className={styles.link}
-            href="https://contentstorage.app"
-            target="_blank"
-          >
-            contentstorage.app
+          <p>{'AI-powered QA agent for multilingual web apps'}</p>
+          <a className={styles.link} href="https://kuup.ai" target="_blank">
+            kuup.ai
             <ExternalLinkIcon />
           </a>
         </div>
